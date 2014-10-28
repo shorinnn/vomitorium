@@ -175,8 +175,12 @@ class PagesController extends \BaseController {
             Session::forget('trial');
             $meta['header_img_text'] = 'Purchase Complete';
             $plans = PaymentPlan::where('program_id',$custom['p'])->get();
-            Return View::make('payment_plans.stripe_success')->withMeta($meta);
-            
+            Return View::make('payment_plans.paypal_success')->withMeta($meta);
+        }
+        
+        public function paypal_check(){
+            if (Auth::user()->programs()===false) return 0;
+            return 1;
         }
         
 }

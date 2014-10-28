@@ -181,6 +181,10 @@ class Paypal_processor extends Ardent {
                     $unit = singplural(1, $plan->trial_duration_unit);
                     $is_trial = true;
                 }
+                if(DB::table('programs_users')->where('user_id', $custom['u'])->where('subscription_id', $plan->id)->count()>0){
+                    $unit = singplural(1, $plan->subscription_duration_unit);
+                    $is_trial = false;
+                }
 
                 if(DB::table('programs_users')->where('user_id', $custom['u'])->where('program_id', $plan->program_id)
                             ->where('subscription_id', $plan->id)->count()==0){

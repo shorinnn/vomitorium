@@ -1630,10 +1630,10 @@ function update_block_score(e){
     $('.block-score-total[data-block="'+block+'"]').val(score);
 }
 
-function cancel_subscription(id){
+function cancel_subscription(id, provider){
     bootbox.confirm("Are you sure you want to cancel this subscription?", function(result) {
           if(result==true){
-            $.post(APP_URL+'/subscriptions',{id:id}, function(result){
+            $.post(APP_URL+'/subscriptions',{id:id, provider:provider}, function(result){
                     result = parse_json(result);
                     do_growl(result.text, result.status);
                     if(result.status=='success'){
@@ -1645,4 +1645,17 @@ function cancel_subscription(id){
     $('[data-bb-handler=cancel]').removeClass('btn-default');
     $('[data-bb-handler=cancel]').addClass('btn-danger');
     
+}
+
+function paypal_check(){
+    $.get('paypal_check',{},function(result){
+        console.log(result);
+        if(result==0) setTimeout(paypal_check, 3000);
+        else{
+            do_growl('Confirmation successful. Redirecting...','success');
+            setTimeout(function(){
+                window.location = APP_URL;
+            }, 3000);
+        }
+    });
 }

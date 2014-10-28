@@ -19,7 +19,7 @@
                     </thead>
                     @foreach($subscriptions as $s)
                     <?php $plan = PaymentPlan::find($s->subscription_id);?>
-                    <tr class='row-{{$s->stripe_subscription_id}}'>
+                    <tr class='row-{{$s->stripe_subscription_id}} row-{{$s->paypal_subscription_id}}'>
                         <td>{{$plan->name}}</td>
                         <td>{{$plan->program->name}}</td>
                         <td>
@@ -40,7 +40,14 @@
                         </td>
                         <td>
                             @if($plan->type=='subscription')
-                                <button class="btn btn-primary btn-sm" onclick='cancel_subscription("{{$s->stripe_subscription_id}}")'>Cancel Subscription</button>
+                                @if($s->stripe_subscription_id!='')
+                                    <button class="btn btn-primary btn-sm" onclick='cancel_subscription("{{$s->stripe_subscription_id}}", "stripe")'>Cancel Subscription</button>
+                                @else
+                                    Log in to <a href='http://paypal.com'>Paypal.com</a>
+                                    <a target='_blank' href='https://www.paypal.com/uk/webapps/helpcenter/helphub/article/?articleID=FAQ2145&m=SRE'>
+                                        <i class='glyphicon glyphicon-info-sign do-tooltip' title='Click here to see how to cancel paypal subscriptions.'></i>
+                                    </a>
+                                @endif
                             @endif
                         </td>
                     </tr>

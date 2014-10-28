@@ -56,6 +56,7 @@ if (!Session::has('subdomain')) {
         Route::post('stripe_hook', 'PagesController@stripe_hook');
         Route::post('paypal_ipn', 'PagesController@paypal_ipn');
         Route::post('thank_you', 'PagesController@thank_you');
+        Route::get('paypal_check', 'PagesController@paypal_check');
         Route::get('payment', 'PagesController@payment');
         Route::post('purchase', 'PagesController@purchase');
         Route::post( 'pm_search',          'PMController@search');

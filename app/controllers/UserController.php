@@ -349,7 +349,8 @@ class UserController extends BaseController {
         }
         
         public function cancel_subscription(){
-            return Stripe_processor::cancel_subscription(Input::get('id'));
+            if(Input::get('provider')=='stripe') return Stripe_processor::cancel_subscription(Input::get('id'));
+            else return Paypal_processor::cancel_subscription(Input::get('id'));
         }
 
 }
