@@ -82,6 +82,8 @@ class Paypal_processor extends Ardent {
             // Inspect IPN validation result and act accordingly
 
             if (strcmp ($res, "VERIFIED") == 0) {
+               // mail('shorinnn@yahoo.com','subcription cancelled',print_r($_POST, true));
+//                 mail('shorinnn@yahoo.com','subcription cancelled',print_r($_POST, true));
                 $custom = json_decode(urldecode($_POST['custom']), true);
                 $plan = PaymentPlan::find($custom['p']);
                 $processor = PaymentProcessor::where('name','Paypal')->where('program_id',$plan->program_id)->first();
@@ -90,12 +92,12 @@ class Paypal_processor extends Ardent {
                     return;
                 }
                 // check whether the payment_status is Completed
-                if(strtolower($_POST['payment_status']) != 'completed') {
+                if(isset($_POST['payment_status']) && strtolower($_POST['payment_status']) != 'completed' && $_POST['txn_type']!='subscr_cancel') {
                     mail('shorinnn@yahoo.com','status','status');
                     return;
                 }
                 // check that txn_id has not been previously processed
-                if(Paypal_transaction::where('transaction_id', $_POST['txn_id'])->count() > 0) {
+                if(isset( $_POST['txn_id']) && Paypal_transaction::where('transaction_id', $_POST['txn_id'])->count() > 0) {
                     mail('shorinnn@yahoo.com','txn','txn');
                     return;
                 }
@@ -113,6 +115,7 @@ class Paypal_processor extends Ardent {
                 switch($_POST['txn_type']){
                     case 'web_accept': self::charge($custom, $plan); break;
                     case 'subscr_payment': self::subscr_payment($custom, $plan); break;
+                    case 'subscr_cancel': self::subscr_cancel($custom, $plan); break;
                 }
             } else if (strcmp ($res, "INVALID") == 0) {
                 // log for manual investigation
@@ -156,9 +159,7 @@ class Paypal_processor extends Ardent {
             }
         }
         
-        public static function subscr_payment($custom, $plan){
-            mail('shorinnn@yahoo.com','IPN', print_r($_POST, true));
-            
+        public static function subscr_payment($custom, $plan){            
             if($_POST['payment_gross']!=$plan->cost && $_POST['payment_gross']!=$plan->trial_cost) {
                 mail('shorinnn@yahoo.com','cost','cost');
                 return;
@@ -206,6 +207,17 @@ class Paypal_processor extends Ardent {
                 }
             catch(Exception $e){
                 mail('shorinnn@yahoo.com','exception', $e->getMessage());
+            }
+        }
+        
+        public static function subscr_cancel($custom, $plan){
+            try{
+                $user = $custom['u'];
+                $data['subscription_cancelled'] = date('Y-m-d H:i:s');
+                DB::table('programs_users')->where('user_id', $user)->where('subscription_id', $plan->id)->update($data);
+            }
+            catch(Exception $e){
+                mail('shorinnn@yahoo.com','cancelexception', $e->getMessage());
             }
         }
         
