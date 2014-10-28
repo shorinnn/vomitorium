@@ -86,31 +86,47 @@ class Paypal_processor extends Ardent {
             // Inspect IPN validation result and act accordingly
 
             if (strcmp ($res, "VERIFIED") == 0) {
-                // TODO: IMPLEMENT THESE CHECKS!!!!
-                // check whether the payment_status is Completed
-                // check that txn_id has not been previously processed
-                // check that receiver_email is your PayPal email
-                // check that payment_amount/payment_currency are correct
-                // process payment and mark item as paid.
-
-                // assign posted variables to local variables
-                //$item_name = $_POST['item_name'];
-                //$item_number = $_POST['item_number'];
-                //$payment_status = $_POST['payment_status'];
-                //$payment_amount = $_POST['mc_gross'];
-                //$payment_currency = $_POST['mc_currency'];
-                //$txn_id = $_POST['txn_id'];
-                //$receiver_email = $_POST['receiver_email'];
-                //$payer_email = $_POST['payer_email'];
-                
                 $custom = json_decode(urldecode($_POST['custom']), true);
+                $plan = PaymentPlan::find($custom['p']);
+                $processor = PaymentProcessor::where('name','Paypal')->where('program_id',$plan->program_id)->first();
+                if($processor==null){
+                    mail('shorinnn@yahoo.com','processor','processor');
+                    return;
+                }
+                // check whether the payment_status is Completed
+                if(strtolower($_POST['payment_status']) != 'completed') {
+                    mail('shorinnn@yahoo.com','status','status');
+                    return;
+                }
+                // check that txn_id has not been previously processed
+                if(Paypal_transaction::where('transaction_id', $_POST['txn_id'])->count() > 0) {
+                    mail('shorinnn@yahoo.com','txn','txn');
+                    return;
+                }
+                // check that receiver_email is your PayPal email
+                 if(strtolower($_POST['receiver_email']) != strtolower($processor->field)) {
+                    mail('shorinnn@yahoo.com','receiver_email','receiver_email');
+                    return;
+                }
+                // check that payment_amount/payment_currency are correct
+                if($_POST['mc_currency']!='USD') {
+                    mail('shorinnn@yahoo.com','currency','currency');
+                    return;
+                }
+                if($_POST['payment_gross']!=$plan->cost) {
+                    mail('shorinnn@yahoo.com','cost','cost');
+                    return;
+                }
+                
+                // process payment and mark item as paid.
+                
                 $t = new Paypal_transaction();
                 $t->user_id = $custom['u'];
                 $t->transaction_id = $_POST['txn_id'];
                 $t->payment_plan_id = $custom['p'];
                 $t->save();
                 try{
-                    $plan = PaymentPlan::find($custom['p']);
+                    
                     if(DB::table('programs_users')->where('user_id', $custom['u'])->where('subscription_id', $plan->id)->count()==0){
                         $data['program_id'] = $plan->program_id;
                         $data['user_id'] = $custom['u'];
