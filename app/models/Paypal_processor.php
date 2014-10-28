@@ -113,7 +113,8 @@ class Paypal_processor extends Ardent {
                     mail('shorinnn@yahoo.com','currency','currency');
                     return;
                 }
-                if($_POST['payment_gross']!=$plan->cost) {
+                $cost = isset($custom['t']) ? $plan->trial_cost : $plan->cost;
+                if($_POST['payment_gross']!=$cost) {
                     mail('shorinnn@yahoo.com','cost','cost');
                     return;
                 }
@@ -132,6 +133,10 @@ class Paypal_processor extends Ardent {
                         $data['user_id'] = $custom['u'];
                         $data['subscription_id'] = $plan->id;
                         $data['start_date'] = date('Y-m-d H:i:s');
+                        if(isset($custom['t']) && $custom['t']==1){
+                            $unit = singplural(1, $plan->trial_duration_unit);
+                            $data['expires'] = date('Y-m-d 23:59:59', strtotime("+ $plan->trial_duration $unit"));
+                        }
                         DB::table('programs_users')->insert($data);
                     }
                     else{

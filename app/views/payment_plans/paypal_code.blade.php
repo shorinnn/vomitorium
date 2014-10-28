@@ -1,14 +1,24 @@
 <?php
     $custom['u'] = Auth::user()->id;
     $custom['p'] = $plan->id;
+    if(Session::has('trial')){
+        $custom['t'] = 1;
+        $unit = singplural(1, $plan->trial_duration_unit);
+        $name = "$plan->trial_duration $unit TRIAL $$plan->trial_cost for $plan->name ($$plan->trial_cost)";
+        $cost = $plan->trial_cost;
+    }
+    else{
+        $name = $plan->name;
+        $cost = $plan->cost;
+    }
     $custom = urlencode(json_encode($custom));
 ?>
 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_xclick">
 <input type="hidden" name="business" value="{{$processor->field}}">
 <input type="hidden" name="lc" value="US">
-<input type="hidden" name="item_name" value="{{$plan->name}}">
-<input type="hidden" name="amount" value="{{$plan->cost}}">
+<input type="hidden" name="item_name" value="{{$name}}">
+<input type="hidden" name="amount" value="{{$cost}}">
 <input type="hidden" name="currency_code" value="USD">
 <input type="hidden" name="button_subtype" value="services">
 <input type="hidden" name="no_note" value="1">

@@ -20,7 +20,7 @@
                         @endif
                     @endif
                 @else
-                {{$p->name}} {{$p->trial_duration}} {{singplural(1,$p->trial_duration_unit)}} Trial
+                {{$p->name}} -  {{$p->trial_duration}} {{singplural(1,$p->trial_duration_unit)}} Trial
                     ${{$p->trial_cost}}
                 @endif
             <br />

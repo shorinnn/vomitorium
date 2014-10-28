@@ -172,6 +172,7 @@ class PagesController extends \BaseController {
             $custom = json_decode(urldecode($_POST['custom']), true);
             $plan = PaymentPlan::find($custom['p']);
             Session::set('program_id', $plan->program_id);
+            Session::forget('trial');
             $meta['header_img_text'] = 'Purchase Complete';
             $plans = PaymentPlan::where('program_id',$custom['p'])->get();
             Return View::make('payment_plans.stripe_success')->withMeta($meta);
