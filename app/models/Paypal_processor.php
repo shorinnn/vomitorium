@@ -68,13 +68,9 @@ class Paypal_processor extends Ardent {
 
             //$cert = __DIR__ . "./cacert.pem";
             //curl_setopt($ch, CURLOPT_CAINFO, $cert);
-
             $res = curl_exec($ch);
             if (curl_errno($ch) != 0) // cURL error
                 {
-                if(DEBUG == true) {	
-                        error_log(date('[Y-m-d H:i e] '). "Can't connect to PayPal to validate IPN message: " . curl_error($ch) . PHP_EOL, 3, LOG_FILE);
-                }
                 curl_close($ch);
                 exit;
 
@@ -113,40 +109,11 @@ class Paypal_processor extends Ardent {
                     mail('shorinnn@yahoo.com','currency','currency');
                     return;
                 }
-                $cost = isset($custom['t']) ? $plan->trial_cost : $plan->cost;
-                if($_POST['payment_gross']!=$cost) {
-                    mail('shorinnn@yahoo.com','cost','cost');
-                    return;
-                }
                 
-                // process payment and mark item as paid.
-                
-                $t = new Paypal_transaction();
-                $t->user_id = $custom['u'];
-                $t->transaction_id = $_POST['txn_id'];
-                $t->payment_plan_id = $custom['p'];
-                $t->save();
-                try{
-                    
-                    if(DB::table('programs_users')->where('user_id', $custom['u'])->where('subscription_id', $plan->id)->count()==0){
-                        $data['program_id'] = $plan->program_id;
-                        $data['user_id'] = $custom['u'];
-                        $data['subscription_id'] = $plan->id;
-                        $data['start_date'] = date('Y-m-d H:i:s');
-                        if(isset($custom['t']) && $custom['t']==1){
-                            $unit = singplural(1, $plan->trial_duration_unit);
-                            $data['expires'] = date('Y-m-d 23:59:59', strtotime("+ $plan->trial_duration $unit"));
-                        }
-                        DB::table('programs_users')->insert($data);
-                    }
-                    else{
-                         mail('shorinnn@yahoo.com','no save', 'no program save');
-                    }
+                switch($_POST['txn_type']){
+                    case 'web_accept': self::charge($custom, $plan); break;
+                    case 'subscr_payment': self::subscr_payment($custom, $plan); break;
                 }
-                catch(Exception $e){
-                    mail('shorinnn@yahoo.com','Exception', $e->getMessage());
-                }
-
             } else if (strcmp ($res, "INVALID") == 0) {
                 // log for manual investigation
                 // Add business logic here which deals with invalid IPN messages
@@ -154,4 +121,92 @@ class Paypal_processor extends Ardent {
             
             
         }
+        
+        public static function charge($custom, $plan){
+            $cost = isset($custom['t']) ? $plan->trial_cost : $plan->cost;
+            if($_POST['payment_gross']!=$cost) {
+                mail('shorinnn@yahoo.com','cost','cost');
+                return;
+            }
+            // process payment and mark item as paid.
+            $t = new Paypal_transaction();
+            $t->user_id = $custom['u'];
+            $t->transaction_id = $_POST['txn_id'];
+            $t->payment_plan_id = $custom['p'];
+            $t->save();
+            
+            try{
+                if(DB::table('programs_users')->where('user_id', $custom['u'])->where('subscription_id', $plan->id)->count()==0){
+                    $data['program_id'] = $plan->program_id;
+                    $data['user_id'] = $custom['u'];
+                    $data['subscription_id'] = $plan->id;
+                    $data['start_date'] = date('Y-m-d H:i:s');
+                    if(isset($custom['t']) && $custom['t']==1){
+                        $unit = singplural(1, $plan->trial_duration_unit);
+                        $data['expires'] = date('Y-m-d 23:59:59', strtotime("+ $plan->trial_duration $unit"));
+                    }
+                    DB::table('programs_users')->insert($data);
+                }
+                else{
+                     mail('shorinnn@yahoo.com','no save', 'no program save');
+                }
+            }
+            catch(Exception $e){
+                mail('shorinnn@yahoo.com','Exception', $e->getMessage());
+            }
+        }
+        
+        public static function subscr_payment($custom, $plan){
+            mail('shorinnn@yahoo.com','IPN', print_r($_POST, true));
+            
+            if($_POST['payment_gross']!=$plan->cost && $_POST['payment_gross']!=$plan->trial_cost) {
+                mail('shorinnn@yahoo.com','cost','cost');
+                return;
+            }
+            
+            // process payment and mark item as paid.
+            $t = new Paypal_transaction();
+            $t->user_id = $custom['u'];
+            $t->transaction_id = $_POST['txn_id'];
+            $t->payment_plan_id = $custom['p'];
+            $t->save();
+            try{
+                // calculate the number of trial days
+                if($_POST['payment_gross']==$plan->cost){
+                    $unit = singplural(1, $plan->subscription_duration_unit);
+                    $is_trial = false;
+                }
+                else{
+                    $unit = singplural(1, $plan->trial_duration_unit);
+                    $is_trial = true;
+                }
+
+                if(DB::table('programs_users')->where('user_id', $custom['u'])->where('program_id', $plan->program_id)
+                            ->where('subscription_id', $plan->id)->count()==0){
+                        $data['program_id'] = $plan->program_id;
+                        $data['subscription_id'] = $plan->id;
+                        $data['paypal_subscription_id'] = $_POST['subscr_id'];
+                        $data['user_id'] = $custom['u'];
+                        $data['start_date'] = date('Y-m-d H:i:s');
+                        if(!$is_trial){
+                            $data['expires'] = date('Y-m-d 23:59:59', strtotime("+ $plan->subscription_duration $unit"));
+                        }
+                        else{
+                            $data['expires'] = date('Y-m-d 23:59:59', strtotime("+ $plan->trial_duration $unit"));
+                        }
+                        DB::table('programs_users')->insert($data);
+                    }
+                    else{
+                        $expires = date('Y-m-d H:i:s');
+                        $data['expires'] = date('Y-m-d 23:59:59', strtotime(" $expires + $plan->subscription_duration $unit"));
+                        $data['subscription_cancelled'] = null;
+                        $data['paypal_subscription_id'] = $_POST['subscr_id'];
+                        DB::table('programs_users')->where('user_id', $custom['u'])->where('subscription_id', $plan->id)->update($data);
+                    }
+                }
+            catch(Exception $e){
+                mail('shorinnn@yahoo.com','exception', $e->getMessage());
+            }
+        }
+        
 }
