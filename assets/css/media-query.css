@@ -1,0 +1,211 @@
+
+/*for smaller devices*/
+@media (min-width: 320px) and (max-width: 479px) {
+span.white-bg {
+	width: 100%
+}
+.logo-bg {
+	width: 100%;
+}
+.logo-bg h1.logo {
+	margin: 18px auto;
+	width: 188px;
+	float: none;
+}
+.memember-col {
+	margin-right: 0;
+	position: relative;
+	z-index: 999999;
+	float: left;
+}
+.navbar-default {
+	float: none;
+}
+.memember-col ul li a {
+	width: 65px;
+}
+.login {
+	background: url(../images/login.png) 22px 22px no-repeat;
+}
+.register {
+	background: url(../images/register.png) 18px 22px no-repeat;
+}
+.search {
+	background: url(../images/search.png) 16px 22px no-repeat;
+}
+.login:hover {
+	background: url(../images/login-hover.png) 22px 22px no-repeat;
+}
+.register:hover {
+	background: url(../images/register-hover.png) 18px 22px no-repeat;
+}
+.search:hover {
+	background: url(../images/search-hover.png) 16px 22px no-repeat;
+}
+.navbar-default .navbar-nav>li>a {
+	line-height: 35px;
+}
+.navbar-nav>li {
+	border-bottom: 1px solid #f4f5f5;
+}
+.navbar-nav {
+	margin: 0;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+	border-bottom: none;
+}
+.navbar-default .navbar-nav>li>a:hover {
+	border-bottom: none;
+}
+.banner h2, .banner h3 {
+	padding-left: 30px;
+}
+.main-content {
+	padding: 30px 10px;
+}
+.typography-col h2, .ui-elements h2, .form-element h2 {
+	font-size: 30px;
+	margin-bottom: 30px;
+}
+.wrapper-dropdown {
+	margin-bottom: 40px;
+}
+.nav>li>a {
+	padding: 8px 5px;
+	font-size: 15px;
+}
+.custom-form-group {
+	width: 100%
+}
+}
+
+@media (min-width: 480px) and (max-width: 567px) {
+span.white-bg {
+	width: 100%;
+}
+.logo-bg {
+	width: 100%;
+}
+.logo-bg h1.logo {
+	margin: 18px auto;
+	width: 188px;
+	float: none;
+}
+.memember-col {
+	float: left;
+	position: relative;
+	z-index: 999999;
+}
+.navbar-default {
+	float: none;
+}
+.navbar-default .navbar-nav>li>a {
+	line-height: 35px;
+}
+.navbar-nav>li {
+	border-bottom: 1px solid #f4f5f5;
+}
+.navbar-nav {
+	margin: 0;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+	border-bottom: none;
+}
+.navbar-default .navbar-nav>li>a:hover {
+	border-bottom: none;
+}
+.main-content {
+	padding: 45px 20px;
+}
+.wrapper-dropdown {
+	margin-bottom: 50px;
+}
+.custom-form-group {
+	width: 100%;
+}
+}
+
+@media (min-width: 568px) and (max-width: 767px) {
+span.white-bg {
+	width: 100%
+}
+.logo-bg {
+	width: 100%;
+}
+.logo-bg h1.logo {
+	margin: 18px auto;
+	width: 188px;
+	float: none;
+}
+.memember-col {
+	float: left;
+	position: relative;
+	z-index: 999999;
+}
+.navbar-default {
+	float: none;
+}
+.navbar-default .navbar-nav>li>a {
+	line-height: 35px;
+}
+.navbar-nav>li {
+	border-bottom: 1px solid #f4f5f5;
+}
+.navbar-nav {
+	margin: 0;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+	border-bottom: none;
+}
+.navbar-default .navbar-nav>li>a:hover {
+	border-bottom: none;
+}
+.main-content {
+	padding: 60px 30px;
+}
+.wrapper-dropdown {
+	margin-bottom: 50px;
+}
+.custom-form-group {
+	width: 100%;
+}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+.memember-col {
+	float: left;
+	position: relative;
+	z-index: 999999;
+}
+.navbar-default {
+	float: none;
+}
+.navbar-default .navbar-nav>li>a {
+	line-height: 35px;
+}
+.navbar-nav>li {
+	border-bottom: 1px solid #f4f5f5;
+}
+.navbar-nav {
+	margin: 0;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+	border-bottom: none;
+}
+.navbar-default .navbar-nav>li>a:hover {
+	border-bottom: none;
+}
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+.memember-col {
+	margin-right: 0px;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+	padding: 0px 12px;
+}
+.logo-bg h1.logo {
+	margin: 15px 45px 0px 40px;
+}
+span.white-bg{width: 25%;}
+}

@@ -1,0 +1,577 @@
+/* CSS Document */
+
+body {
+	font: 16px 'Open Sans', Arial, Helvetica, sans-serif;
+	margin: 0;
+	background: #f3f3f3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.clear{
+	clear: both;
+}
+
+.cl{
+	display: block;
+	clear: both;
+}
+
+.right{
+	float: right;
+}
+
+.left{
+	float: left;
+}
+
+a, input::-moz-focus-inner {
+   outline: 0;
+   border: 0;
+}
+
+ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.center-align{
+	text-align: center;
+}
+
+.block{
+	display: block;
+}
+
+/************ Main site contents ****************/
+
+
+/************ Menu Items *************/
+.main-logo{
+	float: left;
+}
+
+.main-nav-items > li > a{
+	font-size: 14px;
+	color: #2a292b;
+	padding: 25px 9px;
+	font-weight: 600;
+}
+
+.main-nav-items > li > a:hover{
+	background: #99c53b;
+	color: #fff;
+}
+
+.submenu{
+	height: 101px;
+	width: 229px;
+	padding: 0;
+	overflow: hidden;
+	background-color: #99c53b;
+	border: none;
+	left: 0 !important;
+	position: absolute;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.submenu ul{
+	width: 100%;
+	height: auto;
+}
+
+.submenu ul li{
+	overflow: hidden;
+}
+
+.submenu ul li a{
+	display: block;
+	height: 100%;
+	width: 100%;
+	padding: 7px 0 7px 13px;
+	color: #fff;
+	outline: none;
+	font-size: 14px;
+}
+
+.navbar.navbar-default{
+	background: none;
+	border: none;
+	float: right;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+	background-color: #99c53b;
+	color: #fff;
+}
+
+.submenu ul li a:hover{
+	background: #87b22a;
+	text-decoration: none;
+}
+
+
+
+/***************** Top banner **************/
+.top-banner-image div,
+.top-banner-image{
+	padding: 0;
+}
+
+.top-banner-image > div{
+	min-height: 250px;
+	width: 100%;
+	background: url(../img/layout/banner/top-banner.jpg) no-repeat center center;
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/layout/banner/top-banner.jpg',sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/layout/banner/top-banner.jpg', sizingMethod='scale')";
+	padding: 90px 20px 0;
+}
+
+.top-banner-image img{
+	margin: 0 auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.top-banner-image p{
+	/*max-width: 567px;*/
+	padding: 6px 9px;
+	background: #6e469b;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 50px;
+	font-weight: 800;
+	margin: 0 auto 70px;
+	text-transform: uppercase;
+	position: relative;
+}
+
+.section-title{
+	color: #7f8c8c;
+	font-size: 30px;
+	font-weight: 600;
+	margin: 50px 0 23px;
+	text-indent: 25px;
+	padding: 40px 0 40px 3%;
+	background: #ececec;
+}
+
+.message-box{
+	min-height: 232px;
+	max-width: 988px;
+	color: #2a292b;
+	padding: 22px 25px;
+	position: relative;
+}
+
+.message-box p{
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 22px;
+	margin: 0 0 22px;
+}
+
+.message-box h3{
+	font-size: 16px;
+	font-weight: 800;
+	margin: 0 0 22px;
+}
+
+.message-box img{
+	float: left;
+	margin-right: 17px;
+	margin-bottom: 10px;
+}
+
+
+.coach-box{
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+
+.greenyellow-coach-box{
+	background: #d2f293;
+	border: solid 6px #c7ea80;
+}
+
+.white-textarea{
+	min-height: 178px;
+	border-radius: 3px;
+	background: #f8f8f8;
+	resize: none;
+	width: 100%;
+	border: solid 2px #78e9f1;
+}
+
+.cyan-coach-box{
+	background: #bdf6fa;
+	border: solid 6px #b0eef2;	
+}
+
+.purple-border{
+	border: solid 6px #8454af !important;
+}
+
+.purple-article{
+	background: #ececec;
+	margin-top: 58px;
+	padding-top: 30px;
+	padding-bottom: 163px;
+	color: #8454af;
+	font-size: 16px;
+	font-weight: 600;	
+}
+
+.gray-article{
+	margin-top: 51px;
+	font-size: 16px;
+	color: #869292;
+	font-weight: 600;
+}
+
+.gray-article article{
+	padding-bottom: 41px;
+	position: relative;
+}
+
+
+.buttons{
+	height: 50px;
+	border-radius: 4px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	position: absolute;
+	bottom: 0;
+	margin: 0 25px -28px 0;
+	right: 0;
+	line-height: 50px;
+	display: block;
+}
+
+.buttons:hover{
+	text-decoration: none;
+	/*opacity: 0.9;*/
+}
+
+
+.short-buttons{
+	font-size: 14px;
+	width: 200px;
+}
+
+.long-buttons{
+	width: 289px;
+	font-size: 20px;
+}
+
+.purple-button{
+	background: #9d65bf;
+	border: solid #8454af;
+	border-width: 0 0 4px;
+}
+
+.pink-button{
+	background: #f06188;
+	border: solid #ec5171;
+	border-width: 0 0 4px;
+}
+
+.cyan-button{
+	background: #90edf4;
+	border: solid #78e9f1;
+	border-width: 0 0 4px;
+	color: #2a292b;
+}
+
+.greenyellow-button{
+	background: #caec64;
+	border: solid #bde753;
+	border-width: 0 0 4px;
+}
+
+.achievement-box{
+	background: #f8f8f8;
+	border-top: solid 4px #fbfbfb;
+	border-bottom: solid 4px #eaeaea;
+	margin-bottom: 19px;
+}
+
+.achievement-box textarea{
+	border: solid 3px #eaeaed;
+	border-radius: 3px;
+	width: 93.6%;
+	resize: none;
+	background: none;
+	min-height: 194px;
+	margin: 0 0 19px 4%;
+}
+
+.family-achievement-box h2,
+.rating-box h2,
+.achievement-box h2{
+	padding-left: 4%;
+	margin: 27px 0 13px;
+	font-size: 16px;
+	font-weight: 800;
+	color: #2a292b;
+}
+
+.white-textarea-container{
+	position: relative;
+	z-index: 88;
+}
+
+.rating-box{
+	min-height: 140px;
+	border-radius: 2px;
+	margin-top: 78px;
+	background: #f8f8f8;
+	position: relative;
+	padding-bottom: 20px;
+	border-top: solid 4px #fbfbfb;
+	border-bottom: solid 4px #eaeaea;
+}
+
+.rating-box .buttons{
+	top: -30px !important;
+}
+
+.rating-box form{
+	margin-top: 32px;
+	margin-left: 5.6%;
+}
+
+.rating-box form label{
+	color: #7f8c8c;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.bottom-section .section-title{
+	margin: 20px 0 !important;
+}
+
+.bottom-section .message-box .buttons{
+	position: relative;
+	float: right;
+	margin-right: 0;
+}
+
+.bottom-section .message-box .buttons + .buttons{
+	margin-right: 25px;
+}
+
+.rating-box form div + div{
+	margin-left: 7.4%;
+}
+
+.family-achievement-box{
+	position: relative;
+	margin-top: 50px;
+}
+
+.family-achievement-box h2{
+	padding: 0;
+}
+
+.family-achievement-box form div{
+	float: left;
+	width: 319px;
+	height: 53px;
+	border-radius: 3px;
+	margin-top: 10px;
+	border: solid 2px #90edf4;
+	background: #fff;
+}
+
+.family-achievement-box form div + div{
+	margin-left: 1.4%;
+}
+
+.family-achievement-box form input{
+	background: none;
+	border: none;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.family-achievement-box .buttons{
+	bottom: 0;
+	position: relative;
+	margin: 14px 0 0 0;
+	float: right;
+}
+
+.next-lesson-button{
+	display: block;
+	height: 72px;
+	background: #8454af url(../img/layout/icons/next-lesson-icon.png) no-repeat 97.5% center;
+	text-transform: uppercase;
+	font-size: 20px;
+	font-weight: 600;
+	text-align: right;
+	margin-top: 100px;
+	line-height: 72px;
+	padding-right: 80px;
+	color: #fff;
+}
+
+.bottom-section{
+	padding-bottom: 20px;
+}
+
+/************ Courses Content *****************/
+.courses-box{
+	background: #f8f8f8;
+	border-top: solid 4px #fbfbfb;
+	border-bottom: solid 4px #eaeaea;
+	margin-bottom: 19px;
+}
+
+.courses-box h4{
+	font-size: 16px;
+	font-weight: 900;
+	color: #2a292b;
+	margin: 29px 0 13px 24px;
+}
+
+.courses-box li{
+	font-size: 16px;
+	font-weight: 600;
+	color: #7f8c8c;
+	clear: both;
+}
+
+.courses-box li span{
+	display: block;
+	width: 43px;
+	height: 43px;
+	border-radius: 43px;
+	font-size: 16px;
+	font-weight:600;
+	margin: 7px 1.9% 7px 2.5%;
+	color: #2a292b;
+	text-align: center;
+	line-height: 43px;
+	background: #b1f1f5;
+	float: left;
+}
+
+.courses-box li em{
+    display: inline-block;
+    font-style: normal;
+    margin-top: 15px;
+}
+
+.courses-box .col-md-12,
+.content-title .col-md-12{
+	padding-right: 0;
+}
+
+.light-purple-bckgrd{
+	background: #f4ecfc;
+}
+/************ responsive fixes *****************/
+
+@media (max-width: 767px) {
+	.submenu{
+		background: #99c53b !important;
+	}
+}
+
+@media (max-width: 571px) {
+	.bottom-section .message-box .buttons{
+		width: 140px;
+		float: left;
+	}
+	
+	.bottom-section .message-box .buttons + .buttons{
+		margin-right: 0;
+		margin-left: 5px;
+	}
+	
+	.family-achievement-box .buttons{
+		float: left;
+	}
+	
+	.family-achievement-box form div + div{
+		margin-left: 0;
+	}
+	
+
+}
+
+@media (max-width: 480px) {
+	.bottom-section .message-box .buttons{
+		width: 100px;
+	}
+	.top-banner-image p{
+		font-size: 30px;
+	}
+
+}
+
+@media (max-width: 380px) {
+	.bottom-section .message-box .buttons{
+		width: 70px;
+	}
+	
+	.top-banner-image p{
+		font-size: 24px;
+	}
+
+	.family-achievement-box form div{
+		width: 96%;
+	}
+	
+	.long-buttons{
+		margin: 0 auto;
+		width: 260px;
+	}
+	
+	.rating-box form div {
+		float: none;
+		margin: 10px 0 0 !important;
+	}
+	
+}
+
+/* compatibility with older bootstrap */
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1000px !important;
+  }
+  /*.row { margin-left:-30px !important }*/
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .row {
+    margin-left: -7px;
+    margin-right:-2px;
+    
+  }  
+  }
+  
+@media (max-width: 767px) {
+  .container-fluid { padding-left:0px;padding-right:0px }
+  .row
+  {
+    margin-left: 0;
+  }
+  body {
+  
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+  }
+}
