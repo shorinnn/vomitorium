@@ -15,7 +15,7 @@ $(function(){
     $('body').on('change keyup','.block input, .block textarea, .block select', blocks_changed);
     //ready
     release_options();
-    $( "#date" ).datepicker({
+    $( "#date, .date-field" ).datepicker({
       showAnim: 'drop',
       showOn: "both",
       buttonImageOnly: false,
@@ -1059,4 +1059,57 @@ function blocks_changed(e){
     id = $(e.target).closest('.block').attr('id');
     if(blocks_to_update.indexOf(id)==-1) blocks_to_update.push(id);
     console.log(blocks_to_update);
+}
+
+function prepopulate_deadline(){
+    change_deadline_trigger('#deadline-trigger');
+}
+function change_deadline_trigger(e){
+    val = $(e).val();
+    $('.deadline-div').hide();
+    $('.'+val).show();
+    update_deadline_data(e);
+    
+    if(val=='after-completion' || val=='after-release'){
+        update_deadline_data('#interval-lesson');
+    }
+    else if(val=='after-enrollment'){
+        update_deadline_data('#interval_count');
+    }
+    else{
+        update_deadline_data('#deadline_date');
+    }
+}
+
+function update_deadline_data(element){
+    element = $(element);
+    if(element.length==0) return false;
+    value = element.val();
+    field_name = 'deadline_value';
+    switch(element.attr('id')){
+        case 'deadline-trigger': 
+            field_name = 'deadline_type';
+            break;
+        case 'interval_count':
+            value = {count:$('#interval_count').val(), unit:$('#interval-type').val()};
+            value = JSON.stringify(value);
+            break;
+        case 'interval-type':
+            value = {count:$('#interval_count').val(), unit:$('#interval-type').val()};
+            value = JSON.stringify(value);
+            break;
+        case 'interval-lesson':
+            value = $('#interval-lesson').val();
+            break;            
+    }
+    $.post(element.attr('data-url'),{ 
+            pk: element.attr('data-pk'), 
+            name: field_name, 
+            value: value
+        }, function(){
+           $('.glyphicon-floppy-saved').remove();
+           $('.deadline-btn').after(" <i class='glyphicon glyphicon-floppy-saved'></i>");
+           $('.glyphicon-floppy-saved').fadeOut(1000);
+        }
+    );
 }

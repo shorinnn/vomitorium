@@ -9,10 +9,85 @@
                 <a id='public_view_link' href="{{url("lessons/view_lesson/".$data['lesson']->id)}}"  target="_blank" class='btn btn-primary'><i class="glyphicon glyphicon-eye-open"></i> Public view</a>
             </h3>
             <table class="table">
-                <tr><td>Title</td>
+                <tr><td style='width:30%'>Title</td>
                     <td><a class="editable" href="#" id="title" data-type="text" data-pk="{{$data['lesson']->id}}" 
                        data-name="title" data-url="{{action("LessonsController@update", array($data['lesson']->chapter_id, $data['lesson']->id))}}" data-original-title="Enter Title" data-mode='inline'>{{$data['lesson']->title}}
                       </a>
+                    </td>
+                </tr>
+                <tr><td>Deadline</td>
+                    <td>
+                        <button class="btn btn-primary deadline-btn" onclick="slideToggle('.deadline')">Set Deadline</button>
+                        <div class="deadline nodisplay">
+                            <div class='padded-top'>
+                                {{Form::select('deadline-trigger', array('after-enrollment' => 'After Enrollment', 
+                                                                            'after-completion' => 'After Completion', 
+                                                                            'after-release' => 'After Release',
+                                                                            'on-date' => 'On specific date'), 
+                                        $data['lesson']->deadline_type, 
+                                        array(
+                                            'id'=>'deadline-trigger', 'onchange'=> "change_deadline_trigger(this)", 'class'=>'form-control',
+                                            'data-url'=>action("LessonsController@update",array(1)),'data-pk'=>$data['lesson']->id
+                                            )
+                                        ) }}
+                            </div>
+                            <?php
+                            $interval_count = $interval_type = $interval_lesson = $on_date = '';
+                            if($data['lesson']->deadline_type=='after-enrollment'){
+                                $json = json_decode($data['lesson']->deadline_value);
+                                $interval_count = $json->count;
+                                $interval_type = $json->unit;
+                            }
+                            if($data['lesson']->deadline_type=='after-completion' || $data['lesson']->deadline_type=='after-release' ){
+                                $interval_lesson = $data['lesson']->deadline_value;
+                            }
+                            if($data['lesson']->deadline_type=='on-date'){
+                                 $on_date = $data['lesson']->deadline_value;
+                            }
+                            ?>
+                            <div class="after-enrollment text-left padded-top deadline-div">
+                                <div class="col-lg-2 text-left nopadd">
+                                    <input type='text' class='form-control' id="interval_count" placeholder="7"
+                                   onkeyup='update_deadline_data(this)'  value="{{$interval_count}}"
+                                   onchange='update_deadline_data(this)' data-pk = '{{$data['lesson']->id}}' data-url="{{action("LessonsController@update",array(1))}}" />
+                                </div>
+                                <div class="col-lg-4">
+                                    {{Form::select('interval-type', array('day' => 'day(s)', 'week' => 'week(s)', 'month' => 'month(s)'), 
+                                        $interval_type, 
+                                        array(
+                                            'id'=>'interval-type', 'onchange'=>'update_deadline_data(this)', 'class'=>'form-control',
+                                            'data-url'=>action("LessonsController@update",array(1)),'data-pk'=>$data['lesson']->id
+                                            )
+                                        ) }}
+                                </div>
+                                <div class="col-lg-6 text-left"><p class='padded-top'>After enrollment</p></div>
+                            </div>
+                            
+                            <div class="after-completion after-release text-left padded-top nodisplay deadline-div">
+                                <select class='form-control' id="interval-lesson"
+                                        onchange='update_deadline_data(this)' data-pk = '{{$data['lesson']->id}}' data-url="{{action("LessonsController@update",array(1))}}">
+                                    <?php
+                                        $chapter = '';
+                                        foreach($data['lessons'] as $l){ 
+                                            if($chapter!=$l->chapter->title){
+                                                $chapter = $l->chapter->title;
+                                                echo "<option disabled>".strtoupper($chapter)."</option>";
+                                            }
+                                            $checked = '';
+                                            if($l->id==$interval_lesson) $checked=' selected';
+                                            echo "<option value='$l->id' $checked>&nbsp;&nbsp;&nbsp;$l->title</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            
+                             <div class="on-date text-left padded-top nodisplay deadline-div ">
+                                 <input type="text" class="form-control form-inline date-field" id="deadline_date" name="deadline_date" 
+                                        value="{{$on_date}}"
+                                        onchange='update_deadline_data(this)' data-pk = '{{$data['lesson']->id}}' 
+                                        data-url="{{action("LessonsController@update",array(1))}}" style='width:30%; float:left' />
+                             </div>
+                        </div>
                     </td>
                 </tr>
                 <tr class='advanced_lesson'>
@@ -516,4 +591,7 @@
             </div>
         </div>
     </div>
+    <script>
+        onload_functions = ['prepopulate_deadline'];
+    </script>
 @stop
