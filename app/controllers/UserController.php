@@ -33,6 +33,13 @@ class UserController extends BaseController {
         if(PaymentPlan::whereRaw('SHA1(CONCAT("'.sys_settings().'",id)) = "'.$check_hash.'"')->count() >0){
             $this->meta['hash'] = $hash;
         }
+        $exp = 60 * 24 * 90;
+        if(Input::has('a')){
+            Cookie::queue('affiliate',Input::get('a'),$exp);
+        }
+        if(Input::has('t')){
+            Cookie::queue('tracking',Input::get('t'),$exp);
+        }
         return View::make('pages.user_forms')->withForm(Confide::makeSignupForm()->withMeta($this->meta)->render())->withMeta($this->meta);
     }
 
@@ -50,6 +57,8 @@ class UserController extends BaseController {
         $user->email = Input::get( 'email' );
         $user->password = Input::get( 'password' );
         $user->confirmed = 1;
+        if(Cookie::has('affiliate')) $user->affiliate_id = Cookie::get('affiliate');
+        if(Cookie::has('tracking')) $user->tracking_id = Cookie::get('tracking');
         $hash = Input::get('program_id'); // this is payment plan ID actually
         // The password confirmation will be removed from model
         // before saving. This field will be used in Ardent's
@@ -83,6 +92,8 @@ class UserController extends BaseController {
 
         if ( $user->id )
         {
+            Cookie::forget('affiliate');
+            Cookie::forget('tracking');
             $notice = Lang::get('confide::confide.alerts.account_created') . ' ' . Lang::get('confide::confide.alerts.instructions_sent'); 
             // Assign user to Member role
             if(Input::has('role')){

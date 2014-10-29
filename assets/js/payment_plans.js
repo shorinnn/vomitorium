@@ -146,7 +146,10 @@ function get_buy_button(e){
       message: loader_gif,
       title: "Buy Button Code"
     });
-   
-    $('.bootbox-body').html('<textarea rows="10" data-self-title="1" data-clipboard-text=\''+(code)+'\' class="form-control copy-to do-tooltip">'+(code)+'</textarea> ');
+    str = '<b>Regular link</b> <textarea rows="2" data-self-title="1" data-clipboard-text=\''+(code)+'\' class="form-control copy-to do-tooltip">'+code+'</textarea> ';
+    str += '<br /><b>Affiliate link</b> <textarea rows="2" data-self-title="1" data-clipboard-text=\''+(code)+'?a=AFF_ID_HERE\' class="form-control copy-to do-tooltip">'+code+'?a=AFF_ID_HERE</textarea> ';
+    str += '<br /><b>Tracking link</b> <textarea rows="2" data-self-title="1" data-clipboard-text=\''+(code)+'?t=TRACK_ID_HERE\' class="form-control copy-to do-tooltip">'+code+'?t=TRACK_ID_HERE</textarea> ';
+    str += '<br /><b>Affiliate & Tracking link</b> <textarea rows="2" data-self-title="1" data-clipboard-text=\''+(code)+'?a=AFF_ID_HERE&t=TRACK_ID_HERE\' class="form-control copy-to do-tooltip">'+code+'?a=AFF_ID_HERE&t=TRACK_ID_HERE</textarea> ';
+    $('.bootbox-body').html(str);
     var client = new ZeroClipboard($(".copy-to"));
 }
