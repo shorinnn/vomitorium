@@ -81,9 +81,12 @@ class UserManagerController extends BaseController {
     public function register(){
         if(Input::get('type')=='link'){
             $data = Input::all();
-            $data['program_name'] = Program::find(Input::get('program'))->name;
+            $plan = PaymentPlan::find(Input::get('payment_plan'));
+            
+            $data['program_name'] = $plan->program->name;
             $hash = sha1(sys_settings().Input::get('program'));
-            $data['link'] = url('register/'.$hash);
+            //$data['link'] = url('register/'.$hash);
+            $data['link'] = url('register').'/'.sha1(sys_settings().$plan->id);
             if(sys_settings('send_registration_email')!=''){
                 $content = sys_settings('send_registration_email');
                 $content = str_replace('[FIRST_NAME]', Input::get('first_name'), $content);
@@ -172,7 +175,8 @@ class UserManagerController extends BaseController {
     
     public function add_clients_ui(){
         $programs = get_programs();
-        return View::make('user_manager.add_clients')->withPrograms($programs);
+        $plans = PaymentPlan::where('program_id', Session::get('program_id'))->get();
+        return View::make('user_manager.add_clients')->withPrograms($programs)->withPlans($plans);
     }
 }
 

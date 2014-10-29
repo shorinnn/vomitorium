@@ -1,14 +1,15 @@
 <div class='add'>
                     <input type="radio" name="type" value="link" id='register_link' onclick='show_div(this)' /><label for='register_link'>Send Registration Link (Email)</label><br />
                     <input type="radio" name="type" value="link" id='register_manual' onclick='show_div(this)' /> <label for='register_manual'>Manual Add</label><br />
-                    <input type="radio" name="type" value="link" id='register_codes' onclick='show_div(this)' /> <label for='register_codes'>Generate Registration Codes</label><br />
+                    <!--<input type="radio" name="type" value="link" id='register_codes' onclick='show_div(this)' /> <label for='register_codes'>Generate Registration Codes</label><br />-->
                     <form id='register_link_div' 
                           data-bv-message =""
                           data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
                           data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
                           data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
                           class="nodisplay ajax-form" method="post" action='{{url('users/register')}}'>
-<br />                        <div class='row'>
+<br />                        
+<!--                        <div class='row'>
                             <div class="col-lg-12 form-group">
                                 <label>Program</label>
                             <select name='program' class="form-control">
@@ -20,6 +21,20 @@
                                                 >{{$p->name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>-->
+<div class='row'>
+                            <div class="col-lg-12 form-group">
+                                <label>Program - Payment Plan</label>
+                                @if($plans->count()==0)
+                                    You have no payment plans created. <a href="{{url('payment_plans')}}">Create one</a>
+                                @else
+                                    <select name='payment_plan' class="form-control">
+                                         @foreach($plans as $p)
+                                             <option title="{{$p->name}}" value='{{$p->id}}'>{{$p->program->name}} - {{$p->name}}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
                             </div>
                         </div>
                         <div class='row'>
