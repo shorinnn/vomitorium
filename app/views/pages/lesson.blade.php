@@ -136,7 +136,6 @@ $next_lesson_btn = '';
                     <span class='clearfix clear_fix'></span>
                     @endif
                 @endif
-                
             <?php
             $page_has_submit = false;
             $prev_block = '';

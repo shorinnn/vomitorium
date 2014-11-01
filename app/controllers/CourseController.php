@@ -125,7 +125,8 @@ class CourseController extends BaseController {
     }
         
     public function mark_read(){
-        Answer_comment::mark(Input::get('message'), Input::get('block_id'), 'read');
+        //Answer_comment::mark(Input::get('message'), Input::get('block_id'), 'read');
+         Conversation::where('id', Input::get('message'))->where('block_answer_id',Input::get('block_id'))->update(array('attended'=>1));   
         return;
     }
     

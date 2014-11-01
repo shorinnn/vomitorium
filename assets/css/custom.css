@@ -2837,3 +2837,257 @@ body{
 div.ui-datepicker{
     z-index: 99999 !Important;
 }
+
+/** https://github.com/shorinnn/vomitorium/issues/153 code **/
+/**Universal css**/
+body {
+	font-weight: 400;
+	background: #ebeef2;
+	font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: antialiased !important;
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-o-text-size-adjust: 100%;
+	font-size: 17px;
+	color: #303030;
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
+	margin: 0;
+	padding: 0;
+}
+a, a img {
+	text-decoration: none;
+	outline: none;
+}
+:focus {
+	outline: none;
+}
+.container {
+	max-width: 1070px;
+	width: auto;
+	margin: 0 auto;
+	min-height: 100%;
+}
+/*got to top*/
+.go-to-top {
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: rgba(33, 51, 54, 0.2);
+	border-radius: 5px;
+	line-height: 40px;
+	text-align: center;
+	position: fixed;
+	z-index: 99999;
+	bottom: 65px;
+	right: 20px;
+}
+.go-to-top:before {
+	content: url(../img/arrow-up.png);
+	position: relative;
+	top: 1px;
+}
+.go-to-top:hover {
+	background: rgba(33, 51, 54, 0.4);
+	cursor : pointer;
+}
+/*got to top*/
+/**Universal css**/
+
+/**Content Area**/
+.editor-col {
+	margin: 51px 0px;
+}
+.editor-title {
+	background-color: #dce4ec;
+	padding: 0px 6px;
+}
+.editor-title h2 {
+	font-weight: 600;
+	text-transform: uppercase;
+	padding-left: 10px;
+	color: #7f8c8d;
+	font-size: 20px;
+	float: left;
+	line-height: 50px;
+}
+.editor-title ul {
+	margin: 0;
+	padding: 0;
+	float: right;
+}
+.editor-title ul li {
+	float: left;
+	margin-left: 3px;
+}
+.move, .exit {
+	float: left;
+	padding: 8px 11px;
+	background-color: #f2f2f2;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	margin: 5px 0;
+}
+.editor-text-area {
+	background: #ffffff;
+	padding: 27px 22px;
+}
+.discard {
+	color: #f4f5f5;
+	font-size: 19px;
+	font-weight: 600;
+	text-transform: uppercase;
+	background: #1daab2;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	width: 215px;
+	float: left;
+	text-align: center;
+	padding: 15px 0px;
+}
+.discard:hover {
+	color: #f4f5f5;
+	text-decoration: none;
+}
+.step-col {
+	margin-bottom: 51px;
+}
+.step-text-area {
+	background: #ffffff;
+	padding: 53px 37px;
+}
+.text-block h2 {
+	font-size: 30px !important;
+	font-weight: 700 !important;
+	text-align: center !important;
+	line-height: 35px !important;
+	padding-bottom: 8px !important;
+        font-family: 'Open Sans', sans-serif !important;
+-webkit-font-smoothing: antialiased !important;
+}
+.break-line {
+	width: 35px;
+	height: 4px;
+	background: #1daab2;
+	margin: 0px auto;
+	margin-bottom: 28px;
+}
+.divider-line {
+	background: #eaeaea;
+	height: 2px;
+	width: 100%;
+	margin-bottom: 23px;
+}
+.text-block h3 {
+	font-size: 25px;
+	font-weight: 600;
+	line-height: 30px;
+	padding-bottom: 8px;
+}
+.text-block h4 {
+	font-weight: 700;
+	line-height: 23px;
+	padding-bottom: 3px;
+}
+.step-text-area li:before {
+	font-family: 'FontAwesome';
+	content: '\f111';
+	font-size: 5px;
+	padding-right: 10px;
+	vertical-align: middle;
+}
+.comment-title-box {
+	background: #2c3e50;
+	padding: 20px 20px;
+}
+.comment-title-box h2 {
+	background: url(../img/comment.png) 0px 3px no-repeat;
+	font-size: 20px;
+	color: #fff;
+	font-weight: 600;
+	text-transform: uppercase;
+	padding-left: 33px;
+}
+.comment-text-area {
+	background: #fff;
+	padding: 0px 45px 45px 45px;
+}
+span.comment-text-area{
+    background:transparent;
+    padding:0px;
+}
+.load-message-box {
+	text-align: center;
+	margin-bottom: 40px;
+}
+.load-message {
+	background: #f47936;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 14px;
+	padding: 10px 15px 10px 20px;
+	-webkit-border-radius: 0px 0px 3px 3px;
+	border-radius: 0px 0px 3px 3px;
+	display: inline-block;
+}
+.load-message:hover {
+	color: #fff;
+	text-decoration: none;
+}
+.comment-text-area ul {
+	margin: 0;
+	padding: 0;
+	float: right;
+}
+.comment-text-area li {
+	float: left;
+	margin-left: 10px;
+}
+.comment-text-area li a {
+	float: left;
+	color: #748282;
+	font-size: 13px;
+	text-transform: uppercase;
+	background-color: #dce4ec;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 6px 12px;
+}
+.comment-text-area li a:hover {
+	color: #748282;
+	text-decoration: none;
+}
+.comment-text-area li a.reply {
+	background: url(../img/curve-arrow.png) 8px 6px no-repeat;
+	background-color: #dce4ec;
+	padding: 6px 12px 6px 30px;
+}
+
+
+a.comment-reply:hover {
+	color: #748282;
+	text-decoration: none;
+}
+a.comment-reply {
+	color: #748282;
+	font-size: 13px;
+	text-transform: uppercase;
+	
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 6px 12px;
+	//background: url(../img/curve-arrow.png) 8px 6px no-repeat;
+	/*padding: 6px 12px 6px 30px;*/
+        background-color: #1dabb3;
+        color:white;
+}
+
+a.comment-reply:hover{
+    background-color:#22C4CD;
+    color:white;
+}
+/**Content Area**/

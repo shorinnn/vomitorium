@@ -42,23 +42,26 @@
                     @endforeach
                  @endif
             </div>
-            <ul class="list-unstyled option-box">
+            <span class="comment-text-area">
+            <ul class="list-unstyled">
                 @if(!admin())
                     @if($c->read==0)
                     <li>
                         <a id="mark-read-{{$c->id}}" title="Mark As Read" class="do-tooltip"
-                           onclick="mark_read({{$c->id}},{{$c->block_answer_id}})"><i class="glyphicon glyphicon-ok"></i></a>  
+                           onclick="mark_read({{$c->id}},{{$c->block_answer_id}})">Mark As Read</a>  
                     </li>
                     @endif
                 @else
                     @if($c->attended==0 && $c->posted_by=='user')
                     <li>
                          <a  id="mark-read-{{$c->id}}" title="Mark As Attended" class="do-tooltip"
-                                 onclick="mark_attended({{$c->id}},{{$c->block_answer_id}})"><i class="glyphicon glyphicon-ok"></i></a>
+                                 onclick="mark_attended({{$c->id}},{{$c->block_answer_id}})">Mark As Attended</a>
                     </li>
+                        
                     @endif
                 @endif
             </ul>
+                </span>
         </div><!--coach-textarea ends-->
         <div class="clearfix"></div>
     </div>
