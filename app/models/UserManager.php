@@ -126,7 +126,9 @@ class UserManager extends Ardent {
                         (SELECT `id` FROM `block_answers` WHERE `block_id` IN
                             (SELECT `id` FROM `blocks` WHERE `lesson_id` IN 
                                 (SELECT `id` FROM `lessons` WHERE `published` = 1 AND `program_id` = '".Session::get('program_id')."'))))) ";
-        $program_ids = Program::find(Session::get('program_id'))->users()->lists('user_id');
+        $program = Program::find(Session::get('program_id'));
+        if($program==null) $program_ids = array();
+        else $program_ids = $program->users()->lists('user_id');
         if(count($program_ids)==0) $program_ids = array(0);
         $users =  User::whereRaw($sql)->whereIn('id',$program_ids)->get();//->paginate($limit);
         $collection = new Illuminate\Database\Eloquent\Collection;

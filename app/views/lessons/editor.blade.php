@@ -69,7 +69,7 @@
                                     <?php
                                         $chapter = '';
                                         foreach($data['lessons'] as $l){ 
-                                            if($chapter!=$l->chapter->title){
+                                            if($l->chapter_id>0 && $chapter!=$l->chapter->title){
                                                 $chapter = $l->chapter->title;
                                                 echo "<option disabled>".strtoupper($chapter)."</option>";
                                             }
