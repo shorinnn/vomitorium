@@ -5,6 +5,14 @@ Array.prototype.remove = function(from, to) {
   return this.push.apply(this, rest);
 };
 
+Array.prototype.pluck = function(val) {
+    ret = false;
+    for(var i = this.length; i--;){
+          if (this[i] == val) ret = this.splice(i, 1);
+      }
+    return ret;
+};
+
 function enable_rte(toolbar) {
     if(toolbar==1){
         toolbar = [

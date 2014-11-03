@@ -276,7 +276,8 @@ function save_answer_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
-            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+            $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+            blocks_to_update.pluck('block-'+block_id);
     });
 }
 
@@ -291,7 +292,8 @@ function save_category_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
-            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+            $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+            blocks_to_update.pluck('block-'+block_id);
     });
 }
 
@@ -320,7 +322,8 @@ function save_sortable_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
-            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+            $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+            blocks_to_update.pluck('block-'+block_id);
     });
 }
 
@@ -337,7 +340,8 @@ function save_top_skill_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
-            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+            $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+            blocks_to_update.pluck('block-'+block_id);
     });
 }
 
@@ -360,7 +364,8 @@ function save_score_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
-            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+            $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+            blocks_to_update.pluck('block-'+block_id);
     });
 }
 
@@ -379,7 +384,8 @@ function save_dynamic_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
-            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+            $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+            blocks_to_update.pluck('block-'+block_id);
     });
 }
 
@@ -397,7 +403,8 @@ function save_text_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
-            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+            $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+            blocks_to_update.pluck('block-'+block_id);
     });
 }
 first_upload = 0;
@@ -407,7 +414,8 @@ function save_first_file_block(block_id, url){
     first_upload = 1;
     save_file_block(block_id, url);
     first_upload = 0;
-    $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+    $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+    blocks_to_update.pluck('block-'+block_id);
 }
 
 function save_file_block(block_id, url){
@@ -507,7 +515,8 @@ function save_file_block(block_id, url){
                            if(no_file==0) $('#block-'+block_id+' .file_link').html("Download: <a href='"+APP_URL+'/assets/downloads/'+content+"' target='_blank'>"+title+"</a>");
                            else $('#block-'+block_id+' .file_link a').html(title);
                            if(title=='') $('#block-'+block_id+' .file_link a').html('[YOUR FILE]');
-                           $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+                           $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+                           blocks_to_update.pluck('block-'+block_id);
                        }
                 });
             }
@@ -626,8 +635,12 @@ function save_question_block(block_id, url){
            hide_busy();
            result = parse_json(result);
             if(!result) return false;
+            blocks_to_update.pluck("block-"+block_id);
+            
             do_growl(result.text, result.status); 
-            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
+            
+            $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+            
     });
 }
 
@@ -1086,8 +1099,10 @@ function save_all(){
 var blocks_to_update = new Array();
 function blocks_changed(e){
     id = $(e.target).closest('.block').attr('id');
-    $('#'+id+' .panel-heading').addClass('edited-block');
-    if(blocks_to_update.indexOf(id)==-1) blocks_to_update.push(id);
+    if(blocks_to_update.indexOf(id)==-1){
+        blocks_to_update.push(id);
+        $('#'+id+' .panel-heading span').append('<span class="unsaved">*</span>');
+    }
 }
 
 function prepopulate_deadline(){
