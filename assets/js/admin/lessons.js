@@ -276,6 +276,7 @@ function save_answer_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
+            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
     });
 }
 
@@ -290,6 +291,7 @@ function save_category_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
+            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
     });
 }
 
@@ -298,7 +300,7 @@ function save_sortable_block(block_id, url){
     skill_type = $('#options-list-'+block_id).val();
     title =  $('#block-title-'+block_id).val();
     subtitle =  $('#block-subtitle-'+block_id).val();
-    $('#block-title-span-'+block_id).html(title);
+    //$('#block-title-span-'+block_id).html(title);
     var in_section = $('#in_section-'+block_id).val();
     category_id =  $('#category-'+block_id).val();
     var minimum_choices = $('#block-answer-min-skill-'+block_id).val();
@@ -318,6 +320,7 @@ function save_sortable_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
+            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
     });
 }
 
@@ -334,6 +337,7 @@ function save_top_skill_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
+            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
     });
 }
 
@@ -356,6 +360,7 @@ function save_score_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
+            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
     });
 }
 
@@ -374,6 +379,7 @@ function save_dynamic_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
+            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
     });
 }
 
@@ -382,7 +388,7 @@ function save_text_block(block_id, url){
     content = $('#block-editor-'+block_id).val();
     if(content=='')  content =  $('#block-editor-'+block_id).code();
     title =  $('#block-title-'+block_id).val();
-    $('#block-title-span-'+block_id).html(title);
+    //$('#block-title-span-'+block_id).html(title);
     var in_section = $('#in_section-'+block_id).val();
     category_id =  $('#category-'+block_id).val();
     
@@ -391,6 +397,7 @@ function save_text_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             if(!no_growl) do_growl(result.text, result.status); 
+            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
     });
 }
 first_upload = 0;
@@ -400,6 +407,7 @@ function save_first_file_block(block_id, url){
     first_upload = 1;
     save_file_block(block_id, url);
     first_upload = 0;
+    $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
 }
 
 function save_file_block(block_id, url){
@@ -485,7 +493,7 @@ function save_file_block(block_id, url){
                 content = response;
                 title =  $('#block-title-'+block_id).val();
                 subtitle =  $('#block-subtitle-'+block_id).val();
-                $('#block-title-span-'+block_id).html(title);
+                //$('#block-title-span-'+block_id).html(title);
                 var in_section = $('#in_section-'+block_id).val();
                 category_id =  $('#category-'+block_id).val();
                 if(no_file==0) data = {text:content, title:title, subtitle:subtitle, in_section:in_section, category_id:category_id}
@@ -499,6 +507,7 @@ function save_file_block(block_id, url){
                            if(no_file==0) $('#block-'+block_id+' .file_link').html("Download: <a href='"+APP_URL+'/assets/downloads/'+content+"' target='_blank'>"+title+"</a>");
                            else $('#block-'+block_id+' .file_link a').html(title);
                            if(title=='') $('#block-'+block_id+' .file_link a').html('[YOUR FILE]');
+                           $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
                        }
                 });
             }
@@ -513,7 +522,7 @@ function save_question_block(block_id, url){
     show_busy();
     title =  $('#block-title-'+block_id).val();
     subtitle =  $('#block-subtitle-'+block_id).val();
-    $('#block-title-span-'+block_id).html(title);
+    //$('#block-title-span-'+block_id).html(title);
     var answer_type = $('#block-answer-type-'+block_id).val();
     var minimum_choices = maximum_choices = 0;
     var choices = the_options = '';
@@ -618,6 +627,7 @@ function save_question_block(block_id, url){
            result = parse_json(result);
             if(!result) return false;
             do_growl(result.text, result.status); 
+            $('#block-'+block_id+' .panel-heading').removeClass('edited-block');
     });
 }
 
@@ -1076,8 +1086,8 @@ function save_all(){
 var blocks_to_update = new Array();
 function blocks_changed(e){
     id = $(e.target).closest('.block').attr('id');
+    $('#'+id+' .panel-heading').addClass('edited-block');
     if(blocks_to_update.indexOf(id)==-1) blocks_to_update.push(id);
-    console.log(blocks_to_update);
 }
 
 function prepopulate_deadline(){

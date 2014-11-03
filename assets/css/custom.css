@@ -3145,3 +3145,7 @@ a.comment-reply:hover{
     padding-right: 10px;
     vertical-align: middle;
 }
+.edited-block{
+    color:white !important;
+    background-color:#D33D3D !important;
+}
