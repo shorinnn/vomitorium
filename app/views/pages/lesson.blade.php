@@ -464,7 +464,7 @@ $next_lesson_btn = '';
             @elseif($page_has_submit)
             <?php $page_has_scale = '';?>
             <div class="text-center" style="margin-bottom: 15px;">
-                @if(!$lesson->all_answered())
+                @if(!$lesson->already_submitted())
                     <button id="submit_btn" class="btn btn-lg submit-btns btn-success {{$page_has_scale}}">Submit</button>
                     <button type="button" id="edit_btn" btn-lg class="btn submit-btns btn-danger {{$page_has_scale}}" style="display:none" onclick="edit_answers()">Edit Answers</button>
                 @else

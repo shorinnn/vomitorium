@@ -141,6 +141,11 @@ class Lesson extends Ardent {
          DB::table('lessons')->where('program_id',Session::get('program_id'))->where('chapter_id', $this->chapter_id)->where('ord','>', $this->ord)->decrement('ord');               
       }
       
+      public function already_submitted(){
+          if(Auth::guest()) return false;
+          if($this->progress()>0)  return true;
+          return false;
+      }
      
       public function all_answered(){
           if(Auth::guest()) return false;
