@@ -33,6 +33,21 @@
 	font-weight: normal;
 	font-style: normal;
 }
+@font-face{
+    font-family:'OSans';src:url(../fonts/OpenSans-Regular-webfont.eot);
+    src:url(../fonts/OpenSans-Regular-webfont.eot?#iefix) format('embedded-opentype'),
+        url(../fonts/OpenSans-Regular-webfont.woff) format('woff'),
+        url(../fonts/OpenSans-Regular-webfont.ttf) format('truetype'),
+        url(../fonts/OpenSans-Regular-webfont.svg) format('svg')
+}
+
+@font-face{
+    font-family:'OSansSBold';
+    src:url(../fonts/OpenSans-Semibold-webfont.eot);
+    src:url(../fonts/OpenSans-Semibold-webfont.eot?#iefix) format('embedded-opentype'),
+        url(../fonts/OpenSans-Semibold-webfont.woff) format('woff'),url(../fonts/OpenSans-Semibold-webfont.ttf) format('truetype'),
+        url(../fonts/OpenSans-Semibold-webfont.svg) format('svg')
+}
 
 .btn-default2{
     color: #f4f5f5;

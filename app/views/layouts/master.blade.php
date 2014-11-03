@@ -241,5 +241,9 @@
     @endif
     
     <!--<a data-toggle='tooltip' data-placement='right' title='Change Design' class='btn btn-danger do-tooltip' style='position:fixed; top:0px; left:0px;' href="{{url('change_style')}}"><i class='glyphicon glyphicon-refresh'></i></a>-->
+    <div style="visibility: hidden; height:5px; overflow:hidden">
+        <span style="font-family:OSansSBold"> </span>
+        <img src="{{url('assets/img/sprites.png')}}" />
+    </div>
 </body>
 </html>
