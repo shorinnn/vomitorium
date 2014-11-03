@@ -955,16 +955,35 @@ function add_new_page_element(url, id){
 }
 
 function add_question(){
+    $('.slide-left-fade-in-end').removeClass('slide-left-fade-in-end');
+    $('.slide-down-fade-in-end').removeClass('slide-down-fade-in-end');
      $('.adding').html( $('#adding-question').html() );
+     setTimeout(function(){
+         $('.slide-left-fade-in').addClass('slide-left-fade-in-end');
+         $('.slide-down-fade-in').addClass('slide-down-fade-in-end');
+     },10);
+     
 } 
 
 function add_content(){
+    $('.slide-left-fade-in-end').removeClass('slide-left-fade-in-end');
+    $('.slide-down-fade-in-end').removeClass('slide-down-fade-in-end');
      $('.adding').html( $('#adding-content').html() );
      $('.do-tooltip').tooltip({container: 'body'});
+     setTimeout(function(){
+         $('.slide-left-fade-in').addClass('slide-left-fade-in-end');
+         $('.slide-down-fade-in').addClass('slide-down-fade-in-end');
+     },10);
 }
 
 function add_open_type(){
-    $('.adding').html( $('#adding-open').html() );
+    $('.slide-left-fade-in-end').removeClass('slide-left-fade-in-end');
+    $('.slide-down-fade-in-end').removeClass('slide-down-fade-in-end');
+    $('.adding').html( $('#adding-open').html() );setTimeout(function(){
+         $('.slide-left-fade-in').addClass('slide-left-fade-in-end');
+         $('.slide-down-fade-in').addClass('slide-down-fade-in-end');
+     },10);
+    
 }
 
 function add_content_type(type){

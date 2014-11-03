@@ -370,7 +370,7 @@
                                 <div class="center"> </div>
                               </div>                  
                             </div>
-                            <div class="row">
+                            <div class="row slide-left-fade-in">
                               <div class="col-xs-4 button_texthtml">               
                                 <button class="push-action" onclick="add_open_type()">
                                       <i class="mainsprite sprite_open_ended"></i>
@@ -390,12 +390,12 @@
                                 </button>             
                              </div>
                             </div> 
-                            <div class="row">
+                            <div class="row slide-down-fade-in">
                               <div class="col-md-12">
                                 <div class="center">Advanced</div>
                               </div>                  
                             </div> 
-                            <div class="row">
+                            <div class="row slide-left-fade-in slide-left-fade-in-2">
                               <div class="col-xs-4 button_sans">    
                                 <button class="push-action"  onclick="add_content_type('mc')">
                                           <i class="mainsprite sprite_multiple"></i>
@@ -432,12 +432,12 @@
                             <h3>Choose the type of content.</h3>
                         </div>
                         <div class="box-content two-row three-column notpadd">
-                            <div class="row">
+                            <div class="row slide-down-fade-in">
                               <div class="col-md-12">
                                 <div class="center">Basic</div>
                               </div>                  
                             </div>
-                            <div class="row">
+                            <div class="row slide-left-fade-in">
                               <div class="col-xs-4 button_texthtml">               
                                 <button class="push-action" onclick="add_content_type('text')">
                                     <i class="mainsprite sprite_texthtml"></i>
@@ -457,12 +457,12 @@
                                 </button>             
                              </div>
                             </div> 
-                            <div class="row">
+                            <div class="row slide-down-fade-in">
                               <div class="col-md-12">
                                 <div class="center">Advanced</div>
                               </div>                  
                             </div> 
-                            <div class="row">
+                            <div class="row slide-left-fade-in slide-left-fade-in-2">
                               <div class="col-xs-4 button_sans">    
                                 <button class="push-action do-tooltip"  
                                         data-placement="top" 
@@ -484,12 +484,12 @@
                                 </button>    
                               </div>
                             </div>
-                            <div class="row">
+                            <div class="row ">
                               <div class="col-md-12">
                                 <div class="center"></div>
                               </div>                  
                             </div> 
-                            <div class="row">
+                            <div class="row slide-left-fade-in slide-left-fade-in-3">
                               <div class="col-xs-4 button_sans">    
                                 <button class="push-action"  onclick="add_content_type('top_skills')">
                                     <span>Top Skills</span>
@@ -555,7 +555,7 @@
                                 <h3>Select an option.</h3>
                             </div>
                             <div class="box-content one-row three-column">
-                                <div class="row">
+                                <div class="row slide-left-fade-in">
                                   <div class="col-xs-4 button_online">              
                                       <button class="push-action" onclick="add_content_type('one')">
                                           <i class="mainsprite sprite_online"></i>
