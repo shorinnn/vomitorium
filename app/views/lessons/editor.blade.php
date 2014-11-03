@@ -392,7 +392,7 @@
                             </div> 
                             <div class="row slide-down-fade-in">
                               <div class="col-md-12">
-                                <div class="center">Advanced</div>
+                                <div class="center"> </div>
                               </div>                  
                             </div> 
                             <div class="row slide-left-fade-in slide-left-fade-in-2">
@@ -434,7 +434,7 @@
                         <div class="box-content two-row three-column notpadd">
                             <div class="row slide-down-fade-in">
                               <div class="col-md-12">
-                                <div class="center">Basic</div>
+                                <div class="center"> </div>
                               </div>                  
                             </div>
                             <div class="row slide-left-fade-in">
@@ -459,7 +459,7 @@
                             </div> 
                             <div class="row slide-down-fade-in">
                               <div class="col-md-12">
-                                <div class="center">Advanced</div>
+                                <div class="center"> </div>
                               </div>                  
                             </div> 
                             <div class="row slide-left-fade-in slide-left-fade-in-2">
