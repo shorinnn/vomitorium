@@ -1330,9 +1330,9 @@ h3{
     padding-left: 10px;
     list-style: none;
 }
-
+/*
 .text-block li:before {
-     /*For a round bullet*/ 
+     For a round bullet 
     content:'\2022';
     display: block;
     position: relative;
@@ -1341,10 +1341,10 @@ h3{
     left: -10px;
     color: #1e6e37;
     font-weight:bold;
-    /*top: -0px;*/
-    /*color: #6e469b;*/
-    /*font-size: 22px;*/
-}
+    top: -0px;
+    color: #6e469b;
+    font-size: 22px;
+}*/
 
 .open-block{
     /*margin-top: 25px;*/
@@ -2735,6 +2735,7 @@ a{
 }
 body{
     background-position-y: 180px !important;
+    color:initial !important;
 }
 
 .reply-bar{
@@ -3123,4 +3124,24 @@ a.comment-reply:hover{
 .slide-down-fade-in-end div.col-md-12{
     opacity: 1;
     margin-top:0px;
+}
+
+ul{
+    padding-left: 0;
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+li{
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+li:before{
+    font-family: 'FontAwesome';
+    content: '\f111';
+    font-size: 5px;
+    padding-right: 10px;
+    vertical-align: middle;
 }
