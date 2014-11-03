@@ -1326,11 +1326,11 @@ h3{
     margin-bottom: 15px;
 }
 
-.text-block li {
+/*.text-block li {
     padding-left: 10px;
     list-style: none;
 }
-/*
+
 .text-block li:before {
      For a round bullet 
     content:'\2022';
@@ -3126,19 +3126,19 @@ a.comment-reply:hover{
     margin-top:0px;
 }
 
-ul{
+.text-block ul{
     padding-left: 0;
     list-style: none;
     margin-top: 0;
     margin-bottom: 10px;
 }
 
-li{
+.text-block li{
     display: list-item;
     text-align: -webkit-match-parent;
 }
 
-li:before{
+.text-block li:before{
     font-family: 'FontAwesome';
     content: '\f111';
     font-size: 5px;
