@@ -1157,3 +1157,19 @@ function update_deadline_data(element){
         }
     );
 }
+
+function deadline_notifications(lesson_id){
+    bootbox.dialog({
+      message: loader_gif,
+      title: "Deadline Notifications"
+    });
+    $('.bootbox-body').load(APP_URL + '/lessons/deadline_notifications/'+lesson_id);
+}
+
+function edit_alert_content(lesson_id){
+    bootbox.dialog({
+      message: loader_gif,
+      title: "Notification Content"
+    });
+    $('.bootbox-body').last().load(APP_URL + '/lesson_alerts/'+lesson_id);
+}

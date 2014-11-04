@@ -351,12 +351,15 @@ function confirm_delete(){
     $(this).toggleClass('delete-btn');
     var the_width = '145px';
     if($(this).hasClass('btn-sm')) the_width = '125px';
+    if($(this).attr('data-width')!='') the_width = $(this).attr('data-width');
+    confirm_text = ' Confirm Delete';
+    if($(this).attr('data-confirm-text')!='') confirm_text = $(this).attr('data-confirm-text');
     $(this).animate({
         width: the_width
     },100,function(){
         $(this).toggleClass('confirm-delete-btn');
         //$(this).html($(this).html()+' Delete?');
-        $(this).html('<i class="glyphicon glyphicon-remove"></i> Confirm Delete');
+        $(this).html('<i class="glyphicon glyphicon-remove"></i>'+confirm_text);
         setTimeout(cancel_delete, delete_interval, this);
     });
     
@@ -1416,10 +1419,12 @@ function ajax_btn_update(element){
     if(element.length==0) return false;
     input = element.attr('data-ui-field');
     val = $(input).code();
-    if(val=='') val = $(input).val();
-    
+    if(val=='' || typeof(val)=='undefined') val = $(input).val();
+    if(val=='' || typeof(val)=='undefined') val = element.val();
+    if(element.attr('data-method')!='') type = element.attr('data-method');
+    else type = 'POST';
     $.ajax({
-       type: 'POST',
+       type: type,
        url: element.attr('data-url'),
        data: { pk: element.attr('data-pk'), name: element.attr('data-field'), value: val},
        success: function(){
@@ -1608,9 +1613,9 @@ function link_sent(response){
 
 var delay = (function(){
   var timer = 0;
-  return function(callback, ms){
+  return function(callback, ms, params){
     clearTimeout (timer);
-    timer = setTimeout(callback, ms);
+    timer = setTimeout(callback, ms, params);
   };
 })();
 
@@ -1666,4 +1671,43 @@ function paypal_check(){
             }, 3000);
         }
     });
+}
+
+function new_item(e){
+    url = $(e).attr('data-url');
+    data = $(e).attr('data-data');
+    append_to = $(e).attr('data-appendto');
+    $.post(url, {data:data}, function(result){
+        result = parse_json(result);
+        if(result.status=='success'){
+            if(typeof(result.text)!='undefined' && result.text!='') do_growl(result.text, result.status);
+            $(append_to).append(result.html);
+        }
+        else{
+            do_growl(result.text, result.status);
+            if(typeof(result.error)!='undefined') console.log(result.error);
+        }
+    });
+}
+
+function change_alert_type(elem){
+    $elem = $(elem);
+    type = '';
+    if($elem.hasClass('glyphicon-phone')){
+        $elem.removeClass('glyphicon-phone');
+        $elem.addClass('glyphicon-envelope');
+        $elem.attr('title','Email Alert. Click to change alert type');
+        $elem.attr('data-original-title','Email Alert. Click to change alert type');
+        type = 'email';
+    }
+    else{
+        $elem.addClass('glyphicon-phone');
+        $elem.removeClass('glyphicon-envelope');
+        $elem.attr('title','Text Alert. Click to change alert type');
+        $elem.attr('data-original-title','Text Alert. Click to change alert type');
+        type = 'text';
+    }
+    element = $('<span />').attr({'data-id':$elem.attr('data-id') , 'data-method':'PUT','data-field':'delivery_type','value':type, 
+        'data-url': $elem.attr('data-url')});
+    ajax_btn_update(element);
 }

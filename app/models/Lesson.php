@@ -12,7 +12,8 @@ class Lesson extends Ardent {
         'program' => array(self::BELONGS_TO, 'Program'),
         'chapter' => array(self::BELONGS_TO, 'Chapter'),
         'blocks' => array(self::HAS_MANY, 'Block'),
-        'remark' => array(self::HAS_MANY, 'Remark')
+        'remark' => array(self::HAS_MANY, 'Remark'),
+        'alerts' => array(self::HAS_MANY, 'Lesson_alert')
       );
         
     

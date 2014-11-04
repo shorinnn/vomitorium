@@ -61,6 +61,7 @@
                                         ) }}
                                 </div>
                                 <div class="col-lg-6 text-left"><p class='padded-top'>After enrollment</p></div>
+                                <div class="clearfix"></div>
                             </div>
                             
                             <div class="after-completion after-release text-left padded-top nodisplay deadline-div">
@@ -87,6 +88,8 @@
                                         onchange='update_deadline_data(this)' data-pk = '{{$data['lesson']->id}}' 
                                         data-url="{{action("LessonsController@update",array(1))}}" style='width:30%; float:left' />
                              </div>
+                            <br />
+                            <button class="btn btn-primary" onclick="deadline_notifications({{$data['lesson']->id}})">Deadline Notifications</button>
                         </div>
                     </td>
                 </tr>

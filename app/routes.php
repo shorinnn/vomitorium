@@ -78,6 +78,7 @@ if (!Session::has('subdomain')) {
         Route::get( 'conversation/{lesson_id}/{user_id}',          'CourseController@conversation');
 
         Route::get( 'lessons/view_lesson/{id}',          'LessonsController@view_lesson');
+        Route::get( 'lessons/deadline_notifications/{id}',          'LessonsController@deadline_notifications');
         Route::get( 'load_messages',          'CourseController@load_messages');
         Route::get( 'load_lesson_comments',          'CourseController@load_lesson_comments');
         Route::get( 'dynamic_answers/{cat_id}',          'CourseController@dynamic_answers');
@@ -112,6 +113,7 @@ if (!Session::has('subdomain')) {
         Route::post('programs/choose/{id}', 'ProgramsController@choose');
         Route::post('programs/update', 'ProgramsController@update');
         Route::resource('programs', 'ProgramsController');
+        Route::resource('lesson_alerts', 'LessonAlertsController');
         Route::post('payment_plans/update_processor', 'PaymentPlansController@update_processor');
         Route::delete('payment_plans/delete_processor/{id}', 'PaymentPlansController@delete_processor');
         Route::post('payment_plans/processor', 'PaymentPlansController@processor');

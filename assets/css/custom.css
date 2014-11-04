@@ -3164,3 +3164,14 @@ a.comment-reply:hover{
     color:white !important;
     background-color:#D33D3D !important;
 }
+
+.width-50{
+    width:50px;
+}
+
+.deadline-table td{
+    padding:5px !important;
+}
+.tooltip {
+    z-index: 2000 !important;
+}

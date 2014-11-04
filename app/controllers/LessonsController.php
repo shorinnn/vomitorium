@@ -119,7 +119,7 @@ class LessonsController extends BaseController {
         }
         
         public function editor($lesson){
-            
+            $alert = new Lesson_alert();
             $data['lesson'] = Lesson::where('program_id', Session::get('program_id'))->where('id',$lesson)->first();
             if($data['lesson'] == null) return Redirect::to('lessons');
             $data['blocks'] = Block::where('lesson_id', $lesson)->orderBy('ord','asc')->get();
@@ -328,6 +328,11 @@ class LessonsController extends BaseController {
             if(!Session::has('program_id')) return 'Please select a program first';
             $lessons = Lesson::where('program_id', Session::get('program_id'))->orderBy('chapter_ord','asc')->orderBy('ord','asc')->get();
             return View::make('lessons.answers_tag')->withLessons($lessons)->with('is_report',$is_report)->render();
+        }
+        
+        public function deadline_notifications($id){
+            $lesson = Lesson::find($id);
+            return View::make('lessons.alerts.index')->withLesson($lesson);
         }
       
 }
