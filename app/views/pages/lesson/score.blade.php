@@ -21,7 +21,7 @@ $extra_class = '';
 
     }?>
 <div class="block_div {{$extra_class}}" id='block-{{$block->id}}'>
-
+<div class="q-icon">Q</div>
 <h2>{{$block->title}}</h2>
 <h4>{{$block->subtitle}}</h4>
 @foreach($choices as $c)

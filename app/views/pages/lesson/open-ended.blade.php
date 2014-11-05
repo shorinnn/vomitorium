@@ -18,9 +18,9 @@ if($answer!=null){
 }
 ?>
 <div class="block_div open-block {{$extra_class}}" id='block-{{$block->id}}'>
-
-
-    <h2>{{$block->title}}</h2>
+    
+    <div class="q-icon">Q</div>
+    <h2> {{$block->title}}</h2>
     @if(trim($block->subtitle)!='')
         <h4>{{$block->subtitle}}</h4>
     @endif

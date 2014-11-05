@@ -19,7 +19,7 @@ if($answer!=null){
 }
 ?>
 <div class="block_div scale-block {{$extra_class}}" id='block-{{$block->id}}'>
-
+<div class="q-icon">Q</div>
 <h2>{{$block->title}}</h2>
 
 @if($answer==null)

@@ -1245,6 +1245,8 @@ h3{
     text-align: left;
     margin-bottom: 15px !important;
     font-family: "OSans" !important;
+    width:843px;
+    float:right
 }
 
 .purple{
@@ -3178,4 +3180,30 @@ a.comment-reply:hover{
 
 .modal-900 .modal-dialog{
     width: 900px;
+}
+/*
+.q-icon{
+    font-family: OSansSBold;
+    background-color: #1E6E37;
+    color: white;
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    margin-right: 5px;
+    font-size: 15px;
+    position:absolute;  
+    margin-top:-25px
+}*/
+
+.q-icon{
+    font-family: OSansSBold;
+    background-color: #1E6E37;
+    color: white;
+    display: inline-block;
+    height: 26px;
+    width: 26px;
+    text-align: center;
+    margin-right: 5px;
+    font-size: 15px;
 }

@@ -19,7 +19,7 @@ $extra_class = '';
         if($comments!=array() && $comments->count()>0) $extra_class.= ' commented_block';
     }?>
 <div class="block_div {{$extra_class}}" id='block-{{$block->id}}'>
-
+<div class="q-icon">Q</div>
 <h2>{{$block->title}}</h2>
 <h4>{{$block->subtitle}}</h4>
 <input class='mc_validation' type="hidden" data-mc-block="{{$block->id}}"  data-mc-min="{{$block->minimum_choices}}" 

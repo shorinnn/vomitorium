@@ -35,7 +35,7 @@ else $answer = null;
 $i = 0;
 ?>
 <div class="block_div {{$extra_class}}" id='block-{{$block->id}}'>
-
+<div class="q-icon">Q</div>
 <h2 id="block-sortable-list-{{$block->id}}">{{$block->title}}</h2>
 <h4 class='text-center sorting-instructions sorting-instructions-{{$block->id}}'>{{$block->subtitle}}</h4>
 <h4 class='text-center black-txt sorting-instructions sorting-instructions-{{$block->id}}'>{{$block->scale_max_text}}</h4>

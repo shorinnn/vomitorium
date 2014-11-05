@@ -8,12 +8,12 @@
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Lesson.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/alerts/index.blade.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/css/custom.css</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/question_block.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/routes.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/LessonAlertsController.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/custom.js</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/alerts/alert.blade.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/admin/lessons.js</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/editor.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/text_block.blade.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/alerts/content.blade.php</file>
         </group>
     </open-files>
