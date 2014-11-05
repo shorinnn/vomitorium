@@ -21,8 +21,8 @@
                         <div class="deadline nodisplay">
                             <div class='padded-top'>
                                 {{Form::select('deadline-trigger', array('after-enrollment' => 'After Enrollment', 
-                                                                            'after-completion' => 'After Completion', 
-                                                                            'after-release' => 'After Release',
+                                                                            'after-completion' => 'After Completion of lesson', 
+                                                                            'after-release' => 'After Release of lesson',
                                                                             'on-date' => 'On specific date'), 
                                         $data['lesson']->deadline_type, 
                                         array(

@@ -155,6 +155,12 @@ $(function() {
 
     $('body').tooltip({
         selector: '.do-tooltip',
+        container: 'body',
+        title: function(){return $(this).attr('data-title-noconflict');}
+    });
+    
+    $('body').popover({
+        selector: '.do-popover',
         container: 'body'
     });
     // lesson validation
@@ -1692,22 +1698,26 @@ function new_item(e){
 
 function change_alert_type(elem){
     $elem = $(elem);
-    type = '';
+    $indicator = $('.alert-type-'+$elem.attr('data-id'));
     if($elem.hasClass('glyphicon-phone')){
-        $elem.removeClass('glyphicon-phone');
-        $elem.addClass('glyphicon-envelope');
-        $elem.attr('title','Email Alert. Click to change alert type');
-        $elem.attr('data-original-title','Email Alert. Click to change alert type');
-        type = 'email';
-    }
-    else{
-        $elem.addClass('glyphicon-phone');
-        $elem.removeClass('glyphicon-envelope');
-        $elem.attr('title','Text Alert. Click to change alert type');
-        $elem.attr('data-original-title','Text Alert. Click to change alert type');
+        $indicator.removeClass('glyphicon-envelope');
+        $indicator.addClass('glyphicon-phone');
+        $indicator.attr('title','Text Alert. Click to change alert type');
+        $indicator.attr('data-original-title','Text Alert. Click to change alert type');
         type = 'text';
     }
-    element = $('<span />').attr({'data-id':$elem.attr('data-id') , 'data-method':'PUT','data-field':'delivery_type','value':type, 
+    else{
+        $indicator.removeClass('glyphicon-phone');
+        $indicator.addClass('glyphicon-envelope');
+        $indicator.attr('title','Email Alert. Click to change alert type');
+        $indicator.attr('data-original-title','Email Alert. Click to change alert type');
+        type = 'email';
+    }
+    alert_type = 'email';
+    
+    element = $('<input />').attr({'data-id':$elem.attr('data-id') , 'data-method':'PUT','data-field':'delivery_type','value':alert_type, 
         'data-url': $elem.attr('data-url')});
     ajax_btn_update(element);
+    $('.do-tooltip').popover('hide');
+    $('.do-tooltip').tooltip('hide');
 }

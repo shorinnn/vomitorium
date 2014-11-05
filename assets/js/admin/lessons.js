@@ -1,5 +1,8 @@
 
 $(function(){
+    $('body').on('click','.note-toolbar button',function(){
+        $(this).closest('.alert-div').keyup();
+    });
     
     $(window).bind('keydown', function(event) {
         if (event.ctrlKey || event.metaKey) {
@@ -1161,7 +1164,9 @@ function update_deadline_data(element){
 function deadline_notifications(lesson_id){
     bootbox.dialog({
       message: loader_gif,
-      title: "Deadline Notifications"
+      title: "Deadline Reminder Emails/Texts",
+      className: 'modal-900'
+      
     });
     $('.bootbox-body').load(APP_URL + '/lessons/deadline_notifications/'+lesson_id);
 }
@@ -1169,7 +1174,12 @@ function deadline_notifications(lesson_id){
 function edit_alert_content(lesson_id){
     bootbox.dialog({
       message: loader_gif,
-      title: "Notification Content"
+      title: "Email/Text Content",
+      animate: false,
+      className: 'pop-in modal-900'
     });
-    $('.bootbox-body').last().load(APP_URL + '/lesson_alerts/'+lesson_id);
+    $('.bootbox-body').last().load(APP_URL + '/lesson_alerts/'+lesson_id, function(){
+        enable_rte();
+    });
 }
+

@@ -3172,6 +3172,10 @@ a.comment-reply:hover{
 .deadline-table td{
     padding:5px !important;
 }
-.tooltip {
+.tooltip, .popover {
     z-index: 2000 !important;
+}
+
+.modal-900 .modal-dialog{
+    width: 900px;
 }
