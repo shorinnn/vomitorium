@@ -69,8 +69,11 @@ $next_lesson_btn = '';
                 @if(Session::has('error'))
                     <p class='alert alert-danger'>{{Session::get('error')}}</p>
                 @endif
+                
                 @if($lesson_remarks->count() > 0)
-                <p class="green-bg conversations-title">Lesson Remarks</p>
+                    <p class="green-bg conversations-title">Lesson Remarks</p>
+                @else
+                    <p class="green-bg conversations-title hidden">Lesson Remarks</p>
                 @endif
                 
                 @if($total_lesson_remarks>1)

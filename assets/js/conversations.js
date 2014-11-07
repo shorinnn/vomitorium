@@ -396,6 +396,7 @@ function post_coach_remarks(event, url) {
         loading_button($target, true);
         result = parse_json(result);
         $('#remark-' + result.id).remove();
+        $('.conversations-title').removeClass('hidden');
         $container.append(result.html);
         do_growl('Remarks successfully posted.', 'success');
         $rte.code('');
