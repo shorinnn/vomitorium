@@ -8,13 +8,17 @@
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Lesson.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/alerts/index.blade.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/css/custom.css</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/LessonAlertsController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/custom.js</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/alerts/alert.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/admin/lessons.js</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/editor.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/text_block.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/alerts/content.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/open-ended.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/multiple-choice.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/previous-scale.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/previous-skill.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/scale.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/score.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/skill-select.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/sortable.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/top_skills.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/dynamic.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/dynamic_answer.blade.php</file>
         </group>
     </open-files>
 </project-private>

@@ -1245,7 +1245,7 @@ h3{
     text-align: left;
     margin-bottom: 15px !important;
     font-family: "OSans" !important;
-    width:843px;
+    width:850px;
     float:right
 }
 
@@ -3204,6 +3204,5 @@ a.comment-reply:hover{
     height: 26px;
     width: 26px;
     text-align: center;
-    margin-right: 5px;
     font-size: 15px;
 }
