@@ -207,11 +207,14 @@
     <section class="content">
     	<div class="container">
         	<div class="main-content">
+                    
             	@yield('content')
                 <div class="clearfix"></div>
+                
             </div><!--main-content ends-->
             
         </div><!--container ends-->
+        <p class='alert alert-info text-right'><i class='glyphicon glyphicon-time'></i> {{format_date(date('Y-m-d H:i:s'))}}</p>
     </section><!--content ends-->
     
 	<a class="go-to-top" href="#"></a>
@@ -236,6 +239,7 @@
     {{HTML::script('../assets/js/custom.js')}}
     {{HTML::script('../assets/js/conversations.js')}}
     {{HTML::script('../assets/js/payment_plans.js')}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.js"></script>
      @if(isset($meta)) 
         {{extra_javascripts($meta)}}
     @endif

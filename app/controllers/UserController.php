@@ -179,6 +179,7 @@ class UserController extends BaseController {
         // Get the value from the config file instead of changing the controller
         if ( Confide::logAttempt( $input, Config::get('confide::signup_confirm') ) ) 
         {
+            if(Input::has('tz')) Session::set('tz', Input::get('tz'));
             // Redirect the user to the URL they were trying to access before
             // caught by the authentication filter IE Redirect::guest('user/login').
             // Otherwise fallback to '/'

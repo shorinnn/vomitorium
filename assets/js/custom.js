@@ -1721,3 +1721,8 @@ function change_alert_type(elem){
     $('.do-tooltip').popover('hide');
     $('.do-tooltip').tooltip('hide');
 }
+
+function set_user_timezone(){
+    var tz = jstz.determine(); // Determines the time zone of the browser client
+    $('#tz').val(tz.name());
+}

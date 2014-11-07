@@ -54,10 +54,18 @@ function singplural($count, $word){
 function disable_answered($answer){
     if($answer!==null) return 'disabled';
 }
-
+//echo "TIMEZONEHERE";
+//$tz =  timezone_name_from_abbr("", intval(-120)*60, 0);
+//$tz =  timezone_abbreviations_list();
+//var_dump($tz);
 function format_date($date, $format = 'jS F Y H:i'){
-    $date = strtotime($date);
-    return date($format, $date);
+    
+    $schedule_date = new DateTime($date, new DateTimeZone('UTC') );
+    if(Session::has('tz')) $schedule_date->setTimeZone(new DateTimeZone(Session::get('tz')));
+    $triggerOn =  $schedule_date->format($format);
+    return $triggerOn;
+    //$date = strtotime($date);
+    //return date($format, $date);
 }
 
 function get_block_class($answer){
