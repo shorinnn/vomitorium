@@ -33,7 +33,7 @@
                                 {{$p->name}}
                             </a>
                         </td>
-                        <td>{{$p->users->count()}}</td>
+                        <td>{{$p->users()->count()}}</td>
                         <td>
                             <button class='btn btn-primary' onclick='choose_program_id({{$p->id}})'>Select</button>
                             <button class='btn btn-danger' onclick='del({{$p->id}}, "{{url('programs/'.$p->id)}}")'>Delete</button>
