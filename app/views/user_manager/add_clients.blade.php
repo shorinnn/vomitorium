@@ -1,7 +1,7 @@
 <div class='add'>
                     <input type="radio" name="type" value="link" id='register_link' onclick='show_div(this)' /><label for='register_link'>Send Registration Link (Email)</label><br />
                     <input type="radio" name="type" value="link" id='register_manual' onclick='show_div(this)' /> <label for='register_manual'>Manual Add</label><br />
-                    <!--<input type="radio" name="type" value="link" id='register_codes' onclick='show_div(this)' /> <label for='register_codes'>Generate Registration Codes</label><br />-->
+                    <input type="radio" name="type" value="link" id='register_codes' onclick='show_div(this)' /> <label for='register_codes'>Generate Registration Codes</label><br />
                     <form id='register_link_div' 
                           data-bv-message =""
                           data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
