@@ -8,10 +8,10 @@ However, you can track them in <a href='{{url('users/codes')}}'>codes</a> for yo
     @foreach($codes as $c)
     <p class='green'>
         <input type='text'  class='form-control selectable-txt pull-left copy-source-{{$c->id}} copy-to'
-               style="width:93%" value='{{url("register/$c->code")}}' data-clipboard-text="{{url("register/$c->code")}}" 
+               style="width:93%" value='{{url("register/accesspass/$c->code")}}' data-clipboard-text="{{url("register/accesspass/$c->code")}}" 
          data-id='{{$c->id}}'
                 />
-    <img src="{{url('assets/img/clipboard.png')}}" class='copy-to' data-clipboard-text="{{url("register/$c->code")}}" 
+    <img src="{{url('assets/img/clipboard.png')}}" class='copy-to' data-clipboard-text="{{url("register/accesspass/$c->code")}}" 
          data-id='{{$c->id}}' height="32" />
     
     

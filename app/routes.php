@@ -171,6 +171,7 @@ if (!Session::has('subdomain')) {
         Route::post('search_users', 'PagesController@search_users');// Confide routes
         Route::get( '/register',                 'UserController@create');
         Route::get( '/register/{hash}',                 'UserController@create');
+        Route::get( '/register/accesspass/{hash}',                 'UserController@access_pass');
         Route::post('user',                        'UserController@store');
         Route::get( '/login',                  'UserController@login');
         Route::post('/login',                  'UserController@do_login');

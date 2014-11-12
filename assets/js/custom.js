@@ -77,7 +77,9 @@ $(function() {
             input.tooltip('destroy');
             input.removeAttr('title');
         }, 1000, input);
-    });
+    });    
+    
+    enable_copy_to_clipboard();
     $('#attachment, #comment_attachment').change(upload_attachment);
     
     $('body').on('click','.selectable-txt', function(e){
@@ -431,6 +433,7 @@ function pagination_load_page(event) {
             $('#ajax-content').find("*").prop("disabled", false);
             $('#ajax-content').fadeTo('fast', 1);
             // pagination_animation(url, old_page);
+            enable_copy_to_clipboard();
         });
     }
 }
@@ -1481,6 +1484,10 @@ function link_sent(response){
     $('.bootbox-body').html(response.text);
     var client = new ZeroClipboard($(".copy-to"));
     $('#global-zeroclipboard-html-bridge').on('focusin', false);
+}
+
+function enable_copy_to_clipboard(){
+     var client = new ZeroClipboard($(".copy-to"));
 }
 
 

@@ -42,6 +42,17 @@ class UserController extends BaseController {
         }
         return View::make('pages.user_forms')->withForm(Confide::makeSignupForm()->withMeta($this->meta)->render())->withMeta($this->meta);
     }
+    
+    public function access_pass($hash=''){
+        $this->meta['pageTitle'] = 'Register';
+        $this->meta['header_img_text'] = 'Register';    
+        $this->meta['hash'] = '';
+        if(Code::where('code', $hash)->whereNull('used_by')->get()->count() > 0){
+            $this->meta['hash'] = $hash;
+            Session::set('accesspass',$hash);
+        }
+        return View::make('pages.user_forms')->withForm(Confide::makeSignupForm()->withMeta($this->meta)->render())->withMeta($this->meta);
+    }
 
     /**
      * Stores new account
@@ -60,30 +71,20 @@ class UserController extends BaseController {
         if(Cookie::has('affiliate')) $user->affiliate_id = Cookie::get('affiliate');
         if(Cookie::has('tracking')) $user->tracking_id = Cookie::get('tracking');
         $hash = Input::get('program_id'); // this is payment plan ID actually
-        // The password confirmation will be removed from model
-        // before saving. This field will be used in Ardent's
-        // auto validation.
+ 
         $user->password_confirmation = Input::get( 'password_confirmation' );
         
         // program validation
         $error = '';
         $no_program = false;
-//        if(!Input::has('program_id') || Input::get('program_id')==''){
-//            //$error[] = 'Sorry but you cannot register because the referral link is invalid';
-//            $no_program = true;
-//        }
-//        else{
-//            if(strlen(Input::get('program_id'))==16){// see if unique code is available
-//                if(Code::where('code', Input::get('program_id'))->whereNull('used_by')->count()==0) $error[] = 'Invalid registration code';
-//            }
-//            else{// see if program code is valid
-//                if(Program::whereRaw('SHA1(CONCAT("'.sys_settings().'",id)) = "'.Input::get('program_id').'"')->count()==0) $error[] = 'Invalid registration link';
-//            }
-//        }
-        
+        if(Session::has('accesspass')){
+            $code = Code::where('code', Session::get('accesspass'))->whereNull('used_by')->first();
+            if($code==null) $error = "Invalid access pass";
+        }
         if($error!=''){
             //return Redirect::action('UserController@create', array('hash'=>'asdYY'))->withInput()->with( 'error', $error );
-            return Redirect::to("register/$hash")->withInput()->with( 'error', $error );
+            if(Session::has('accesspass')) return Redirect::to("register/accesspass/$hash")->withInput()->with( 'error', $error );
+            else return Redirect::to("register/$hash")->withInput()->with( 'error', $error );
         }
         
 
@@ -102,7 +103,7 @@ class UserController extends BaseController {
             }
             else $user->attachRole(2);
             
-            if(Input::get('program_id')!=''){
+            if(Input::get('program_id')!='' && isset($code)){
                 Session::set('payment_plan_id',Input::get('program_id'));
 //                if(strlen(Input::get('program_id'))==16){//unique registration code
 //                    $code = Code::where('code',Input::get('program_id'))->first();
@@ -125,10 +126,21 @@ class UserController extends BaseController {
 //                }
             }
             $this->do_login();
-            return Redirect::to("payment");
-            // Redirect with success message, You may replace "Lang::get(..." for your custom message.
-            return Redirect::action('UserController@login')
-                ->with( 'notice', $notice );
+            if(isset($code)){// user has access pass, no payment, associate with the program and log in
+                $code->used_by = $user->id;
+                $code->updateUniques();
+                $data = array();
+                $data['program_id'] = $code->program_id;
+                $data['user_id'] = $user->id;
+                $data['start_date'] = date('Y-m-d H:i:s');
+                DB::table('programs_users')->insert($data);
+                Session::set('program_id', $code->program_id);
+                Session::forget('accesspass');
+                Session::forget('payment_plan_id');
+                Session::forget('trial');
+                return Redirect::to("/");
+            }
+            else return Redirect::to("payment");
         }
         else
         {
@@ -136,7 +148,8 @@ class UserController extends BaseController {
             $error = $user->errors()->all(':message');
 
                 //return Redirect::action('UserController@create')->withInput(Input::except('password'))->with( 'error', $error );
-                return Redirect::to("register/$hash")->withInput(Input::except('password'))->with( 'error', $error );
+             if(Session::has('accesspass')) return Redirect::to("register/accesspass/$hash")->withInput(Input::except('password'))->with( 'error', $error );
+             else return Redirect::to("register/$hash")->withInput(Input::except('password'))->with( 'error', $error );
         }
     }
 
