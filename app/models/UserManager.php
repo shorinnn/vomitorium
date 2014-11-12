@@ -122,10 +122,7 @@ class UserManager extends Ardent {
                         (SELECT `id` FROM `blocks` WHERE `lesson_id` IN 
                             (SELECT `id` FROM `lessons` WHERE `published` = 1 AND `program_id` = '".Session::get('program_id')."')))
                 OR `id` IN 
-                    (SELECT `user_id` FROM `answer_comments` WHERE `attended` = '0' AND `block_answer_id` IN 
-                        (SELECT `id` FROM `block_answers` WHERE `block_id` IN
-                            (SELECT `id` FROM `blocks` WHERE `lesson_id` IN 
-                                (SELECT `id` FROM `lessons` WHERE `published` = 1 AND `program_id` = '".Session::get('program_id')."'))))) ";
+                    (SELECT `user_id` FROM `conversations`  WHERE `posted_by` = 'user' AND `attended` = 0)) ";
         $program = Program::find(Session::get('program_id'));
         if($program==null) $program_ids = array();
         else $program_ids = $program->users()->lists('user_id');

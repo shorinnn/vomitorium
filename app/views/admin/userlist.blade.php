@@ -16,7 +16,7 @@
                     @if($items>0)
                         <span data-toggle="tooltip" class="badge do-tooltip alert-danger" title='{{$items}} Unattended {{ singplural($items,'Item')}}'>{{$items}}</span>
                     @endif
-                </td>
+                                    </td>
                 <td class="text-center vert-align">
                     <span data-toggle="tooltip" class='do_tooltip' data-original-title='{{format_date($u->last_update())}}'>
                        

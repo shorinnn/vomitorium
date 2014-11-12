@@ -8,7 +8,7 @@
                    <img width="32" alt="{{$s->user->username}}" title="{{$s->user->username}}" class="discussion-thumb" 
                         src="http://placehold.it/80x80&text={{$s->user->username}}" />
                @endif
-               <a href='{{url('userpage/'.$s->user->id)}}' style="display: inline;">{{$s->user->username}}</a>               
+               <a href='{{url('userpage/'.$s->user->id)}}' style="display: inline;">{{$s->user->username}}</a>   
                 </td>
                 <td class="text-center vert-align">
                     <a title='View Submission' href='{{url('lesson/'.$s->block->lesson->slug.'/'.$s->user->id.'#block-'.$s->block->id)}}'>{{ $s->block->lesson->title }} - 
