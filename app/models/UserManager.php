@@ -75,7 +75,7 @@ class UserManager extends Ardent {
         $sql = " `block_id` IN (SELECT `id` FROM `blocks` WHERE `lesson_id` IN 
             (SELECT `id` FROM `lessons` WHERE `program_id` = '".Session::get('program_id')."'))";
         $blocks = Block_answer::whereRaw($sql)->where('user_id',$id)->lists('id');
-        if(count($blocks)==0) $blocks = array(0);
+        if(count($blocks)==0) $blocks = array(-10);
         return Conversation::where('read',0)->where('is_pm',0)->whereIn('block_answer_id',$blocks)->where('posted_by','admin')
                 ->orderBy('id','desc')->get();
     }
