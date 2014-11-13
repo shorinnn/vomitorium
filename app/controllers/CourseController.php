@@ -177,6 +177,13 @@ class CourseController extends BaseController {
         $response['text'] = View::make('pages.lesson.comments')->withComments(array($c))->withSingle_object(true)->render();
         $response['id'] = $c->id;
         $response['status'] = 'success';
+        if(admin()){
+            $block = $c->block_answer()->block;
+            $data['user_id'] = $c->user_id;
+            $data['admin_id'] = $c->admin_id;
+            $data['link'] = url('lesson/'.$block->lesson->slug.'/#block-'.$block->id);
+            Mailer::reply_notification($data);
+        }
         return json_encode($response);
     }
 
@@ -407,6 +414,11 @@ class CourseController extends BaseController {
         
         $response['html'] = View::make('pages.lesson.remarks')->with('remarks',array($remark))->render();
         $response['id'] = $remark->id;
+        $lesson = Lesson::find( Input::get('lesson'));
+        $data['user_id'] = $remark->user_id;
+        $data['admin_id'] = $remark->admin_id;
+        $data['link'] = url('lesson/'.$lesson->slug.'/#remark-'.$remark->id);
+            Mailer::reply_notification($data);
         return json_encode($response);
     }
     

@@ -123,6 +123,12 @@ class AdminController extends BaseController {
         }
         $response['html'] = View::make('pages.lesson.remarks')->with('remarks',array($remark))->render();
         $response['id'] = $remark->id;
+            
+        $lesson = Lesson::find( Input::get('lesson'));
+        $data['user_id'] = $remark->user_id;
+        $data['admin_id'] = $remark->admin_id;
+        $data['link'] = url('lesson/'.$lesson->slug.'/#remark-'.$remark->id);
+        Mailer::reply_notification($data);
         return json_encode($response);
         
     }

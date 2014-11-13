@@ -17,6 +17,11 @@
                 <tr><td>Outgoing Email Address</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='email_from'>{{sys_settings('email_from')}}</a></td></tr>
                 <tr><td>Outgoing Email Name</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='email_name'>{{sys_settings('email_name')}}</a></td></tr>
                 <tr><td>Client Term</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='client_term'>{{sys_settings('client_term')}}</a></td></tr>
+                <tr><td>New Comment Email<br />
+                        <p class='alert alert-info'>
+                            Available tags: [FirstName], [LastName], [CoachFirstName], [CoachLastName], [Link]
+                        </p>
+                    </td><td><a href='#' data-url='{{url('system_settings')}}' data-type='textarea' data-mode='inline' class='editable' data-pk='1' id='new_comment_email'>{{sys_settings('new_comment_email')}}</a></td></tr>
             </table>
           
        </div>
