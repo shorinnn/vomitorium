@@ -170,6 +170,7 @@ class PMController extends BaseController {
                         ->where('id','<=', $id)->orderBy('id','DESC')->take($take)->skip($skip)->get();
                 $field = admin() ? 'attended' : 'read';
                 foreach($comments as $c){
+                    $c->timestamps = false;
                     $c->$field = 1;
                     $c->save();
                 }
