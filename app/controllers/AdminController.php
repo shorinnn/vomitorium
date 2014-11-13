@@ -87,14 +87,22 @@ class AdminController extends BaseController {
     
     public function mark_lesson(){
         Block_answer::mark_lesson(Input::get('lesson'), Input::get('user'));
-        Conversation::where('user_id',Input::get('user'))->where('lesson_id', Input::get('lesson'))->where('posted_by','user')->update( array('attended'=>1) );
         return;
     }
     
     public function mark_user(){
-        Block_answer::where('user_id',Input::get('user'))->update( array('attended'=>1) );
-        //Answer_comment::where('user_id',Input::get('user'))->update( array('attended'=>1) );
-        Conversation::where('user_id',Input::get('user'))->where('posted_by','user')->update( array('attended'=>1) );
+        $blocks = Block_answer::where('user_id',Input::get('user'))->get();
+        foreach($blocks as $b){
+            $b->attended = 1;
+            $b->timestamps = false;
+            $b->save();
+        }
+        $comments = Conversation::where('user_id',Input::get('user'))->where('posted_by','user')->get();
+        foreach($comments as $c){
+           $c->attended = 1;
+           $c->timestamps = false;
+           $c->save();
+        }
         return;
     }
     
@@ -237,7 +245,10 @@ class AdminController extends BaseController {
     }
     
     public function mark_remark_attended(){
-        Conversation::where('id',Input::get('message'))->update(array('attended'=>1));
+        $c = Conversation::where('id',Input::get('message'))->first();
+        $c->attended = 1;
+        $c->timestamps = false;
+        $c->save();
     }
 
 }

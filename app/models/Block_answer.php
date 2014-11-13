@@ -154,15 +154,28 @@ class Block_answer extends Ardent {
        
        public static function mark_lesson($lesson, $user){
            $blocks = Block::where('lesson_id',$lesson)->lists('id');
-           self::where('user_id', $user)->whereIn('block_id',$blocks)->update(array('attended'=>1));
-           $block_answers = Block_answer::whereIn('block_id',$blocks)->lists('id');
-           if($block_answers!=null){
-               DB::table('answer_comments')
-                       ->where('user_id',$user)
-                       ->whereIn('block_answer_id',$block_answers)
-                       ->update(array('attended'=>1));
+           // mark answers as attended
+           $answers = self::where('user_id', $user)->whereIn('block_id',$blocks)->get();
+           foreach($answers as $answer){
+               $answer->attended = 1;
+               $answer->timestamps = false;
+               $answer->save();
            }
-           
+           // mark answer comments as attended
+           $block_answers = Block_answer::whereIn('block_id',$blocks)->lists('id');
+           $comments = Conversation::whereIn('block_answer_id', $block_answers)->get();
+           foreach($comments as $c){
+               $c->attended = 1;
+               $c->timestamps = false;
+               $c->save();
+           }
+           // mark lesson comments as attended
+           $comments = Conversation::where('user_id', $user)->where('lesson_id', $lesson)->where('posted_by','user')->get();
+           foreach($comments as $c){
+               $c->attended = 1;
+               $c->timestamps = false;
+               $c->save();
+           }
        }
    
 }
