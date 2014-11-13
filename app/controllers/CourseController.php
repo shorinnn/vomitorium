@@ -126,12 +126,20 @@ class CourseController extends BaseController {
         
     public function mark_read(){
         //Answer_comment::mark(Input::get('message'), Input::get('block_id'), 'read');
-         Conversation::where('id', Input::get('message'))->where('block_answer_id',Input::get('block_id'))->update(array('attended'=>1));   
+        $c = Conversation::where('id', Input::get('message'))->where('block_answer_id',Input::get('block_id'))->first();
+        $c->timestamps = false;
+        $c->read = 1;
+        $c->save();
+        //Conversation::where('id', Input::get('message'))->where('block_answer_id',Input::get('block_id'))->update(array('read'=>1));   
         return;
     }
     
     public function mark_remark_read(){
-        Conversation::where('id',Input::get('message'))->where('user_id', Auth::user()->id)->update(array('read'=>1));
+        //Conversation::where('id',Input::get('message'))->where('user_id', Auth::user()->id)->update(array('read'=>1));
+        $c = Conversation::where('id',Input::get('message'))->where('user_id', Auth::user()->id)->first();
+        $c->timestamps = false;
+        $c->read = 1;
+        $c->save();
     }
     
     public function reply() {

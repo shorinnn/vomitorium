@@ -148,6 +148,7 @@ class Block_answer extends Ardent {
       public static function mark($id, $field = 'read', $value=1){
            $answer = self::where('id', $id)->first();
            $answer->$field = $value;
+           $answer->timestamps = false;
            $answer->save();
        }
        

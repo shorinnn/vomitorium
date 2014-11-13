@@ -55,14 +55,22 @@ class AdminController extends BaseController {
     
     public function mark_attended(){
         //Answer_comment::mark(Input::get('message'), Input::get('block_id'),'attended',1);
-        Conversation::where('id', Input::get('message'))->update(array('attended'=>1));
+        //Conversation::where('id', Input::get('message'))->update(array('attended'=>1));
+        $c = Conversation::where('id', Input::get('message'))->first();
+        $c->timestamps = false;
+        $c->attended = 1;
+        $c->save();
         return;
     }
     
     
     public function mark_unattended(){
         //Answer_comment::mark(Input::get('message'), Input::get('block_id'), 'attended', 0);
-        Conversation::where('id', Input::get('message'))->update(array('attended'=>0));
+        //Conversation::where('id', Input::get('message'))->update(array('attended'=>0));
+        $c = Conversation::where('id', Input::get('message'))->first();
+        $c->timestamps = false;
+        $c->attended = 0;
+        $c->save();
         return;
     }
     
