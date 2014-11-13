@@ -9,7 +9,7 @@
             @if(count($notifications)==0)
                 You have no new notifications<br /><br />
             @else
-            <a href="{{url('inbox')}}" style="color:red"><i class='glyphicon glyphicon-info-sign'></i> You have {{count($notifications)}} new {{singplural(count($notifications),'notifications')}}</a>
+            <a href="{{url('inbox/filter:unread')}}" style="color:red"><i class='glyphicon glyphicon-info-sign'></i> You have {{count($notifications)}} new {{singplural(count($notifications),'notifications')}}</a>
                 <br /><br />
             @endif
             

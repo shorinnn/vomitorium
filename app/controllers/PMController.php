@@ -8,6 +8,10 @@ class PMController extends BaseController {
     }
     
     public function index($search=''){
+        if($search=='filter:unread'){
+            Input::merge(array('filter'=>'unread'));
+            $search = '';
+        }
         $meta['header_img_text'] = 'Private Messages';
         $recipients = $this->recipients();
         if(admin()){
@@ -48,6 +52,10 @@ class PMController extends BaseController {
             elseif(Input::get('filter')=='lesson'){
                 $convo = Conversation::whereRaw('`is_pm` = 0 AND `lesson_id` > 0 AND `posted_by` = "admin" AND `user_id` = '.Auth::user()->id)
                         ->where('program_id', Session::get('program_id'))->orderBy('id','desc')->paginate(10);
+            }
+            elseif(Input::get('filter')=='unread'){
+                 $convo = Conversation::whereRaw('`posted_by` = "admin" AND `user_id` = '.Auth::user()->id)
+                     ->where('program_id', Session::get('program_id'))->where('read',0)->orderBy('id','desc')->paginate(10);
             }
             else{
                 $convo = Conversation::whereRaw('`posted_by` = "admin" AND `user_id` = '.Auth::user()->id)->where('program_id', Session::get('program_id'))
