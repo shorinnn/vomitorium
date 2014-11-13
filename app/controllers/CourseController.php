@@ -120,7 +120,9 @@ class CourseController extends BaseController {
         return json_encode($response);
     }
     public function load_lesson_comments() {
-        $remarks = Conversation::where('lesson_id', Input::get('lesson_id'))
+        if(admin()) $id = Input::get('uid');
+        else $id = Auth::user()->id;
+        $remarks = Conversation::where('lesson_id', Input::get('lesson_id'))->where('user_id', $id)
                 ->take(2)->skip(Input::get('skip'))->orderBy('id','desc')->get();
         $response['comments'] = View::make('pages.lesson.remarks')->withRemarks($remarks)->withReverse(1)->render();
         $response['remaining'] = count(Conversation::where('lesson_id', Input::get('lesson_id'))->take(2)->skip(Input::get('skip')+2)->get());

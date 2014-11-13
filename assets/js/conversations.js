@@ -352,6 +352,10 @@ function do_remark_reply(event, lesson) {
         cancel_remark_reply();
         discard(event);
         hide_busy();
+        $('.show-remark-reply').remove();
+        $('.remark-post-area').remove();
+        $('.force-edit-remark').show();
+        
     });
 }
 
@@ -362,6 +366,10 @@ function remark_reply(lesson) {
     $('#remark_reply').focus();
     $('.remark-reply-btn').hide();
     enable_rte(1);
+}
+
+function show_remark_reply(){
+    $('.remark-post-area').slideToggle();
 }
 
 function show_coach_remarks() {
@@ -401,6 +409,9 @@ function post_coach_remarks(event, url) {
         do_growl('Remarks successfully posted.', 'success');
         $rte.code('');
         discard(event);
+        $('.show-remark-reply').remove();
+        $('.remark-post-area').remove();
+        $('.force-edit-remark').show();
     });
 }
 
@@ -537,7 +548,8 @@ function mark_read(message, block_id, block) {
 
 function load_lesson_comments(lesson_id, skip) {
     show_busy();
-    $.get(APP_URL + '/load_lesson_comments', {lesson_id: lesson_id, skip: skip}, function(result) {
+    uid = $('.load-lesson-comments').attr('data-id');
+    $.get(APP_URL + '/load_lesson_comments', {lesson_id: lesson_id, skip: skip, uid:uid}, function(result) {
         result = parse_json(result);
         remaining = result.remaining;
         result = result.comments;

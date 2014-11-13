@@ -3,9 +3,11 @@
     <h3>{{$current_program->name}}</h3>
     
     <div class='col-lg-4'><h2>{{$current_program->today_users()}}</h2> 
+        
         New 
         {{singplural($current_program->today_users(), client_term() ) }}
         Today</div>
+
     <div class='col-lg-4'>
         <h2>{{$current_program->users()->count()}}</h2>
         {{singplural($current_program->users()->count(), client_term()) }}

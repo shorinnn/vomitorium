@@ -23,9 +23,11 @@
                     </span>
                 </td>
                 <td class="text-center vert-align">
+                    @if($u->answers->count()>0)
                     <span data-toggle="tooltip" class="do-tooltip" title='{{format_date($u->answers()->orderBy('updated_at','DESC')->first()->updated_at)}}'>
-                     Last Update: {{\Carbon\Carbon::createFromTimeStamp( strtotime( $u->answers()->orderBy('updated_at','DESC')->first()->updated_at ) )->diffForHumans() }}
+                             Last Update: {{\Carbon\Carbon::createFromTimeStamp( strtotime( $u->answers()->orderBy('updated_at','DESC')->first()->updated_at ) )->diffForHumans() }}
                     </span>
+                    @endif
                 </td>
             </tr>
             @endforeach

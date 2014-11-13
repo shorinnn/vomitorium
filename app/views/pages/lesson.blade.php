@@ -77,7 +77,7 @@ $next_lesson_btn = '';
                 @endif
                 
                 @if($total_lesson_remarks>1)
-                    <button type='button' onclick="load_lesson_comments({{$lesson->id}},1)" class="btn btn-default load-lesson-comments">
+                    <button type='button' data-id="{{$current_user->id or 0}}" onclick="load_lesson_comments({{$lesson->id}},1)" class="btn btn-default load-lesson-comments">
                         <img src="http://chicken.imacoa.ch/assets/img/arrow-point.png" alt=""> Load Earlier Messages
                     </button><br />
                     @endif
@@ -88,20 +88,25 @@ $next_lesson_btn = '';
                     @if(!admin())
                         @if($lesson_remarks->count()>0)
                             @if($remarks[$remarks->count()-1]->posted_by == 'user')
-                                <button type='button' class='btn btn-default' onclick='force_edit(".lesson-comments")'>Edit</button>
+                                <button type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
                             @else
-                            <span id='remark-reply-area'></span>
-                            <textarea id="remark_reply_top" class="white-textarea summernote_editor"></textarea>
+                            <button style='display:none' type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
+                            <div class='remark-post-area' style='display:none'>
+                                <span id='remark-reply-area'></span>
+                                <textarea id="remark_reply_top" class="white-textarea summernote_editor"></textarea>
 
-                            <button type="button" class="btn btn-default2 message-send" 
-                                    data-rte='#remark_reply_top' data-container='.lesson-comments' 
-                                        onclick="do_remark_reply(event, {{$lesson->id}})">Send</button>
-                            <ul class="list-unstyled option-box-2">
-                                <li><a href="#" data-toggle="tooltip" title="" data-input='attachment' 
-                                       data-rte='#remark_reply_top' data-input='attachment'
-                                       data-original-title="Attach" class="do-tooltip icon-2" onclick="attach(event)"></a></li>
-                                <li><a href="#" data-toggle="tooltip" title="" data-original-title="Discard" data-target='#remark_reply_top' onclick="discard(event)" class="do-tooltip icon-3"></a></li>
-                            </ul>
+                                <button type="button" class="btn btn-default2 message-send" 
+                                        data-rte='#remark_reply_top' data-container='.lesson-comments' 
+                                            onclick="do_remark_reply(event, {{$lesson->id}})">Send</button>
+                                <ul class="list-unstyled option-box-2">
+                                    <li><a href="#" data-toggle="tooltip" title="" data-input='attachment' 
+                                           data-rte='#remark_reply_top' data-input='attachment'
+                                           data-original-title="Attach" class="do-tooltip icon-2" onclick="attach(event)"></a></li>
+                                    <li><a href="#" data-toggle="tooltip" title="" data-original-title="Discard" data-target='#remark_reply_top' onclick="discard(event)" class="do-tooltip icon-3"></a></li>
+                                </ul>
+                            </div>
+                            <br class='clearfix clear_fix' />
+                            <button type='button' class='btn btn-default show-remark-reply' onclick='show_remark_reply()'>Reply</button>
                             @endif
                             <span class='clearfix clear_fix'></span>
                         @endif
@@ -110,14 +115,16 @@ $next_lesson_btn = '';
                             @if($remarks[$remarks->count()-1]->posted_by == 'admin')
                                 <button type='button' class='btn btn-default' onclick='force_edit(".lesson-comments")'>Edit</button>
                             @else
-                                <div class="message-col">
-                                    <h2>
-                                        @if($lesson_remarks->count()>0)
-                                            Compose Your Message
-                                        @else
-                                            Start the conversation
-                                        @endif
-                                    </h2>
+                                <button style='display:none' type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
+                                    @if($lesson_remarks->count()>0)
+                                        <div class='remark-post-area' style='display:none'>
+                                    @else 
+                                        <div class="message-col remark-post-area">
+                                        <h2>
+                                        Start the conversation
+                                        </h2>
+                                    @endif
+                                    
                                     <textarea id="top-remark" class="form-control white-textarea summernote_editor"></textarea>
 
 
@@ -133,8 +140,14 @@ $next_lesson_btn = '';
                                     </ul>
                                     <br />
                                     <br />
-                        </div>
+                                </div>
+                                        @if($lesson_remarks->count()>0)
+                        <br class='clearfix clear_fix' />
+                        <br class='clearfix clear_fix' />
+                            <button type='button' class='btn btn-default show-remark-reply' onclick='show_remark_reply()'>Reply</button>
                         @endif
+                        @endif
+                        
                     @endif
                     <span class='clearfix clear_fix'></span>
                     @endif
