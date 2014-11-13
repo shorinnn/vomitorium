@@ -290,12 +290,28 @@ class UserManager extends Ardent {
         $notifications = array();
         if($comments->count() > 0){
             foreach($comments as $c){
-                $notifications[strtotime($c->updated_at)] = $c;
+                $key = strtotime($c->updated_at);
+                if(!key_exists($key, $notifications)) $notifications[] = $c;
+                else{
+                    do{
+                        $key +=1;
+                    }
+                    while(key_exists($key, $notifications));
+                    $notifications[$key] = $c;
+                }
             }
         }
         if($remarks->count() > 0){
             foreach($remarks as $c){
-                $notifications[strtotime($c->updated_at)] = $c;
+                $key = strtotime($c->updated_at);
+                if(!key_exists($key, $notifications)) $notifications[] = $c;
+                else{
+                    do{
+                        $key +=1;
+                    }
+                    while(key_exists($key, $notifications));
+                    $notifications[$key] = $c;
+                }
             }
         }
         

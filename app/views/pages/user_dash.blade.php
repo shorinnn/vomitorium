@@ -4,37 +4,39 @@
 <div class="section">
         <?php $program = Program::find(Session::get('program_id')); ?>
     @if($program!=null)
-        <div class="container">
-            @if(Auth::user()->coach(Session::get('program_id'))!=false)
-                Your Coach: {{Auth::user()->coach(Session::get('program_id'))->username}}
-            @endif
-            
-                @if($program->lessons->count() > 0)
-                <p class="text-center">
-                    @if(Lesson::last()==null)
-                        <a style="font-size:18px" class="btn btn-success btn-lg" href="{{Lesson::first()}}"> <i class="glyphicon glyphicon-flag"></i> 
-                            Begin {{$program->name}}</a>
-                    @else
-                    <strong>You last stopped at...</strong>
-                    <span class="purple" style="display:block;padding-top:10px; font-weight: bold">
-                            @if(Lesson::last()->chapter_id > 0)
-                                {{Lesson::last()->chapter->title}} - 
-                            @endif
-                            {{Lesson::last()->title}}</span><br />
-                    <a style="font-size:18px; padding:25px !important" class="btn btn-success btn-lg" 
-                       href='{{URL('lesson/'.Lesson::last()->slug)}}'> <i class="glyphicon glyphicon-play"></i>
-                        Click here to resume</a><br />
-
-                    @endif
-                </p>
-                @endif
+        <div class="container">           
             <h3>Notifications</h3>
             @if(count($notifications)==0)
                 You have no new notifications<br /><br />
             @else
-            <a href="{{url('inbox')}}"><i class='glyphicon glyphicon-info-sign'></i> You have {{count($notifications)}} new {{singplural(count($notifications),'notifications')}}</a>
+            <a href="{{url('inbox')}}" style="color:red"><i class='glyphicon glyphicon-info-sign'></i> You have {{count($notifications)}} new {{singplural(count($notifications),'notifications')}}</a>
                 <br /><br />
             @endif
+            
+            @if($program->lessons->count() > 0)
+            <p class="text-center">
+                @if(Lesson::last()==null)
+                    <a style="font-size:18px" class="btn btn-success btn-lg" href="{{Lesson::first()}}"> <i class="glyphicon glyphicon-flag"></i> 
+                        Begin {{$program->name}}</a>
+                @else
+                <strong>You last stopped at...</strong>
+                <span class="purple" style="display:block;padding-top:10px; font-weight: bold">
+                        @if(Lesson::last()->chapter_id > 0)
+                            {{Lesson::last()->chapter->title}} - 
+                        @endif
+                        {{Lesson::last()->title}}</span><br />
+                <a style="font-size:18px; padding:25px !important" class="btn btn-success btn-lg" 
+                   href='{{URL('lesson/'.Lesson::last()->slug)}}'> <i class="glyphicon glyphicon-play"></i>
+                    Click here to resume</a><br /><br />
+
+                @endif
+            </p>
+            @endif
+                
+            @if(Auth::user()->coach(Session::get('program_id'))!=false)
+                Your Coach: {{Auth::user()->coach(Session::get('program_id'))->username}}
+            @endif
+            
             <!-- courses-->
             @if($courses=='' || $courses->count()==0)
             <!--<a href="{{Lesson::first()}}">Begin BrilliantU Career Coaching</a>-->
