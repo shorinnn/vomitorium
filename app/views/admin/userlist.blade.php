@@ -18,12 +18,13 @@
                     @endif
                                     </td>
                 <td class="text-center vert-align">
-                    <span data-toggle="tooltip" class='do_tooltip' data-original-title='{{format_date($u->last_update())}}'>
-                       
-                    </span>
-                    
                     <span data-toggle="tooltip" class="do-tooltip" title='{{format_date($u->last_update())}}'>
                      {{\Carbon\Carbon::createFromTimeStamp( strtotime( $u->last_update() ) )->diffForHumans() }}
+                    </span>
+                </td>
+                <td class="text-center vert-align">
+                    <span data-toggle="tooltip" class="do-tooltip" title='{{format_date($u->answers()->orderBy('updated_at','DESC')->first()->updated_at)}}'>
+                     Last Update: {{\Carbon\Carbon::createFromTimeStamp( strtotime( $u->answers()->orderBy('updated_at','DESC')->first()->updated_at ) )->diffForHumans() }}
                     </span>
                 </td>
             </tr>
