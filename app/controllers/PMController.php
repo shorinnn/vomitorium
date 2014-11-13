@@ -152,6 +152,7 @@ class PMController extends BaseController {
                 $url = url('go_to/'.$convo->id);
                 $field = admin() ? 'attended' : 'read';
                 foreach($remarks as $c){
+                    $c->timestamps = false;
                     $c->$field = 1;
                     $c->save();
                 }
