@@ -5,7 +5,9 @@
 
 
         <div class="container">
-            
+            @if(Session::has('error'))
+                <p class='alert alert-danger alert-warning'>{{Session::get('error')}}</p>
+            @endif
             @if(Lesson::count()==0 && !Session::has('program_id'))
             <h2 class="text-center" style="margin-bottom: 15px;">Welcome {{Auth::user()->first_name}} to 
                 <img style="height:28px" src="{{url('assets/img/TrainingAutomate_logo.png')}}" /></h2> 

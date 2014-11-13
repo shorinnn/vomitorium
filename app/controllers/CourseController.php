@@ -43,6 +43,9 @@ class CourseController extends BaseController {
         
         if(admin() && $user_id>0){
             $current_user = User::find($user_id);
+            if($current_user==null){
+                return Redirect::to('/')->with('error', 'Account does not exist');
+            }
             Session::flash('user_id',$user_id);
             $unattended = UserManager::unattended_answers($user_id, $lesson->id) + UserManager::unattended_comments($user_id, $lesson->id)  + UserManager::unattended_remarks($user_id, $lesson->id);
             $next_unattended = UserManager::next_unattended($user_id, $lesson->id);
