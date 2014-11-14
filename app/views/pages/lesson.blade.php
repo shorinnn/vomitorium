@@ -478,7 +478,7 @@ $next_lesson_btn = '';
             <!--@-elseif(admin())-->
             
             @elseif($page_has_submit)
-            <?php $page_has_scale = '';?>
+            <?php //$page_has_scale = '';?>
             <div class="text-center" style="margin-bottom: 15px;">
                 @if(!$lesson->already_submitted())
                     <button id="submit_btn" class="btn btn-lg submit-btns btn-success {{$page_has_scale}}">Submit</button>
