@@ -121,7 +121,7 @@ $next_lesson_btn = '';
                                     @else 
                                         <div class="message-col remark-post-area">
                                         <h2>
-                                        Start the conversation
+                                        Leave Remarks
                                         </h2>
                                     @endif
                                     
@@ -521,7 +521,7 @@ $next_lesson_btn = '';
                     @if($lesson_remarks->count()>0)
                         Compose Your Message
                     @else
-                        Start the conversation
+                        Leave Remarks
                     @endif
                 </h2>
                 <textarea id="top-remark" class="form-control white-textarea summernote_editor">  <p><br></p> </textarea>
@@ -543,7 +543,7 @@ $next_lesson_btn = '';
             @endif
             <div id="posted_remarks_big">
                 @if($remarks->count()>0 && (!admin()  || (admin() && Session::has('user_id')) ))
-                <p class="green-bg conversations-title">
+<!--                <p class="green-bg conversations-title">
                     Main Conversation with
                     @if(admin())
                         {{ User::find(Session::get('user_id'))->first_name}} {{User::find(Session::get('user_id'))->last_name}}
@@ -554,7 +554,11 @@ $next_lesson_btn = '';
                             onclick='window.open("{{url("conversation/$lesson->id/".Session::get('user_id'))}}","_blank",
                             "location=0, menubar=0, statusbar=0, toolbar=0, titlebar=0, scrollbars=1, top=0, width=1000")' title='Open in a new window'><i class='glyphicon glyphicon-new-window'></i></button>
                     <button class='btn btn-primary btn-xs pull-right remark-btn do-tooltip' title='View full conversation'  onclick='toggle_remarks()'><i class='glyphicon glyphicon-resize-full'></i></button> 
-                </p>
+                </p>-->
+                <button class='btn btn-primary do-tooltip center-block' 
+                            onclick='window.open("{{url("conversation/$lesson->id/".Session::get('user_id'))}}","_blank",
+                            "location=0, menubar=0, statusbar=0, toolbar=0, titlebar=0, scrollbars=1, top=0, width=1000")' title='Open in a new window'><i class='glyphicon glyphicon-new-window'></i>
+                Open Program Wide Conversation</button>
                 <div class='remarks-container' style='display:none'>
                     <div id='posted_remarks'>
                         {{ View::make('pages.lesson.remarks')->withRemarks($remarks) }}
@@ -587,7 +591,7 @@ $next_lesson_btn = '';
                                             @if($remarks->count()>0)
                                                 Compose Your Message
                                             @else
-                                                Start the conversation
+                                                Leave Remarks
                                             @endif
                                         </h2>
 
