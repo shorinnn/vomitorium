@@ -1,8 +1,8 @@
-@extends($layout)
+@extends('layouts.editor')
 
 @section('content')
 
-        <div class="container">
+        <div class="container editor-container">
             <h3 style="margin-bottom: 10px;">
                 <!--<a href='{{url('lessons')}}'><i class='glyphicon glyphicon-chevron-left'></i> Back to Lesson Manager</a>-->
                 <a href='{{url('modules')}}'><i class='glyphicon glyphicon-chevron-left'></i> Back to Modules</a>

@@ -3206,3 +3206,13 @@ a.comment-reply:hover{
     text-align: center;
     font-size: 15px;
 }
+
+.editor-container{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.main-editor{
+    padding-left: 38px !important;
+    padding-right: 38px !important;
+}
