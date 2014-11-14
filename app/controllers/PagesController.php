@@ -183,4 +183,10 @@ class PagesController extends \BaseController {
             return 1;
         }
         
+        public function infusionsoft(){
+            $str = Input::all();
+            $str = print_r($str, true);
+            mail('shorinnn@yahoo.com','is', $str);
+        }
+        
 }

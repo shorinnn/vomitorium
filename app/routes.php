@@ -53,6 +53,7 @@ if (!Session::has('subdomain')) {
    
         View::share('layout', Session::has('style') ? 'layouts.'.Session::get('style') : 'layouts.master');
         
+        Route::post('infusionsoft/callback', 'PagesController@infusionsoft');
         Route::post('stripe_hook', 'PagesController@stripe_hook');
         Route::post('paypal_ipn', 'PagesController@paypal_ipn');
         Route::post('thank_you', 'PagesController@thank_you');
