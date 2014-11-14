@@ -2405,7 +2405,7 @@ select#release{
 .disabled-preview-lesson{
     opacity: 0.6;
     cursor:default;
-    background-color:gray;
+    background-color:silver !important;
     font-family: 'HelveticaNeueLTCom-Roman';
     border-color:gray;
 }
