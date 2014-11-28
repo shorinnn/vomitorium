@@ -2387,9 +2387,15 @@ select#release{
     display: inline-block;
 }
 
-#lesson_form h2{
+.block_div h2+h4{
+    margin-top:12px !important;  
+}
+
+#lesson_form h2, .text-block h2{
     margin:0px 0 20px 0;
 }
+
+
 /*
 .preview-lesson:hover{
     overflow:hidden;
