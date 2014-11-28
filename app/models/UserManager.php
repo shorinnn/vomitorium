@@ -104,11 +104,11 @@ class UserManager extends Ardent {
     
     public static function unattended_users($limit=5){
         $assigned = DB::table('assigned_clients')->where('program_id',Session::get('program_id'))->where('admin_id', Auth::user()->id)->lists('user_id');
-        if(count($assigned)==0) $assigned = array('0');
+        if(count($assigned)==0) $assigned = array('-1');
         $assigned = implode(',', $assigned);
         $non_assigned = DB::table('users')->whereRaw('`id` NOT IN (SELECT DISTINCT `user_id` FROM 
             `assigned_clients` WHERE `program_id` = "'.Session::get('program_id').'" )')->lists('id');
-        if(count($non_assigned)==0) $non_assigned = array('0');
+        if(count($non_assigned)==0) $non_assigned = array('-1');
         $non_assigned = implode(',', $non_assigned);
         
         $sql = " (`id` IN ($assigned) OR `id` IN ($non_assigned))
@@ -126,7 +126,7 @@ class UserManager extends Ardent {
         $program = Program::find(Session::get('program_id'));
         if($program==null) $program_ids = array();
         else $program_ids = $program->users()->lists('user_id');
-        if(count($program_ids)==0) $program_ids = array(0);
+        if(count($program_ids)==0) $program_ids = array('-1');
         $users =  User::whereRaw($sql)->whereIn('id',$program_ids)->get();//->paginate($limit);
         $collection = new Illuminate\Database\Eloquent\Collection;
         $arr = [];
@@ -174,7 +174,7 @@ class UserManager extends Ardent {
            // return Block_answer::where('user_id',$user_id)->where('attended',0)->count();
         }
         $b = Block::where('lesson_id',$lesson)->lists('id');
-        if(count($b)==0) $b = array(0);
+        if(count($b)==0) $b = array('-1');
         return Block_answer::whereIn('block_id', $b)->where('user_id', $user_id)->where('attended',0)->count();
     }
     
@@ -195,9 +195,9 @@ class UserManager extends Ardent {
             //return Answer_comment::where('user_id',$user_id)->where('attended',0)->count();
         }
         $b = Block::where('lesson_id',$lesson)->lists('id');
-        if(count($b)==0) $b = array(0);
+        if(count($b)==0) $b = array('-1');
         $b = Block_answer::whereIn('block_id',$b)->lists('id');
-        if(count($b)==0) $b = array(0);
+        if(count($b)==0) $b = array('-1');
         return Conversation::whereIn('block_answer_id', $b)->where('user_id', $user_id)->where('attended',0)->where('posted_by','user')->count();
     }
     
