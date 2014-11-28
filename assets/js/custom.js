@@ -50,6 +50,8 @@ function enable_rte(toolbar) {
 }
 
 $(function() {
+    $('body').on('keyup','input.two-column', add_two_column_row);
+    
     $('body').on('keyup','.block-score', update_block_score);
     if(typeof(onload_functions)!='undefined'){
         $(onload_functions).each(function(index, func){
@@ -69,7 +71,7 @@ $(function() {
             $('.copied').fadeOut(2000);
             return false;
         }
-        input = $(e.target).parent().find('input');
+        input = $(e.target).parent().find('input').first();
         input.attr('title','Copied to clipboard!');
         input.tooltip();
         input.trigger('mouseover');
@@ -208,7 +210,10 @@ $(function() {
             }
         });
         $('.required').each(function() {
+            $('.required').css('outline','initial');
             if ($.trim($(this).val()) == '') {
+                $('.required').filter(function() {return !this.value;}).css('outline', 'red solid thin');
+                console.log($(this).css);
                 do_growl('Please fill in all required fields', 'danger');
                 is_valid = false;
                 return false;
@@ -361,7 +366,7 @@ function confirm_delete(){
     if($(this).hasClass('btn-sm')) the_width = '125px';
     if($(this).attr('data-width')!='') the_width = $(this).attr('data-width');
     confirm_text = ' Confirm Delete';
-    if($(this).attr('data-confirm-text')!='') confirm_text = $(this).attr('data-confirm-text');
+    if(typeof($(this).attr('data-confirm-text'))!='undefined' && $(this).attr('data-confirm-text')!='') confirm_text = $(this).attr('data-confirm-text');
     $(this).animate({
         width: the_width
     },100,function(){
@@ -1732,4 +1737,38 @@ function change_alert_type(elem){
 function set_user_timezone(){
     var tz = jstz.determine(); // Determines the time zone of the browser client
     $('#tz').val(tz.name());
+}
+
+function add_two_column_row(e){
+    block = $(e.target).attr('data-block');
+    row = $(e.target).attr('data-row');
+    row++;
+    if($('.two-column-'+block+'[data-row='+row+']').length==0){
+        new_row = '<tr><td><input data-block="'+block+'" data-row="'+row+'" type="text" class="form-control two-column two-column-'+block+'" ' +
+                  'name="two-column['+block+']['+row+'][1]" /></td> ' +
+                  '<td><input data-block="'+block+'" data-row="'+row+'" type="text" class="form-control two-column two-column-'+block+'" '+
+                  'name="two-column['+block+']['+row+'][2]" /></td></tr>';
+        
+        $('.two-column-table-'+block+' tbody').append(new_row);
+    }
+}
+
+
+function link_remote_change_element(target){
+    $target = $(target);
+    $.post($target.attr('data-url'), function(result){
+        result = parse_json(result);
+        if(result.status=='success'){
+            remove = $target.attr('data-remove-element');
+            $(remove).remove();
+            add = $target.attr('data-add-element');
+            $target.prepend(add);
+            do_growl('Saved','success');
+        }
+        else{
+            do_growl('An error occurred','danger');
+            console.log(result);
+        }
+    });
+    
 }

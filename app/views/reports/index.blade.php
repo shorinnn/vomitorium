@@ -2,6 +2,7 @@
 
 @section('content')
         <div class="container">
+           <button class="btn btn-default inline" onclick="tag_options()">Tag Options</button>
            <button class="btn btn-default inline" onclick="add_report_tag(1)">View Tags</button> 
            <button class="btn btn-default inline" onclick="create_report()">Create Report</button> 
            <br />

@@ -3,6 +3,7 @@
     <!--<i class="glyphicon glyphicon-align-justify"></i>-->
     <img src='{{url('assets/img/lesson-icon.png')}}' class='lesson-icon do-tooltip' title='Lesson' /> 
         <div class='btn-cell'>
+
              <a 
                  @if($l->published==1)
                      href="{{url("lessons/view_lesson/".$l->id)}}" 
@@ -14,8 +15,8 @@
                 @if($l->published!=1)
                     disabled-preview-lesson
                 @endif'>
-                 <i class="glyphicon glyphicon-eye-open"></i></a>
-
+             
+             <i class="glyphicon glyphicon-eye-open"></i></a>
             <a href="{{url("lessons/$l->id/editor")}}" class='btn btn-default inline do-tooltip' title='Edit lesson'>
                 Edit</a>
             <button class='btn btn-danger btn-warning delete-btn do-tooltip' title='Delete this lesson' 

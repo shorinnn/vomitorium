@@ -19,5 +19,7 @@ However, you can track them in <a href='{{url('users/codes')}}'>codes</a> for yo
     </p>
     @endforeach
 <br />
+    <button class='btn btn-default copy-to' data-clipboard-text="{{ $code_string }}"  data-id='1'>Copy Codes List</button>
+    <br />
     <button class='btn btn-default' onclick="add_client_modal(0,'#register_codes')">Generate More Codes</button>
 </div>

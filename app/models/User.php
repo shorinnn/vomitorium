@@ -363,5 +363,11 @@ class User extends ConfideUser {
          }
         DB::table('remarks')->where('user_id', $this->id)->delete();
     }
+    
+    public function paying(){
+        if(DB::table('paypal_transactions')->where('user_id', $this->id)->count()) return true;
+        if(DB::table('stripe_transactions')->where('user_id', $this->id)->count()) return true;
+        return false;
+    }
 
 }

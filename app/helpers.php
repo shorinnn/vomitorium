@@ -213,7 +213,7 @@ function parse_tags($text, $logo='', $report_title=''){
             continue;
         }
         $attr = explode(' ', $m);
-        $id = 0;
+        $id = $row = $col =  0;
         $delim = '<br />';
         $skill_type = '';
         $include_rating = 'no';
@@ -251,6 +251,12 @@ function parse_tags($text, $logo='', $report_title=''){
             if(substr($a, 0,7 ) == 'height='){
                 $height = substr($a, 7);
             }
+            if(substr($a, 0,4 ) == 'row='){
+                $row = substr($a, 4);
+            }
+            if(substr($a, 0,4 ) == 'col='){
+                $col = substr($a, 4);
+            }
         }
         
         $str = '';
@@ -261,6 +267,10 @@ function parse_tags($text, $logo='', $report_title=''){
         if($answer!=null){
             if(Block::find($id)->type=='question'){
                 switch(Block::find($id)->answer_type){
+                    case 'Two Column': 
+                        $arr = json_decode($answer->answer, true);
+                        $str = isset($arr[$row][$col]) ? $arr[$row][$col] : '';
+                        break;
                     case 'Open Ended': 
                         $str = $answer->answer;
                         break;

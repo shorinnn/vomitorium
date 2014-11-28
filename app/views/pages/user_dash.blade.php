@@ -14,6 +14,9 @@
             @endif
             
             @if($program->lessons->count() > 0)
+            @if(Lesson::last()==null)
+                {{ $intro_content }}
+            @endif
             <p class="text-center">
                 @if(Lesson::last()==null)
                     <a style="font-size:18px" class="btn btn-success btn-lg" href="{{Lesson::first()}}"> <i class="glyphicon glyphicon-flag"></i> 

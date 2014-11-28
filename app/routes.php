@@ -79,6 +79,7 @@ if (!Session::has('subdomain')) {
         Route::get( 'conversation/{lesson_id}/{user_id}',          'CourseController@conversation');
 
         Route::get( 'lessons/view_lesson/{id}',          'LessonsController@view_lesson');
+        Route::post( 'lessons/intro/{id}',          'LessonsController@change_intro');
         Route::get( 'lessons/deadline_notifications/{id}',          'LessonsController@deadline_notifications');
         Route::get( 'load_messages',          'CourseController@load_messages');
         Route::get( 'load_lesson_comments',          'CourseController@load_lesson_comments');
@@ -173,6 +174,8 @@ if (!Session::has('subdomain')) {
         Route::get( '/register',                 'UserController@create');
         Route::get( '/register/{hash}',                 'UserController@create');
         Route::get( '/register/accesspass/{hash}',                 'UserController@access_pass');
+        Route::get( '/access-code',                 'UserController@access_code');
+        Route::post( '/access-code',                 'UserController@access_code');
         Route::post('user',                        'UserController@store');
         Route::get( '/login',                  'UserController@login');
         Route::post('/login',                  'UserController@do_login');
@@ -186,6 +189,7 @@ if (!Session::has('subdomain')) {
         Route::get( '/users/assign_coach/{id}',          'UserManagerController@assign_coach');
         Route::post( '/users/assign_coach/{id}',          'UserManagerController@do_assign_coach');
         Route::post( '/users/register',          'UserManagerController@register');
+        Route::get( '/users/comma_separated_codes',          'UserManagerController@comma_separated_codes');
         Route::get( '/users/codes',          'UserManagerController@codes');
         Route::get( '/users',                 'UserManagerController@index');
         Route::post( '/users/update',          'UserManagerController@update');

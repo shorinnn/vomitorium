@@ -148,6 +148,7 @@ class UserManagerController extends BaseController {
         }
         else{
             $codes = array();
+            $code_string = array();
             for($i=0; $i<Input::get('code_count');++$i){
                 $code = new Code();
                 $code->program_id = Input::get('program');
@@ -156,9 +157,11 @@ class UserManagerController extends BaseController {
                 }
                 while(!$code->save());
                 $codes[] = $code;
+                $code_string[] = $code->code;
             }
+            $code_string = implode(', ',$code_string);
             $response['callback'] = 'link_sent';
-            $response['text'] = View::make('user_manager.codes')->withCodes($codes)->render();
+            $response['text'] = View::make('user_manager.codes')->withCodes($codes)->withCode_string($code_string)->render();
         }
         $response['status'] = 'success';
         return json_encode($response);
@@ -171,6 +174,12 @@ class UserManagerController extends BaseController {
             return View::make('user_manager.all_codes_partial')->withCodes($codes)->withMeta($meta);
         }
         return View::make('user_manager.all_codes')->withCodes($codes)->withMeta($meta);
+    }
+    
+    public function comma_separated_codes(){
+        $codes = implode( ', ', Code::whereNull('used_at')->lists('code') );
+        $meta['header_img_text'] = 'Generated Codes';
+        return View::make('user_manager.comma_separated_codes')->withCodes($codes)->withMeta($meta);
     }
     
     public function add_clients_ui(){

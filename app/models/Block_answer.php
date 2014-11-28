@@ -19,6 +19,31 @@ class Block_answer extends Ardent {
     
     public static function store_answers($params){
         $is_update = false;
+        if(isset($params['two-column'])){
+            foreach($params['two-column'] as $block => $value){
+                $i = 1;
+                $data = array();
+                foreach($value as $key => $values){
+                    if($values[1]!=='') {
+                        $data[$i] = $values;
+                        ++$i;
+                    }
+                }
+                if(self::where('user_id', Auth::user()->id)->where('block_id',$block)->count() > 0){
+                    $answer = self::where('user_id', Auth::user()->id)->where('block_id',$block)->first();
+                    $is_update = true;
+                }
+                else{
+                    $answer = new Block_answer;
+                }
+                $data = json_encode($data);
+                $answer->user_id = Auth::user()->id;
+                $answer->block_id = $block;
+                $answer->answer = $data;
+                $answer->attended = 0;
+                $answer->save();
+            }
+        }
         if(isset($params['score'])){
             foreach($params['score'] as $block => $value){
                 $data = array();

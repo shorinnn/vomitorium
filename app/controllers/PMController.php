@@ -41,6 +41,7 @@ class PMController extends BaseController {
             }
         }
         else{
+            
             if(Input::get('filter')=='pm'){
                 $convo = Conversation::whereRaw('`is_pm` = 1 AND `posted_by` = "admin" AND `user_id` = '.Auth::user()->id)
                         ->where('program_id', Session::get('program_id'))->orderBy('id','desc')->paginate(10);
@@ -60,13 +61,13 @@ class PMController extends BaseController {
             else{
                 $convo = Conversation::whereRaw('`posted_by` = "admin" AND `user_id` = '.Auth::user()->id)->where('program_id', Session::get('program_id'))
                     ->orderBy('id','desc')->paginate(10);
-            }
-            
+            }            
         }
         if(Request::ajax()){
             return View::make('pm.conversations')->withConvo($convo)->render();
         }
-        return View::make('pm.index')->withMeta($meta)->withRecipients($recipients)->withConvo($convo)->withSearch($search);
+        $admin = User::first();     
+        return View::make('pm.index')->withMeta($meta)->withRecipients($recipients)->withConvo($convo)->withSearch($search)->withAdmin($admin);
     }
     
     public function search(){

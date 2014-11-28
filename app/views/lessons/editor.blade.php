@@ -7,6 +7,11 @@
                 <!--<a href='{{url('lessons')}}'><i class='glyphicon glyphicon-chevron-left'></i> Back to Lesson Manager</a>-->
                 <a href='{{url('modules')}}'><i class='glyphicon glyphicon-chevron-left'></i> Back to Modules</a>
                 <a id='public_view_link' href="{{url("lessons/view_lesson/".$data['lesson']->id)}}"  target="_blank" class='btn btn-primary'><i class="glyphicon glyphicon-eye-open"></i> Public view</a>
+                @if($data['lesson']->intro_lesson)
+                    <button onclick='link_remote_change_element(this)' data-url='{{url("lessons/intro/".$data['lesson']->id)}}' data-remove-element='i.lesson-intro' data-add-element="<i class='glyphicon glyphicon-ok lesson-intro'></i> " class='btn btn-default inline'><i class='glyphicon glyphicon-ok lesson-intro'></i> Intro Lesson</button>
+                @else
+                    <button onclick='link_remote_change_element(this)' data-url='{{url("lessons/intro/".$data['lesson']->id)}}' data-remove-element='i.lesson-intro' data-add-element="<i class='glyphicon glyphicon-ok lesson-intro'></i> " class='btn btn-default inline'>Intro Lesson</button>
+                @endif
             </h3>
             <table class="table">
                 <tr><td style='width:30%'>Title</td>
@@ -240,6 +245,8 @@
                     @else
                         @if($block->answer_type=='Score')
                             {{ View::make('lessons.score')->withBlock($block) }}
+                        @elseif($block->answer_type=='Two Column')
+                            {{ View::make('lessons.two_column_block')->withBlock($block) }}
                         @else
                             {{ View::make('lessons.question_block')->withBlock($block) }}
                         @endif
@@ -409,6 +416,12 @@
                                  <button class="push-action" onclick="add_content_type('sortable')">
                                         <i class="mainsprite sprite_sortable"></i>
                                         <span>Sortable List</span>
+                                    </button>                         
+                              </div>
+                              <div class="col-xs-4 button_filed">                            
+                                 <button class="push-action" onclick="add_content_type('two-column')">
+                                        <i class="glyphicon glyphicon-th-large" style="font-size:40px"></i>
+                                        <span>Two Column Input</span>
                                     </button>                         
                               </div>
                               <div class="col-xs-4">

@@ -372,6 +372,26 @@ function save_score_block(block_id, url){
     });
 }
 
+function save_two_column_block(block_id, url){
+    show_busy();
+    title = $("#block-title-"+block_id).val();
+    subtitle = $("#block-subtitle-"+block_id).val();
+    var in_section = $('#in_section-'+block_id).val();
+    category_id =  $('#category-'+block_id).val();
+    min_score = $("#scale-min-"+block_id).val();
+    min_score_text = $("#scale-min-text"+block_id).val();
+    max_score_text = $("#scale-max-text"+block_id).val();
+    $.post(url,{title:title, subtitle:subtitle, in_section:in_section, 
+        category_id:category_id, scale_min:min_score, scale_min_text:min_score_text, scale_max_text:max_score_text}, function(result){
+           hide_busy();
+           result = parse_json(result);
+           if(!result) return false;
+           if(!no_growl) do_growl(result.text, result.status); 
+           $('#block-'+block_id+' .panel-heading').find('.unsaved').remove();
+           blocks_to_update.pluck('block-'+block_id);
+    });
+}
+
 function save_dynamic_block(block_id, url){
     cats = new Array();
     $('.dynamic-category-selected-'+block_id+':checked').each(function(){
@@ -869,6 +889,8 @@ function tag_options() {
     str += "<br /><b>include_rating</b> = For scale answers - If 'yes', show the rating of the answer";
     str += "<br /><b>height</b> = Height in px or percentage for uploaded images (e.g. height=40 OR height=23%)";
     str += "<br /><b>width</b> = Width in px or percentage for uploaded images (e.g. width=40 OR width=23%)";
+    str += "<br /><b>row</b> = What row in a TwoColumn answer to be used (e.g. row=1)";
+    str += "<br /><b>col</b> = Which column from the row specified to be used (e.g. col=1 OR col=2)";
     str += "<br /><br /><b>[CLIENT_NAME]</b> displays the client name";
     bootbox.alert(str);
 }

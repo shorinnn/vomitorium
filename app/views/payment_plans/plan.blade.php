@@ -22,8 +22,9 @@
             $trial_code = url('register').'/'.sha1(sys_settings().$plan->id).'-trial';
         }
         else{
-            
             $code = 'paypal';
+            $code = url('register').'/'.sha1(sys_settings().$plan->id);
+            $trial_code = url('register').'/'.sha1(sys_settings().$plan->id).'-trial';
         }
         $code = str_replace("'", '&#8217;', $code);
         ?>

@@ -2,12 +2,19 @@
 
 @section('content')
 <div class="section">
-
         <div class="container">
             <a href='{{url('/')}}'>&lt; Back To Dashboard</a>
             <br />
             <br class='clearfix clear_fix' />
-            <button type="button" class="btn btn-primary create-form-btn btn-default pull-left" onclick="create_form()">New Message</button>
+            @if(admin() || Auth::user()->paying())
+                <button type="button" class="btn btn-primary create-form-btn btn-default pull-left" onclick="create_form()">
+                    @if(!admin())
+                        Ask {{$admin->first_name.' '.$admin->last_name}}
+                    @else
+                        New Message
+                    @endif
+                </button>
+            @endif
             <div class="col-lg-5 pull-right text-right">
                 <input type="text" class="form-control inbox-search" placeholder="Search" onkeyup='delay(search_inbox,300)'/>
             </div>
@@ -18,6 +25,7 @@
             <form method="POST" action="{{action("PMController@store")}}" accept-charset="UTF-8" class='ajax-form' id='pm-form'>
                 <div class='row'>
                     <div class="col-lg-12 form-group">
+                        @if(admin())
                         <label>To</label>
                         <select name='to' id='to' data-toggle='combobox' class='form-control'>
                             <option></option>
@@ -25,6 +33,9 @@
                             <option value='{{$r->id}}'>{{$r->username}} ({{$r->first_name}} {{$r->last_name}})</option>
                             @endforeach
                         </select>
+                        @else
+                        <input type="hidden" name="to" value="{{$admin->id}}" />
+                        @endif
                     </div>
                 </div>
                 <div class='row'>

@@ -53,6 +53,16 @@ class UserController extends BaseController {
         }
         return View::make('pages.user_forms')->withForm(Confide::makeSignupForm()->withMeta($this->meta)->render())->withMeta($this->meta);
     }
+    
+    public function access_code(){
+        if(Input::has('code')){
+            return Redirect::to('/register/accesspass/'.Input::get('code'));
+        }
+        $this->meta['pageTitle'] = 'Access Code';
+        $this->meta['header_img_text'] = 'Access Code';    
+        $this->meta['hash'] = '';
+        return View::make('pages.access_code')->withMeta($this->meta);
+    }
 
     /**
      * Stores new account
@@ -71,7 +81,6 @@ class UserController extends BaseController {
         if(Cookie::has('affiliate')) $user->affiliate_id = Cookie::get('affiliate');
         if(Cookie::has('tracking')) $user->tracking_id = Cookie::get('tracking');
         $hash = Input::get('program_id'); // this is payment plan ID actually
- 
         $user->password_confirmation = Input::get( 'password_confirmation' );
         
         // program validation
@@ -102,7 +111,7 @@ class UserController extends BaseController {
                 $user->attachRole(Input::get('role'));
             }
             else $user->attachRole(2);
-            
+            Session::set('payment_plan_id',Input::get('program_id'));
             if(Input::get('program_id')!='' && isset($code)){
                 Session::set('payment_plan_id',Input::get('program_id'));
 //                if(strlen(Input::get('program_id'))==16){//unique registration code

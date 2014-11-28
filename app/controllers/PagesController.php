@@ -72,9 +72,15 @@ class PagesController extends \BaseController {
                   if($visited=='') $visited = array();
                   else $visited = json_decode($visited, true);
                   $meta['header_img_text'] = sys_settings('domain');
+                  $intro_content = '';
+                  
+                  $intro_lesson = Lesson::where('program_id', Session::get('program_id'))->where('intro_lesson', 1)->first();
+                  if($intro_lesson !=null){
+                      $intro_content = View::make('pages.intro_lesson')->withLesson($intro_lesson);
+                  }
                   return View::make('pages.user_dash')->with('pageTitle','Welcome')->withComments($comments)->withVisited($visited)
                           ->withRemarks($remarks)->withNotifications($notifications)->withMeta($meta)->withCourses($courses)
-                          ->withPlans($plans)->withExpired($expired);
+                          ->withPlans($plans)->withExpired($expired)->withIntro_content($intro_content);
               }
           }
 	}

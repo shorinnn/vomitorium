@@ -166,6 +166,10 @@ class LessonsController extends BaseController {
                 $block->type='question';
                 $block->answer_type = 'Score';
             }
+            if($block->type=='two-column'){
+                $block->type='question';
+                $block->answer_type = 'Two Column';
+            }
             
             $block->lesson_id = $lesson;
             if(Input::get('pos')=='z'){
@@ -196,6 +200,7 @@ class LessonsController extends BaseController {
                 else if($block->type=='file_upload') $response['html_string'] = View::make('lessons.file_upload_block')->withBlock($block)->render();
                 else{
                     if($block->answer_type=='Score') $response['html_string'] = View::make('lessons.score')->withBlock($block)->render();
+                    elseif($block->answer_type=='Two Column') $response['html_string'] = View::make('lessons.two_column_block')->withBlock($block)->render();
                     else $response['html_string'] = View::make('lessons.question_block')->withBlock($block)->render();
                 }
                 $response['id'] = "block-$block->id";
@@ -333,6 +338,19 @@ class LessonsController extends BaseController {
         public function deadline_notifications($id){
             $lesson = Lesson::find($id);
             return View::make('lessons.alerts.index')->withLesson($lesson);
+        }
+        public function change_intro($id){
+            $lesson = Lesson::find($id);
+            DB::table('lessons')->where('program_id', $lesson->program_id)->update(array('intro_lesson' => 0));
+            $lesson->intro_lesson = 1;
+            if($lesson->updateUniques()){
+                $response['status'] = 'success';
+            }
+            else{
+                $response['status'] = 'danger';
+                $response['text'] = format_validation_errors($lesson->errors()->all());
+            }
+            return json_encode($response);
         }
       
 }
