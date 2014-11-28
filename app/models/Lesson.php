@@ -150,7 +150,7 @@ class Lesson extends Ardent {
      
       public function all_answered(){
           if(Auth::guest()) return false;
-          if($this->progress()==100)  return true;
+          if($this->progress()==100) return true;
           return false;
 //          foreach($this->blocks as $b){
 //              if($b->type=='text') continue;
@@ -233,7 +233,6 @@ class Lesson extends Ardent {
                if(isset($last_lesson_arr[Session::get('program_id')])) $user->last_lesson = $last_lesson_arr[Session::get('program_id')];
                else $user->last_lesson = '0';
            }
-            
            if($user->last_lesson !== '0' ){
               $last_lesson = Lesson::find($user->last_lesson);
               if($last_lesson==null){
@@ -244,7 +243,7 @@ class Lesson extends Ardent {
               if(($l->chapter_ord > $last_lesson->chapter_ord)){
                   $user->last_lesson = $l->id;
               }
-              if(($l->chapter_ord == $last_lesson->ord) && ($l->ord > $last_lesson->ord)){
+              if(($l->chapter_ord == $last_lesson->chapter_ord) && ($l->ord > $last_lesson->ord)){
                   $user->last_lesson = $l->id;
               }
               $last_lesson_arr[Session::get('program_id')] = $user->last_lesson;
@@ -298,7 +297,12 @@ class Lesson extends Ardent {
           // get the total answerable blocks count
           $types = array('image_upload', 'file_upload', 'sortable', 'question');
           $blocks = Block::where('lesson_id', $this->id)->whereIn('type', $types)->get();
-          $total = $blocks->count();
+          $total = Block::where('lesson_id', $this->id)->whereIn('type', $types)->count();
+          if($this->id==52) {
+              foreach($blocks->lists('id') as $key=>$val){
+                  //echo "$val, ";
+              }
+          }
           $ids = $blocks->lists('id');
           if(count($ids)==0) return 100;
           $answered = Block_answer::whereIn('block_id', $ids)->where('user_id', $user_id)->whereNotNull('answer')->whereRaw('LENGTH(answer) > 0')->count();

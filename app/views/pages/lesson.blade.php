@@ -53,9 +53,12 @@ $next_lesson_btn = '';
                         echo $next_lesson_btn;
                     ?>
                 @else
-                     @if($lesson->all_answered())
+                <?php
+                    $next_lesson = next_lesson($lesson);
+                ?>
+                     @if($lesson->progress() > 0)
                      <?php
-                      $next_lesson = next_lesson($lesson);
+                      
                       if($next_lesson!='') $next_lesson_btn =  "<div class=' next-lesson-btn'>
                                     <a class='btn btn-success' href='".URL('lesson/'.$next_lesson)."'>Next lesson <i class='glyphicon glyphicon-forward'></i></a>
                                 </div>";

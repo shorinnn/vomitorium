@@ -12,6 +12,9 @@
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/AdminController.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/admin/user.blade.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/UserManager.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/css/custom.css</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/multiple-choice.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/open-ended.blade.php</file>
         </group>
     </open-files>
 </project-private>
