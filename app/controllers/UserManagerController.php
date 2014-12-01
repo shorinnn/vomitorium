@@ -157,7 +157,7 @@ class UserManagerController extends BaseController {
                 }
                 while(!$code->save());
                 $codes[] = $code;
-                $code_string[] = $code->code;
+                $code_string[] = url("register/accesspass/$code->code");
             }
             $code_string = implode(', ',$code_string);
             $response['callback'] = 'link_sent';
@@ -177,7 +177,11 @@ class UserManagerController extends BaseController {
     }
     
     public function comma_separated_codes(){
-        $codes = implode( ', ', Code::whereNull('used_at')->lists('code') );
+        $codes = Code::whereNull('used_at')->lists('code');
+        foreach($codes as $key=>$code){
+            $codes[$key] = url("register/accesspass/$code");
+        }
+        $codes = implode( ', ', $codes );
         $meta['header_img_text'] = 'Generated Codes';
         return View::make('user_manager.comma_separated_codes')->withCodes($codes)->withMeta($meta);
     }
