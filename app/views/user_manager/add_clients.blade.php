@@ -1,7 +1,8 @@
 <div class='add'>
                     <input type="radio" name="type" value="link" id='register_link' onclick='show_div(this)' /><label for='register_link'>Send Registration Link (Email)</label><br />
                     <input type="radio" name="type" value="link" id='register_manual' onclick='show_div(this)' /> <label for='register_manual'>Manual Add</label><br />
-                    <input type="radio" name="type" value="link" id='register_codes' onclick='show_div(this)' /> <label for='register_codes'>Generate Registration Codes</label><br />
+                    <input type="radio" name="type" value="link" id='register_codes' onclick='show_div(this)' /> <label for='register_codes'>Generate Access Passes</label><br />
+                    <input type="radio" name="type" value="link" id='send_codes' onclick='show_div(this)' /> <label for='send_codes'>Send Access Pass (Email)</label><br />
                     <form id='register_link_div' 
                           data-bv-message =""
                           data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
@@ -9,20 +10,6 @@
                           data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
                           class="nodisplay ajax-form" method="post" action='{{url('users/register')}}'>
 <br />                        
-<!--                        <div class='row'>
-                            <div class="col-lg-12 form-group">
-                                <label>Program</label>
-                            <select name='program' class="form-control">
-                                     @foreach($programs as $p)
-                                        <option title="{{$p->name}}" value='{{$p->id}}'
-                                                @if(Session::has('program_id') && Session::get('program_id')==$p->id)
-                                                selected="selected"
-                                                @endif
-                                                >{{$p->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>-->
 <div class='row'>
                             <div class="col-lg-12 form-group">
                                 <label>Program - Payment Plan</label>
@@ -208,6 +195,68 @@ Your password is [PASSWORD]
                             <button class="btn btn-default"  data-submit='1'>Generate</button>
                         </div>
                         <input type='hidden' name='type' value='code' />
+                    </form>
+                    <br class="clear_fix" />
+            </div>
+            <form id='send_codes_div' 
+                          data-bv-message =""
+                          data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                          data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                          data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
+                          class="nodisplay ajax-form code-form" method="post"  action='{{url('users/register')}}'>
+                        <br />                        
+<div class='row'>
+                            <div class="col-lg-12 form-group">
+                                <label>Program - Payment Plan</label>
+                                @if($plans->count()==0)
+                                    You have no payment plans created. <a href="{{url('payment_plans')}}">Create one</a>
+                                @else
+                                    <select name='payment_plan' class="form-control">
+                                         @foreach($plans as $p)
+                                             <option title="{{$p->name}}" value='{{$p->id}}'>{{$p->program->name}} - {{$p->name}}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class="col-lg-12 form-group">
+                                <label>Email</label>
+                            <input type='text' name='email'
+                                   data-bv-notempty 
+                                   data-bv-emailaddress="true"
+                                   class='form-control' />
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-lg-6 form-group'>
+                                <label>First Name</label>
+                                <input type='text' name='first_name' data-bv-notempty class="form-control" />
+                            </div>
+                            <div class='col-lg-6 form-group'>
+                                <label>Last Name (Optional)</label>
+                                <input type='text' name='last_name' 
+                                       data-bv-callback="true"
+                                       data-bv-callback-callback="resettable" class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+                        <button type='button' class='btn btn-sm-default btn-default' onclick='slideToggle(".link-email")'>Edit Email Content</button><br />
+                        <div class='nodisplay link-email'>
+<textarea id='code_text' class='summernote_editor'>@if(sys_settings('send_code_email')=='')
+Hey [FIRST_NAME] [LAST_NAME]
+                            <br />
+                            Please use the following link <a href='[LINK]'>[LINK]</a> to access [PROGRAM_NAME]
+                            @else
+{{sys_settings('send_code_email')}}
+                            @endif</textarea><br />
+                            <center><button type='button' class='btn btn-sm btn-primary' data-ui-field='#code_text' 
+                            data-field='send_code_email' data-pk='1'  data-method="POST"
+                            data-url='{{url('system_settings')}}' onclick='ajax_btn_update(this)'>Save Template</button></center>
+                            <br />
+                        </div>
+                        <button class='btn btn-default' data-submit='1'>Send</button>
+                        <input type='hidden' name='type' value='send_code' />
                     </form>
                     <br class="clear_fix" />
             </div>

@@ -1435,7 +1435,7 @@ function ajax_btn_update(element){
     val = $(input).code();
     if(val=='' || typeof(val)=='undefined') val = $(input).val();
     if(val=='' || typeof(val)=='undefined') val = element.val();
-    if(element.attr('data-method')!='') type = element.attr('data-method');
+    if(typeof(element.attr('data-method'))!='undefined' && element.attr('data-method')!='') type = element.attr('data-method');
     else type = 'POST';
     $.ajax({
        type: type,

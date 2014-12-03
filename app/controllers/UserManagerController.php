@@ -146,6 +146,30 @@ class UserManagerController extends BaseController {
             $response['text'] =  View::make('user_manager.client_added')->withUser($user)->withPassword(Input::get('password'))
                     ->withEmailed(Input::get('send_email'))->render();
         }
+        else if(Input::get('type')=='send_code'){
+            $code = new Code();
+            $plan = PaymentPlan::find(Input::get('payment_plan'));
+            $data['program_name'] = $plan->program->name;
+            $code->program_id = $plan->program_id;
+            do{
+                $code->code = Str::random();
+            }
+            while(!$code->save());
+            $data['link'] = url("register/accesspass/$code->code");
+            if(sys_settings('send_code_email')!=''){
+                $content = sys_settings('send_code_email');
+                $content = str_replace('[FIRST_NAME]', Input::get('first_name'), $content);
+                $content = str_replace('[LAST_NAME]', Input::get('last_name'), $content);
+                $content = str_replace('[LINK]', $data['link'], $content);
+                $content = str_replace('[PROGRAM_NAME]', $data['program_name'], $content);
+                $data['content'] = $content;
+            }
+            Mail::send('emails.access_pass_link', $data, function($message){
+                $message->to(Input::get('email'), Input::get('first_name').' '.Input::get('last_name'))->subject('Access Pass');
+            });
+            $response['text'] = View::make('user_manager.code_emailed')->withEmail(Input::get('email'))->render();
+            $response['callback'] = 'link_sent';
+        }
         else{
             $codes = array();
             $code_string = array();
