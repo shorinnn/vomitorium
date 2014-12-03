@@ -207,16 +207,16 @@ Your password is [PASSWORD]
                         <br />                        
 <div class='row'>
                             <div class="col-lg-12 form-group">
-                                <label>Program - Payment Plan</label>
-                                @if($plans->count()==0)
-                                    You have no payment plans created. <a href="{{url('payment_plans')}}">Create one</a>
-                                @else
-                                    <select name='payment_plan' class="form-control">
-                                         @foreach($plans as $p)
-                                             <option title="{{$p->name}}" value='{{$p->id}}'>{{$p->program->name}} - {{$p->name}}</option>
-                                        @endforeach
-                                    </select>
-                                @endif
+                                <label>Program</label>
+                                <select name='program' class="form-control">
+                                     @foreach($programs as $p)
+                                        <option title="{{$p->name}}" value='{{$p->id}}'
+                                        @if(Session::has('program_id') && Session::get('program_id')==$p->id)
+                                        selected="selected"
+                                        @endif
+                                        >{{$p->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class='row'>

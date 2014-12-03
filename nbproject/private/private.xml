@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/PaymentPlan.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PaymentPlansController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/UserManager.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/UserManagerController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/user_manager/comma_separated_codes.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/config/database.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/user_manager/add_clients.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/routes.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/custom.js</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/emails/access_pass_link.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/user_manager/code_emailed.blade.php</file>
         </group>
     </open-files>
 </project-private>

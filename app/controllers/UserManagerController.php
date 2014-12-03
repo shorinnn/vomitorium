@@ -148,9 +148,9 @@ class UserManagerController extends BaseController {
         }
         else if(Input::get('type')=='send_code'){
             $code = new Code();
-            $plan = PaymentPlan::find(Input::get('payment_plan'));
-            $data['program_name'] = $plan->program->name;
-            $code->program_id = $plan->program_id;
+            $program = Program::find(Input::get('program'));
+            $data['program_name'] = $program->name;
+            $code->program_id = $program->id;
             do{
                 $code->code = Str::random();
             }
