@@ -66,7 +66,10 @@ Route::filter('program',function(){
 });
 
 Route::filter('saas-admin',function(){
+    $whitelist = ['115.66.142.54', '94.52.185.22'];
+    if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) return Redirect::to('/');
     if(Session::has('subdomain') && Session::get('subdomain')!='www'){
+        
         return Redirect::to('/');
     }
 });
