@@ -126,55 +126,7 @@
                                     <li>
                                 @endif
                                 {{link_to('users','Clients')}}
-                                <!--
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                                            <?php
-                                           $chapter = -1;
-                                           $lessons = Lesson::where('published','1')->orderBy('chapter_ord','asc')->orderBy('ord','asc')->get();
-                                           foreach($lessons as $lesson){
-                                               if(Auth::guest()) $user_id = 0;
-                                               else{
-                                                   $user_id = Session::has('user_id') ? Session::get('user_id') : Auth::user()->id;
-                                               }
-                                               
-                                            if($chapter!=$lesson->chapter_id){
-                                                $last_ord = DB::table('lessons')->where('chapter_id', $lesson->chapter_id)->max('ord');
-                                                $chapter = $lesson->chapter_id;
-                                                ?>
-                                    <li><a href="#">{{$lesson->chapter->title or ''}}</a></li>
-                                                <?php } ?>
-                                                <li>
-                                                    @if(Session::has('user_id'))
-                                                        @if(Request::url() == url("lesson/$lesson->slug/".Session::get('user_id')))
-                                                            <a class='current_lesson' href="{{url("lesson/$lesson->slug/".Session::get('user_id'))}}">&raquo; 
-                                                        @else
-                                                            <a href="{{url("lesson/$lesson->slug/".Session::get('user_id'))}}">&raquo; 
-                                                        @endif
-                                                        
-                                                    @else
-                                                        @if(Request::url() == url("lesson/$lesson->slug"))
-                                                            <a class='current_lesson' href="{{url("lesson/$lesson->slug")}}">&raquo; 
-                                                        @else
-                                                            <a href="{{url("lesson/$lesson->slug")}}">&raquo; 
-                                                        @endif
-                                                    @endif
-                                                        
-                                                        {{$lesson->title}}
-                                                     @if(admin())
-                                                        <span class="badge" title='{{UserManager::unattended_answers($user_id, $lesson->id)}} Unattended {{ 
-                                                            singplural(UserManager::unattended_answers($user_id, $lesson->id),'Submissions')}}'>
-                                                            {{UserManager::unattended_answers($user_id, $lesson->id)}}</span>
-                                                        <span class="badge" title='{{UserManager::unattended_comments($user_id, $lesson->id)}} Unattended {{
-                                                            singplural(UserManager::unattended_comments($user_id, $lesson->id),'Comments')}}'>
-                                                            {{UserManager::unattended_comments($user_id, $lesson->id)}}</span>
-                                                     @endif
-                                                    </a></li>
-                                                <?php
-                                           }
-
-                                        ?>
-                        </ul>-->
+                               
                     </li>
                             @endif
                              @if(Request::url() == url("contact-us"))

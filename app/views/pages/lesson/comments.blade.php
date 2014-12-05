@@ -54,8 +54,8 @@
                 @else
                     @if($c->attended==0 && $c->posted_by=='user')
                     <li>
-                         <a  id="mark-read-{{$c->id}}" title="Mark As Attended" class="do-tooltip"
-                                 onclick="mark_attended({{$c->id}},{{$c->block_answer_id}})">Mark As Attended</a>
+                         <a  id="mark-read-{{$c->id}}" title="Mark As Reviewed" class="do-tooltip"
+                                 onclick="mark_attended({{$c->id}},{{$c->block_answer_id}})">Mark As Reviewed</a>
                     </li>
                         
                     @endif

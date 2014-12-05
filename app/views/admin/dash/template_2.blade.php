@@ -4,7 +4,7 @@
 
 <div class='col-lg-8'>
     @if($current_program->users()->count()>0)
-        <h4 class="green-bg">New Submissions (Unattended {{client_term()}})</h4>
+        <h4 class="green-bg">New Submissions (Not Yet Reviewed {{client_term()}})</h4>
         <div class='dash-content'>
             {{View::make('admin.userlist')->withUnattended($unattended)}}
         </div>

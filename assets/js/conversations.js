@@ -340,7 +340,9 @@ function do_remark_reply(event, lesson) {
     }
     show_busy();
     $('#remark_reply_form').remove();
-    $.post(APP_URL + '/remark_reply', {lesson: lesson, reply_txt: reply_txt, attachments: $('#attachments').val()}, function(result) {
+    page = '/remark_reply';
+    if($(event.target).attr('data-group-convo')==1) page = '/group_reply';
+    $.post(APP_URL + page, {lesson: lesson, reply_txt: reply_txt, attachments: $('#attachments').val()}, function(result) {
         if (result == 'error') {
             do_growl('An error was encountered. Please refresh the page and try again', 'danger');
             hide_busy();
@@ -368,8 +370,9 @@ function remark_reply(lesson) {
     enable_rte(1);
 }
 
-function show_remark_reply(){
-    $('.remark-post-area').slideToggle();
+function show_remark_reply(elem){
+    if(typeof(elem)=='undefined')    $('.remark-post-area').slideToggle();
+    else     $(elem).slideToggle();
 }
 
 function show_coach_remarks() {
@@ -528,7 +531,7 @@ function mark_unattended(message, block_id) {
     show_busy();
     $.post(APP_URL + '/mark_unattended', {message: message, block_id: block_id}, function(result) {
         hide_busy();
-        $('#mark-read-' + message).html('<i class="glyphicon glyphicon-ok"></i> Mark as attended');
+        $('#mark-read-' + message).html('<i class="glyphicon glyphicon-ok"></i> Mark as reviewed');
         $('#mark-read-' + message).attr('onclick', 'mark_attended(' + message + ',' + block_id + ')');
         $('#next_item_btn').show();
         $('#comment-' + message).addClass('purple-border');
@@ -549,7 +552,8 @@ function mark_read(message, block_id, block) {
 function load_lesson_comments(lesson_id, skip) {
     show_busy();
     uid = $('.load-lesson-comments').attr('data-id');
-    $.get(APP_URL + '/load_lesson_comments', {lesson_id: lesson_id, skip: skip, uid:uid}, function(result) {
+    group_convo = 0;
+    $.get(APP_URL + '/load_lesson_comments', {lesson_id: lesson_id, skip: skip, uid:uid, group_convo:group_convo}, function(result) {
         result = parse_json(result);
         remaining = result.remaining;
         result = result.comments;
@@ -561,6 +565,26 @@ function load_lesson_comments(lesson_id, skip) {
         else {
             $('.load-lesson-comments').html('No additional messages available');
             $('.load-lesson-comments').removeAttr('onclick');
+        }
+        hide_busy();
+    });
+}
+
+function load_group_lesson_comments(lesson_id, skip) {
+    show_busy();
+    uid = $('.load-lesson-comments').attr('data-id');
+    $.get(APP_URL + '/load_lesson_comments', {lesson_id: lesson_id, skip: skip, uid:uid, group_convo:1}, function(result) {
+        result = parse_json(result);
+        remaining = result.remaining;
+        result = result.comments;
+        $('.lesson-comments-group').prepend(result);
+        if (result != '' && remaining > 0) {
+            skip += 2;
+            $('.load-group-lesson-comments').attr('onclick', 'load_group_lesson_comments(' + lesson_id + ',' + skip + ')');
+        }
+        else {
+            $('.load-group-lesson-comments').html('No additional messages available');
+            $('.load-group-lesson-comments').removeAttr('onclick');
         }
         hide_busy();
     });

@@ -9,7 +9,7 @@
                 <tr><td>Title</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='title'>{{sys_settings('title')}}</a></td></tr>
                 <tr><td>Dash Layout</td>
                     <td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' 
-                           data-type='select' data-source='[{"template_1":"Full"},{"template_2":"Unattended & Messages"},{"template_3":"Except Messages"}]' 
+                           data-type='select' data-source='[{"template_1":"Full"},{"template_2":"Not Yet Reviewed & Messages"},{"template_3":"Except Messages"}]' 
                            data-value="{{sys_settings('dash_layout')}}"
                            id='dash_layout'>{{human_dash()}}</a></td></tr>
                 <tr><td>Contact Us Destination Email</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='contact_email'>{{sys_settings('contact_email')}}</a></td></tr>

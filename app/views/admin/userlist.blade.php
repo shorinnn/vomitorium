@@ -14,7 +14,7 @@
                     $items = UserManager::unattended_answers($u->id) + UserManager::unattended_comments($u->id)  + UserManager::unattended_remarks($u->id);
                 ?>
                     @if($items>0)
-                        <span data-toggle="tooltip" class="badge do-tooltip alert-danger" title='{{$items}} Unattended {{ singplural($items,'Item')}}'>{{$items}}</span>
+                        <span data-toggle="tooltip" class="badge do-tooltip alert-danger" title='{{$items}} Not Yet Reviewed {{ singplural($items,'Item')}}'>{{$items}}</span>
                     @endif
                                     </td>
                 <td class="text-center vert-align">

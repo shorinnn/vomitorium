@@ -9,7 +9,6 @@
 		<div>
                     <p>Name: {{$contact_name}}</p>
                     <p>Email: {{$contact_email}}</p>
-                    <p>Phone: {{$contact_phone}}</p>
                     <p>Message: {{$contact_message}}</p>
 		</div>
 	</body>

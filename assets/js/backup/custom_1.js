@@ -696,7 +696,7 @@ function edit_answers() {
 
 function next_unattended_item() {
     if ($('.unattended_item').length == 0) {
-        bootbox.confirm("Do you want to go back to the first unattended item?", function(result) {
+        bootbox.confirm("Do you want to go back to the first not yet reviewed item?", function(result) {
             if (result == false)
                 return;
             $('.unattended_item_visited').addClass('unattended_item');
@@ -714,7 +714,7 @@ function next_unattended_item() {
 }
 
 function user_attended(user) {
-    result = confirm("Do you want to mark all submissions and comments from this user as attended?");
+    result = confirm("Do you want to mark all submissions and comments from this user as reviewed?");
     if (result == true) {
         show_busy();
         $.post(APP_URL + '/mark_user', {user: user}, function(result) {
@@ -732,8 +732,7 @@ function user_attended(user) {
 }
 
 function lesson_attended(lesson, user) {
-    //bootbox.confirm("Do you want to mark all submissions and comments in this lesson as attended?", function(result) {
-    result = confirm("Do you want to mark all submissions and comments in this lesson as attended?");
+    result = confirm("Do you want to mark all submissions and comments in this lesson as reviewed?");
     if (result == true) {
         show_busy();
         $.post(APP_URL + '/mark_lesson', {lesson: lesson, user: user}, function(result) {
@@ -743,7 +742,7 @@ function lesson_attended(lesson, user) {
             $('.unattended_item_visited').hide();
             $('#next_item_btn').hide();
             $('#mark_lesson_btn').hide();
-            do_growl('Lesson has been marked as attended', 'success');
+            do_growl('Lesson has been marked as reviewed', 'success');
             if ($('.next-lesson').length > 0) {
                 console.log($('.next-lesson').length);
                 href = $('.next-lesson').attr('href');

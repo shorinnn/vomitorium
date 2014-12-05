@@ -1,6 +1,9 @@
 <?php
 
 class PagesController extends \BaseController {
+       public function __construct(){
+            $this->beforeFilter('auth', array('only' => 'contact'));
+       }
        public $meta;
 	/**
 	 * Display a listing of the resource.
@@ -106,7 +109,10 @@ class PagesController extends \BaseController {
         }
         
         public function do_contact(){ 
-            return Mailer::contact(Input::all());
+            $_POST['contact_name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
+            $_POST['contact_email'] = Auth::user()->email;
+            $_POST['contact_message'] = Input::get('contact_message');
+            return Mailer::contact($_POST);
         }
         
         public function jsconfig(){

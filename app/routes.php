@@ -97,6 +97,7 @@ if (!Session::has('subdomain')) {
         Route::post( 'mark_user',          'AdminController@mark_user');
         Route::post( 'reply',          'CourseController@reply');
         Route::post( 'remark_reply',          'CourseController@remark_reply');
+        Route::post( 'group_reply',          'CourseController@group_reply');
         Route::post( 'edit_reply',          'CourseController@edit_reply');
         Route::post( 'courses/attach',          'CourseController@attach');
         Route::post( 'courses/delete_attachment',          'CourseController@delete_attachment');

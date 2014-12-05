@@ -10,7 +10,7 @@
             {{View::make('admin.newest_clients')->withNewest($newest)}}
         </div>
 
-        <h4 class="green-bg">Unattended {{client_term()}}</h4>
+        <h4 class="green-bg">Not Yet Reviewed {{client_term()}}</h4>
         <div class='dash-content'>
             {{View::make('admin.userlist')->withUnattended($unattended)}}
         </div>

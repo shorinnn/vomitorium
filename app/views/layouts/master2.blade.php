@@ -82,10 +82,10 @@
                                                         
                                                         {{$lesson->title}}
                                                      @if(admin())
-                                                        <span class="badge" title='{{UserManager::unattended_answers($user_id, $lesson->id)}} Unattended {{ 
+                                                        <span class="badge" title='{{UserManager::unattended_answers($user_id, $lesson->id)}} Not Yet Reviewed {{ 
                                                             singplural(UserManager::unattended_answers($user_id, $lesson->id),'Submissions')}}'>
                                                             {{UserManager::unattended_answers($user_id, $lesson->id)}}</span>
-                                                        <span class="badge" title='{{UserManager::unattended_comments($user_id, $lesson->id)}} Unattended {{
+                                                        <span class="badge" title='{{UserManager::unattended_comments($user_id, $lesson->id)}} Not Yet Reviewed {{
                                                             singplural(UserManager::unattended_comments($user_id, $lesson->id),'Comments')}}'>
                                                             {{UserManager::unattended_comments($user_id, $lesson->id)}}</span>
                                                      @endif

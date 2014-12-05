@@ -369,7 +369,7 @@ class UserController extends BaseController {
             $upload_success = $image->save($destination.$filename); 
             if( $upload_success ) {
                 Auth::user()->avatar = $filename;
-                Auth::user()->updateUniques();
+                if(!Auth::user()->updateUniques()) return 'error'.print_r(Auth::user()->errors()->all());
                 return url('assets/img/avatars/'.$filename);
             } else {
                return 'error';

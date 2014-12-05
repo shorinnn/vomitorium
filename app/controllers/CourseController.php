@@ -69,10 +69,15 @@ class CourseController extends BaseController {
             
             $lesson_remarks = Conversation::where('user_id', $user_id)->take(1)->where('lesson_id',$lesson->id)->orderBy('id','DESC')->get();
             $total_lesson_remarks = Conversation::where('user_id', $user_id)->where('lesson_id',$lesson->id)->count();
+            
+            $group_remarks = Conversation::take(1)->where('group_lesson_id',$lesson->id)->orderBy('id','DESC')->get();
+            $total_group_remarks = Conversation::where('group_lesson_id',$lesson->id)->count();
         }
         else{
             //$remarks = Remark::where('user_id',0)->where('lesson_id',$lesson->id)->orderBy('id','ASC')->get();
-            $lesson_remarks = $remarks = Conversation::where('user_id',0)->where('lesson_id',$lesson->id)->orderBy('id','ASC')->get();
+            $lesson_remarks = $remarks = Conversation::where('user_id',-1)->where('lesson_id',$lesson->id)->orderBy('id','ASC')->get();
+            $group_remarks = Conversation::where('user_id', $user_id)->take(1)->where('group_lesson_id',-1)->orderBy('id','DESC')->get();
+            $total_group_remarks = 0;
         }
         
         $this->meta['pageTitle'] = $lesson->title;
@@ -83,7 +88,8 @@ class CourseController extends BaseController {
         return View::make('pages.lesson')->withMeta($this->meta)->withCurrent_user($current_user)->withRemarks($remarks)
                 ->withCurrent_remark($current_remark)->withUnread_remark($unread_remark)->withLesson($lesson)->withSkills($skills)
                 ->withUnattended($unattended)->withNext_unattended($next_unattended)->withLessonProgress($lesson_progress)
-                ->withLesson_remarks($lesson_remarks)->withTotal_lesson_remarks($total_lesson_remarks);
+                ->withLesson_remarks($lesson_remarks)->withTotal_lesson_remarks($total_lesson_remarks)->withGroup_remarks($group_remarks)
+                ->withTotal_group_remarks($total_group_remarks);
     }
 
     public function store_answer($slug) {
@@ -120,12 +126,21 @@ class CourseController extends BaseController {
         return json_encode($response);
     }
     public function load_lesson_comments() {
-        if(admin()) $id = Input::get('uid');
-        else $id = Auth::user()->id;
-        $remarks = Conversation::where('lesson_id', Input::get('lesson_id'))->where('user_id', $id)
-                ->take(2)->skip(Input::get('skip'))->orderBy('id','desc')->get();
-        $response['comments'] = View::make('pages.lesson.remarks')->withRemarks($remarks)->withReverse(1)->render();
-        $response['remaining'] = count(Conversation::where('lesson_id', Input::get('lesson_id'))->take(2)->skip(Input::get('skip')+2)->get());
+        if(Input::get('group_convo')==1){
+            $remarks = Conversation::where('group_lesson_id', Input::get('lesson_id'))
+                    ->take(2)->skip(Input::get('skip'))->orderBy('id','desc')->get();
+            $response['comments'] = View::make('pages.lesson.remarks')->withRemarks($remarks)->withReverse(1)->render();
+            $response['remaining'] = count(Conversation::where('group_lesson_id', Input::get('lesson_id'))->take(2)->skip(Input::get('skip')+2)->get());
+        }
+        else{
+            if(admin()) $id = Input::get('uid');
+            else $id = Auth::user()->id;
+            $remarks = Conversation::where('lesson_id', Input::get('lesson_id'))->where('user_id', $id)
+                    ->take(2)->skip(Input::get('skip'))->orderBy('id','desc')->get();
+            $response['comments'] = View::make('pages.lesson.remarks')->withRemarks($remarks)->withReverse(1)->render();
+            $response['remaining'] = count(Conversation::where('lesson_id', Input::get('lesson_id'))->take(2)->skip(Input::get('skip')+2)->get());
+        }
+        
         return json_encode($response);
     }
         
@@ -391,6 +406,22 @@ class CourseController extends BaseController {
             @unlink(base_path().'/assets/uploads/attachments/'.$att->filename);
             $att->delete();
         }
+    }
+    
+    public function group_reply(){      
+        $remark = new Conversation();
+        $remark->content = Input::get('reply_txt');
+        $remark->admin_id = !admin() ? 0 : Auth::user()->id;
+        $remark->user_id = Auth::user()->id;
+        $remark->group_lesson_id = Input::get('lesson');
+        $remark->posted_by = !admin() ? 'user' : 'admin';
+        $remark->attended = 1;
+        $remark->read = 1;
+        if(!$remark->save()) return print_r($remark->errors()->all());
+       
+        $response['html'] = View::make('pages.lesson.remarks')->with('remarks',array($remark))->render();
+        $response['id'] = $remark->id;
+        return json_encode($response);
     }
     
     public function remark_reply(){

@@ -478,7 +478,6 @@ $next_lesson_btn = '';
             <input type="hidden" name="lesson" value="{{$lesson->id}}" />
             @if(Auth::guest())
                 You need to be registered and logged in to take this exam. <a href="{{url('login')}}">Log in</a>
-            <!--@-elseif(admin())-->
             
             @elseif($page_has_submit)
             <?php //$page_has_scale = '';?>
@@ -546,18 +545,6 @@ $next_lesson_btn = '';
             @endif
             <div id="posted_remarks_big">
                 @if($remarks->count()>0 && (!admin()  || (admin() && Session::has('user_id')) ))
-<!--                <p class="green-bg conversations-title">
-                    Main Conversation with
-                    @if(admin())
-                        {{ User::find(Session::get('user_id'))->first_name}} {{User::find(Session::get('user_id'))->last_name}}
-                    @else
-                        {{Auth::user()->coach(Session::get('program_id'))->first_name}} {{Auth::user()->coach(Session::get('program_id'))->last_name}}
-                    @endif
-                    <button class='btn btn-primary btn-xs pull-right do-tooltip' 
-                            onclick='window.open("{{url("conversation/$lesson->id/".Session::get('user_id'))}}","_blank",
-                            "location=0, menubar=0, statusbar=0, toolbar=0, titlebar=0, scrollbars=1, top=0, width=1000")' title='Open in a new window'><i class='glyphicon glyphicon-new-window'></i></button>
-                    <button class='btn btn-primary btn-xs pull-right remark-btn do-tooltip' title='View full conversation'  onclick='toggle_remarks()'><i class='glyphicon glyphicon-resize-full'></i></button> 
-                </p>-->
                 <button class='btn btn-primary do-tooltip center-block' 
                             onclick='window.open("{{url("conversation/$lesson->id/".Session::get('user_id'))}}","_blank",
                             "location=0, menubar=0, statusbar=0, toolbar=0, titlebar=0, scrollbars=1, top=0, width=1000")' title='Open in a new window'><i class='glyphicon glyphicon-new-window'></i>
@@ -624,41 +611,42 @@ $next_lesson_btn = '';
                 
                 
             </div>
-            
+            @if(Auth::check())
+                {{ View::make('pages.lesson.group_lesson_comments')->withTotal_group_remarks($total_group_remarks)->withGroup_remarks($group_remarks)->withRemarks($remarks)->withLesson($lesson) }}
+            @endif
                          
-
              @if(admin() && Session::has('user_id'))
             
             
                 <div class="admin-panel" id="block-1">
                                 @if($unattended>0)
                                 <div id="mark_lesson_btn" >
-                                    <button title="Mark Whole Lesson As Attended" data-placement="top" data-toggle="tooltip" type='button' class='btn btn-success btn-sm do-tooltip' onclick='lesson_attended({{$lesson->id}},{{Session::get('user_id')}})'><i class="glyphicon glyphicon-ok"></i> Mark Whole Lesson As Attended</button>
+                                    <button title="Mark Whole Lesson As Reviewed" data-placement="top" data-toggle="tooltip" type='button' class='btn btn-success btn-sm do-tooltip' onclick='lesson_attended({{$lesson->id}},{{Session::get('user_id')}})'><i class="glyphicon glyphicon-ok"></i> Mark Whole Lesson As Reviewed</button>
                                 </div>
                                 @endif
     
                                 @if($next_unattended!='' && $next_unattended != null)
                                         @if($next_unattended->chapter_ord < $lesson->chapter_ord)
-                                            <a title="Go back to first unattended lesson"  data-placement="left" data-toggle="tooltip" class='btn btn-danger btn-sm do-tooltip next-lesson' href='{{url("lesson/$next_unattended->slug/".Session::get('user_id'))}}'>
+                                            <a title="Go back to first not yet reviewed lesson"  data-placement="left" data-toggle="tooltip" class='btn btn-danger btn-sm do-tooltip next-lesson' href='{{url("lesson/$next_unattended->slug/".Session::get('user_id'))}}'>
                                             <i class="glyphicon glyphicon-fast-backward"></i>
-                                            Back to first unattended lesson
+                                            Back to first not yet reviewed lesson
                                             </a>
                                         @elseif($next_unattended->chapter_ord == $lesson->chapter_ord)
                                             @if($lesson->ord > $next_unattended->ord)
-                                                <a title="Go back to first unattended lesson"  data-placement="left" data-toggle="tooltip" class='btn btn-danger btn-sm do-tooltip next-lesson' href='{{url("lesson/$next_unattended->slug/".Session::get('user_id'))}}'>
+                                                <a title="Go back to first not yet reviewed lesson"  data-placement="left" data-toggle="tooltip" class='btn btn-danger btn-sm do-tooltip next-lesson' href='{{url("lesson/$next_unattended->slug/".Session::get('user_id'))}}'>
                                                 <i class="glyphicon glyphicon-fast-backward"></i>
-                                                Back to first unattended lesson
+                                                Back to first not yet reviewed lesson
                                                 </a>
                                             @else
-                                                <a title="Go to Next unattended lesson "  data-placement="left" data-toggle="tooltip" class='btn btn-danger btn-sm do-tooltip next-lesson' href='{{url("lesson/$next_unattended->slug/".Session::get('user_id'))}}'>
+                                                <a title="Go to Next not yet reviewed lesson "  data-placement="left" data-toggle="tooltip" class='btn btn-danger btn-sm do-tooltip next-lesson' href='{{url("lesson/$next_unattended->slug/".Session::get('user_id'))}}'>
                                                  <i class="glyphicon glyphicon-fast-forward"></i>
-                                                 Next unattended lesson
+                                                 Next not yet reviewed lesson
                                                  </a>
                                             @endif
                                         @else 
-                                            <a title="Go to Next unattended lesson "  data-placement="left" data-toggle="tooltip" class='btn btn-danger btn-sm do-tooltip next-lesson' href='{{url("lesson/$next_unattended->slug/".Session::get('user_id'))}}'>
+                                            <a title="Go to Next not yet reviewed lesson "  data-placement="left" data-toggle="tooltip" class='btn btn-danger btn-sm do-tooltip next-lesson' href='{{url("lesson/$next_unattended->slug/".Session::get('user_id'))}}'>
                                             <i class="glyphicon glyphicon-fast-forward"></i>
-                                            Next unattended lesson
+                                            Next not yet reviewed lesson
                                             </a>
                                         @endif
                                 @endif
@@ -677,7 +665,7 @@ $next_lesson_btn = '';
                 ?></a>
                      @if($unattended>0)
                      
-                        <br />    <button id="mark_user_btn" title="Mark User As Attended" data-placement="right" data-toggle="tooltip" type='button' class='btn btn-success btn-sm do-tooltip mark_user' onclick='user_attended({{Session::get('user_id')}})'><i class="glyphicon glyphicon-ok"></i> Mark As Attended</button>
+                        <br />    <button id="mark_user_btn" title="Mark User As Reviewed" data-placement="right" data-toggle="tooltip" type='button' class='btn btn-success btn-sm do-tooltip mark_user' onclick='user_attended({{Session::get('user_id')}})'><i class="glyphicon glyphicon-ok"></i> Mark As Reviewed</button>
                     @endif
                 </div>
              @endif

@@ -14,7 +14,7 @@
         }
         $custom = urlencode(json_encode($custom));
     ?>
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
     <input type="hidden" name="cmd" value="_xclick">
     <input type="hidden" name="business" value="{{$processor->field}}">
     <input type="hidden" name="lc" value="US">
@@ -37,7 +37,7 @@
         $custom['p'] = $plan->id;
         $custom = urlencode(json_encode($custom));
     ?>
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
         <input type="hidden" name="business" value="{{$processor->field}}">
         <input type="hidden" name="cmd" value="_xclick-subscriptions">
         <input type="hidden" name="item_name" value="{{$plan->name}}">

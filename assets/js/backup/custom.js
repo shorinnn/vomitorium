@@ -649,7 +649,7 @@ function mark_unattended(message, block_id) {
     show_busy();
     $.post(APP_URL + '/mark_unattended', {message: message, block_id: block_id}, function(result) {
         hide_busy();
-        $('#mark-read-' + message).html('<i class="glyphicon glyphicon-ok"></i> Mark as attended');
+        $('#mark-read-' + message).html('<i class="glyphicon glyphicon-ok"></i> Mark as reviewed');
         //$('#mark-read-'+message).parent().addClass('new_comment');
         $('#mark-read-' + message).attr('onclick', 'mark_attended(' + message + ',' + block_id + ')');
         $('#next_item_btn').show();
@@ -661,7 +661,7 @@ function mark_submission_attended(message) {
     show_busy();
     $.post(APP_URL + '/mark_submission_attended', {message: message}, function(result) {
         hide_busy();
-        $('#mark-s-read-' + message).html('Mark as unattended');
+        $('#mark-s-read-' + message).html('Mark as not yet reviewed');
         $('#mark-s-read-' + message).addClass('red-button');
         $('#mark-s-read-' + message).removeClass('greenyellow-button');
         //$('#mark-s-read-'+message).removeClass('btn-success');
@@ -670,9 +670,6 @@ function mark_submission_attended(message) {
         //$('#red-btn-'+message).remove();
         $('#red-btn-' + message).addClass('invisible');
         $('#mark-s-read-' + message).attr('onclick', 'mark_submission_unattended(' + message + ')');
-        //$('#mark-s-read-'+message).parent().removeClass('unattended_item');
-        //$('#mark-s-read-'+message).parent().removeClass('unattended_item_visited');
-        //$('#mark-s-read-'+message).parent().parent().removeClass('unattended_block');
         console.log('remove unattended');
         if ($('.unattended_item').length == 0 && $('.unattended_item_visited').length == 0) {
             $('#next_item_btn').hide();
@@ -684,16 +681,13 @@ function mark_submission_unattended(message) {
     show_busy();
     $.post(APP_URL + '/mark_submission_unattended', {message: message}, function(result) {
         hide_busy();
-        $('#mark-s-read-' + message).html('<i class="glyphicon glyphicon-ok"></i> Mark as attended');
+        $('#mark-s-read-' + message).html('<i class="glyphicon glyphicon-ok"></i> Mark as reviewed');
         $('#mark-s-read-' + message).removeClass('red-button');
         $('#mark-s-read-' + message).addClass('greenyellow-button');
-        // $('#mark-s-read-'+message).before(" <span id='unattended-warning-"+message+"'><i class='glyphicon glyphicon-exclamation-sign'></i> Submission Unattended</span> ");
         $('#mark-s-read-' + message).attr('onclick', 'mark_submission_attended(' + message + ')');
-        //$('#mark-s-read-'+message).parent().addClass('unattended_item');
 
         //$('#mark-s-read-'+message).addClass('btn-success');
         //$('#mark-s-read-'+message).removeClass('btn-danger');
-        //$('#mark-s-read-'+message).parent().parent().addClass('unattended_block');
         $('#next_item_btn').show();
     });
 }
@@ -854,7 +848,7 @@ val = $('.edit-comment-txt').code();
 
 function next_unattended_item() {
     if ($('.unattended_item').length == 0) {
-        bootbox.confirm("Do you want to go back to the first unattended item?", function(result) {
+        bootbox.confirm("Do you want to go back to the first not yet reviewed item?", function(result) {
             if (result == false)
                 return;
             $('.unattended_item_visited').addClass('unattended_item');
@@ -872,7 +866,7 @@ function next_unattended_item() {
 }
 
 function user_attended(user) {
-    result = confirm("Do you want to mark all submissions and comments from this user as attended?");
+    result = confirm("Do you want to mark all submissions and comments from this user as reviewed?");
     if (result == true) {
         show_busy();
         $.post(APP_URL + '/mark_user', {user: user}, function(result) {
@@ -890,8 +884,7 @@ function user_attended(user) {
 }
 
 function lesson_attended(lesson, user) {
-    //bootbox.confirm("Do you want to mark all submissions and comments in this lesson as attended?", function(result) {
-    result = confirm("Do you want to mark all submissions and comments in this lesson as attended?");
+    result = confirm("Do you want to mark all submissions and comments in this lesson as reviewed?");
     if (result == true) {
         show_busy();
         $.post(APP_URL + '/mark_lesson', {lesson: lesson, user: user}, function(result) {
@@ -901,7 +894,7 @@ function lesson_attended(lesson, user) {
             $('.unattended_item_visited').hide();
             $('#next_item_btn').hide();
             $('#mark_lesson_btn').hide();
-            do_growl('Lesson has been marked as attended', 'success');
+            do_growl('Lesson has been marked as reviewed', 'success');
             if ($('.next-lesson').length > 0) {
                 console.log($('.next-lesson').length);
                 href = $('.next-lesson').attr('href');

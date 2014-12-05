@@ -59,7 +59,7 @@ $total = is_array($remarks)? count($remarks) : $remarks->count();?>
                 @else
                     @if($remark->attended==0 && $remark->admin_reply==0)
                     <li>
-                         <a id="mark-remark-read-{{$remark->id}}" title="Mark As Attended" class="do-tooltip"
+                         <a id="mark-remark-read-{{$remark->id}}" title="Mark As Reviewed" class="do-tooltip"
                                  onclick="mark_remark_attended({{$remark->id}})"><i class="glyphicon glyphicon-ok"></i></a>
                     </li>
                     @endif
