@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,8 +26,8 @@ return array(
 	|
 	*/
 
-	'url' => 'http://www.imacoa.ch',
-	'base_url' => 'imacoa.ch',
+	'url' => 'http://www.vomitorium.rocks',
+	'base_url' => 'vomitorium.rocks',
 
 	/*
 	|--------------------------------------------------------------------------

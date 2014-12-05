@@ -4,6 +4,7 @@ class PagesController extends \BaseController {
        public function __construct(){
             $this->beforeFilter('auth', array('only' => 'contact'));
        }
+       
        public $meta;
 	/**
 	 * Display a listing of the resource.

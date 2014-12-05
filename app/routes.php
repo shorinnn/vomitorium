@@ -12,8 +12,10 @@
 */
 // Determine subdomain and set in session
 $_SERVER['SERVER_NAME'] = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost';
-if (preg_match('/^(www|\/).*/',$_SERVER['SERVER_NAME']) || preg_match('/^(imacoa|\/).*/',$_SERVER['SERVER_NAME'])) {
-  //die('no subdomain2');
+if(App::environment()=='production') $domain = 'imacoa';
+else $domain = 'vomitorium';
+
+if (preg_match('/^(www|\/).*/',$_SERVER['SERVER_NAME']) || preg_match("/^($domain|\/).*/",$_SERVER['SERVER_NAME'])) {
    // Public site, no subdomain
     Session::forget('subdomain');
 } else {
@@ -42,7 +44,7 @@ if (!Session::has('subdomain')) {
   // The user is attempting to access a domain.
   Route::group(array("before"=>"switchToTenantDB"), function() {
         $dbdata = DB::table('accounts')->where('subdomain', Session::get('subdomain'))->first();
-        if($dbdata==null) die('This account doesn\'t exit yet');
+        if($dbdata==null) die('This account doesn\'t exist yet');
         
         Config::set('database.connections.mysql_tennant.database', $dbdata->db_name);
         Config::set('database.connections.mysql_tennant.username', $dbdata->db_username);
