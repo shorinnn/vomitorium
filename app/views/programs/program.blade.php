@@ -4,6 +4,6 @@
             {{$program->name}}
         </a>
     </td>
-    <td>{{$program->users->count()}}</td>
+    <td>{{$program->users()->count()}}</td>
     <td><button class='btn btn-danger' onclick='del({{$program->id}}, "{{url('programs/'.$program->id)}}")'>Delete</button></td>
 </tr>

@@ -31,7 +31,7 @@ return array(
 		'production' => array(
 			'host'      => 'imacoa.ch',
 			'username'  => 'root',
-			'password'  => '4p8WtT9G1Bb2ODS#',
+			'password'  => '4p8WtT9G1Bb2ODS!',
 			'key'       => '',
 			'keyphrase' => '',
 			'root'      => '/',
