@@ -50,6 +50,7 @@ function enable_rte(toolbar) {
 }
 
 $(function() {
+    enable_autosave_lesson();
     $('body').on('keyup','input.two-column', add_two_column_row);
     
     $('body').on('keyup','.block-score', update_block_score);
@@ -1770,4 +1771,16 @@ function link_remote_change_element(target){
         }
     });
     
+}
+
+function enable_autosave_lesson(){
+    if($('#lesson_form').length==1){
+        lesson_name = lesson_name.toString();
+        $("#lesson_form").rememberState({
+            objName:lesson_name,
+            noticeDialog: $("<div class='rememberStateDiv alert alert-info' />").html("<p>Would you like to restore your autosaved progress?</p> <a class='rememberStateYes' href='#'>Yes</a>  <a class='rememberStateNo' href='#'>No</a>"),
+            noticeConfirmSelector: "a.rememberStateYes",
+            noticeCancelSelector: "a.rememberStateNo"
+        });
+    }
 }

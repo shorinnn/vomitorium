@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PagesController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/programs/program.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/ProgramsController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Program.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/User.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/config/auth.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/bootstrap/autoload.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/bootstrap/start.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/group_lesson_comments.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/config/app.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/routes.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/config/dev/app.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/config/dev/mail.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Lesson.php</file>
         </group>
     </open-files>
 </project-private>

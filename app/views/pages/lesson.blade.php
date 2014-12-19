@@ -691,5 +691,6 @@ $next_lesson_btn = '';
     <script>
         var do_enable_rte = true;
         var rte_config = 3;
+        var lesson_name = "{{$lesson->slug}}";
     </script>
 @stop

@@ -27,6 +27,7 @@
         {{HTML::style('assets/colorpicker/css/colorpicker.css')}}
 	<!--Style css-->
         @if(file_exists( base_path().'/assets/stylesheets/stylesheet'.sys_settings().'.css'))
+        {{HTML::style('assets/css/custom.css')}}
         {{HTML::style('assets/stylesheets/stylesheet'.sys_settings().'.css')}}
         @else
 	
@@ -224,6 +225,7 @@
     <!--{{HTML::script('../assets/builds/combined.min.js')}}-->
     {{HTML::script('assets/js/jquery.min.js')}}
     {{HTML::script('assets/js/jquery-ui-1.10.4.custom.min.js')}}
+    {{HTML::script('assets/js/jquery.remember-state.js')}}
     {{HTML::script('assets/js/bootstrap.min.js')}}
     {{HTML::script('assets/js/bootstrapValidator.min.js')}}
     {{HTML::script('assets/js/bootstrap-growl.js')}}

@@ -3222,3 +3222,21 @@ a.comment-reply:hover{
     padding-left: 38px !important;
     padding-right: 38px !important;
 }
+
+.rememberStateDiv{
+    text-align:center;
+}
+.rememberStateDiv p {
+    margin:0px !important;
+}
+.rememberStateDiv a {
+    margin-left:20px;
+    margin-right: 20px;
+    color: white;
+    font-weight: bold;
+}
+.rememberStateDiv a:hover {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+}
