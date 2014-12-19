@@ -11,6 +11,13 @@
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/bootstrap/autoload.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/bootstrap/start.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Lesson.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/custom.js</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/HomeController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PagesController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/user_dash.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/layouts/master.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/css/custom.css</file>
         </group>
     </open-files>
 </project-private>

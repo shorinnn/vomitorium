@@ -1778,9 +1778,9 @@ function enable_autosave_lesson(){
         lesson_name = lesson_name.toString();
         $("#lesson_form").rememberState({
             objName:lesson_name,
-            noticeDialog: $("<div class='rememberStateDiv alert alert-info' />").html("<p>Would you like to restore your autosaved progress?</p> <a class='rememberStateYes' href='#'>Yes</a>  <a class='rememberStateNo' href='#'>No</a>"),
-            noticeConfirmSelector: "a.rememberStateYes",
-            noticeCancelSelector: "a.rememberStateNo"
+            noticeDialog: $("<div class='rememberStateDiv' />").html("<p>You didn't complete this lesson last time. Restore your autosaved progress?</p> <button class='rememberStateYes btn btn-success' href='#'>Oh, thank ***, yes, please restore it!</button>  <button class='rememberStateNo btn btn-danger' href='#'>Nope, I'm good</button>"),
+            noticeConfirmSelector: "button.rememberStateYes",
+            noticeCancelSelector: "button.rememberStateNo"
         });
     }
 }
