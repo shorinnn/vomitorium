@@ -816,3 +816,8 @@ label.form-label {
 	border-color: transparent;
 }
 /*Content Section*/
+
+
+.scale-holder{
+    clear:both;
+}
