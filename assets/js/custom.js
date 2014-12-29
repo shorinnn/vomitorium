@@ -592,13 +592,17 @@ function all_scales(block) {
     var is_valid = true;
     $('.scale-holder-' + block + ' .col-lg-12').each(function() {
         input_name = $(this).attr('data-input-name');
-        entry = $(this).attr('data-entry-name');
-        var vl = $('[name=' + input_name + "]:checked").val();
-        if (isNaN(vl)) {
-            vl = "0";
-            is_valid = false;
+        if(typeof(input_name) != 'undefined'){
+            entry = $(this).attr('data-entry-name');
+            var vl = $('[name=' + input_name + "]:checked").val();
+            if (isNaN(vl)) {
+                console.log(vl + " name "+input_name);
+                vl = "0";
+                is_valid = false;
+
+            }
+            master_list.push({key: vl, val: entry});
         }
-        master_list.push({key: vl, val: entry});
     });
     if (!is_valid) {
         do_growl('Please rate all items', 'danger');
