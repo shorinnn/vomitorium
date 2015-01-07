@@ -5,6 +5,15 @@
 
         <div class="container">
             <table class='table table-bordered table-striped'>
+                <tr>
+                    <td>Homepage content</td>
+                    <td> 
+                        <div class='summernote_editor'>{{ sys_settings('homepage_html') }}</div>
+                        <button class="btn btn-primary" data-field = 'homepage_html' data-pk = '1'
+                            data-code=".summernote_editor" data-url='{{url('system_settings')}}'
+                            onclick='ajax_update(this)' >Save</button>
+                    </td>
+                </tr>
                 <tr><td>Logo</td>
                     <td>
                          @if(sys_settings('logo')!='')
@@ -109,5 +118,8 @@
 
     </div>
     <!-- /.section -->
-    
+    <script>
+        var do_enable_rte = true;
+        var rte_config = 1;
+    </script>
 @stop

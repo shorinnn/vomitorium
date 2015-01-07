@@ -215,7 +215,6 @@
             </div><!--main-content ends-->
             
         </div><!--container ends-->
-        <p class='alert alert-info text-right'><i class='glyphicon glyphicon-time'></i> {{format_date(date('Y-m-d H:i:s'))}}</p>
     </section><!--content ends-->
     
 	<a class="go-to-top" href="#"></a>

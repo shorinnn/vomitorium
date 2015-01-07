@@ -50,7 +50,7 @@ function enable_rte(toolbar) {
 }
 
 $(function() {
-    enable_autosave_lesson();
+    if(typeof(enable_autosave) !='undefined' && enable_autosave===1) enable_autosave_lesson();
     $('body').on('keyup','input.two-column', add_two_column_row);
     
     $('body').on('keyup','.block-score', update_block_score);
@@ -283,6 +283,10 @@ function update_color_field(elem, val){
 function ajax_update(element){
     element = $(element);
     val = element.val();
+    if( typeof(element.attr('data-code'))!='undefined' ){
+        $src = $(element.attr('data-code'));
+        val = $src.code(); 
+    }
     $.post(element.attr('data-url'),{ 
             pk: element.attr('data-pk'), 
             name: element.attr('data-field'), 
@@ -1780,11 +1784,30 @@ function link_remote_change_element(target){
 function enable_autosave_lesson(){
     if($('#lesson_form').length==1){
         lesson_name = lesson_name.toString();
+        // see if we need to expire the data
+        storage = JSON.parse(localStorage.getItem(lesson_name));
+        name = lesson_name+'-set-date';
+        if( localStorage.getItem(name) !== null ){
+            current = new Date().getTime();
+            date_set = localStorage.getItem(name);
+            dif = (current - date_set)/1000/60;
+            // expire after 30 minutes
+            if(dif >= 30){
+                localStorage.removeItem(name);
+                localStorage.removeItem(lesson_name);
+            }
+        }
+        
         $("#lesson_form").rememberState({
             objName:lesson_name,
             noticeDialog: $("<div class='rememberStateDiv' />").html("<p>You didn't complete this lesson last time. Restore your autosaved progress?</p> <button class='rememberStateYes btn btn-success' href='#'>Oh, thank ***, yes, please restore it!</button>  <button class='rememberStateNo btn btn-danger' href='#'>Nope, I'm good</button>"),
             noticeConfirmSelector: "button.rememberStateYes",
             noticeCancelSelector: "button.rememberStateNo"
         });
+        t = new Date().getTime();
+        name = lesson_name+'-set-date';
+        if( localStorage.getItem(name) === null ){
+            localStorage.setItem(name, t);
+        }
     }
 }

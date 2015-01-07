@@ -691,6 +691,11 @@ $next_lesson_btn = '';
     <script>
         var do_enable_rte = true;
         var rte_config = 3;
-        var lesson_name = "{{$lesson->slug}}";
+        @if(admin())
+            var enable_autosave = 0;
+        @else
+            var enable_autosave = 1;
+            var lesson_name = "{{$lesson->slug}}";
+        @endif
     </script>
 @stop
