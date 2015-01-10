@@ -3,23 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/programs/program.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/ProgramsController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Program.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/User.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/config/auth.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/bootstrap/autoload.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/bootstrap/start.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Lesson.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/admin/appearance.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/text_block.blade.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/custom.js</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/HomeController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PagesController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/user_dash.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/layouts/master.blade.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/css/custom.css</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/admin/lessons.js</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/css/style.css</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/HomeController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/vendor/jeremeamia/SuperClosure/demo/hello-world.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/index.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/layouts/master.blade.php</file>
         </group>
     </open-files>
 </project-private>
