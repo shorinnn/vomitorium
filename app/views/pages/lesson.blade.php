@@ -75,7 +75,6 @@ $next_lesson_btn = '';
                 
                 <!-- lesson remarks -->
                 @if(Auth::check() && Auth::user()->chat_permission(Session::get('program_id'), 'coach_conversations')==1 )
-                can have remarks
                         @if($lesson_remarks->count() > 0)
                             <p class="green-bg conversations-title">Lesson Remarks</p>
                         @else
