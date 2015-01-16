@@ -8,9 +8,27 @@
                 <tr>
                     <td>Homepage content</td>
                     <td> 
-                        <div class='summernote_editor'>{{ sys_settings('homepage_html') }}</div>
+                        <div class='summernote_editor homepage_html'>{{ sys_settings('homepage_html') }}</div>
                         <button class="btn btn-primary" data-field = 'homepage_html' data-pk = '1'
-                            data-code=".summernote_editor" data-url='{{url('system_settings')}}'
+                            data-code=".homepage_html" data-url='{{url('system_settings')}}'
+                            onclick='ajax_update(this)' >Save</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Signup Page content</td>
+                    <td> 
+                        <div class='summernote_editor register_html'>{{ sys_settings('register_html') }}</div>
+                        <button class="btn btn-primary" data-field = 'register_html' data-pk = '1'
+                            data-code=".register_html" data-url='{{url('system_settings')}}'
+                            onclick='ajax_update(this)' >Save</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Support Page content</td>
+                    <td> 
+                        <div class='summernote_editor support_html'>{{ sys_settings('support_html') }}</div>
+                        <button class="btn btn-primary" data-field = 'support_html' data-pk = '1'
+                            data-code=".support_html" data-url='{{url('system_settings')}}'
                             onclick='ajax_update(this)' >Save</button>
                     </td>
                 </tr>

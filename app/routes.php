@@ -189,6 +189,8 @@ if (!Session::has('subdomain')) {
         Route::post('/reset_password',         'UserController@do_reset_password');
         Route::get( '/logout',                 'UserController@logout');
         Route::get( '/users/add_clients_ui',          'UserManagerController@add_clients_ui');
+        Route::get( '/users/chat_permissions/{id}',          'UserManagerController@chat_permissions');
+        Route::post( '/users/chat_permissions/{id}',          'UserManagerController@set_chat_permissions');
         Route::get( '/users/assign_coach/{id}',          'UserManagerController@assign_coach');
         Route::post( '/users/assign_coach/{id}',          'UserManagerController@do_assign_coach');
         Route::post( '/users/register',          'UserManagerController@register');

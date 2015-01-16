@@ -7,8 +7,10 @@
       <div class="row">
 
         <div class="col-sm-12">
-          <h3>Let's Get In Touch!</h3>
-          <p>Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+          
+@if( trim(sys_settings('support_html')) != '')
+    {{ sys_settings('support_html') }}
+@endif
             <form role="form" method="POST" action="{{url('/contact-us')}}" id="contact_form">    
 	            <div class="row">
 	              <div class="clearfix"></div>

@@ -52,18 +52,10 @@ class PagesController extends \BaseController {
                   $meta['javascripts'] = array('../assets/js/admin/lessons.js');
                   $template = 'template_3';
                   $pm = PMController::unread_pm();
+                       
                   return View::make('admin.dash.base')->withMeta($meta)->withUnattended($unattended)->withCurrent_program($current_program)
                           ->withNewest($newest)->withNew_submissions($new_submissions)->withPm($pm);
-//                  $new_submissions = UserManager::new_submissions(5);
-//                  $unattended_submissions = UserManager::unattended_submissions(5);
-//                  $new_comments = UserManager::new_admin_comments(5);
-//                  $unattended_comments = UserManager::unattented_comments(5);
-//                  return View::make('pages.admin_dash')
-//                          ->with('pageTitle','Welcome')
-//                          ->withNew_submissions($new_submissions)
-//                          ->withUnattended_submissions($unattended_submissions)
-//                          ->withNew_comments($new_comments)
-//                          ->withUnattended_comments($unattended_comments);
+
               }
               else{
                   $comments = UserManager::new_comments(Auth::user()->id);

@@ -199,7 +199,7 @@ class Lesson extends Ardent {
       }
       
       public static function first(){
-          $l = Lesson::where('program_id', Session::get('program_id'))->orderBy('chapter_ord','ASC')->orderBy('ord','ASC')->first();
+          $l = Lesson::where('published',1)->where('program_id', Session::get('program_id'))->orderBy('chapter_ord','ASC')->orderBy('ord','ASC')->first();
           if($l==null) return '';
           return URL('lesson/'.$l->slug);
       }

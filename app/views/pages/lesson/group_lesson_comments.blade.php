@@ -14,9 +14,11 @@
         {{ View::make('pages.lesson.remarks')->withRemarks($group_remarks) }}
     </div>
 </div>
-<div class='remark-post-area-group' style='display:none'>
+<div class='remark-post-area-group group-chat'>
                 <span id='remark-reply-area-group'></span>
-                <textarea id="remark_reply_top_group" class="white-textarea summernote_editor"></textarea>
+                <textarea id="remark_reply_top_group" class="white-textarea summernote_editor">@if($total_group_remarks==0)
+<span class='summernote_placeholder'>Start The Conversation</span>
+@endif</textarea>
 
                 <button type="button" class="btn btn-default2 message-send" 
                         data-rte='#remark_reply_top_group' data-container='.lesson-comments-group' 
@@ -24,7 +26,8 @@
                             onclick="do_remark_reply(event, {{$lesson->id}})">Send</button>
             </div>
             <br class='clearfix clear_fix' />
-            
+ 
+            <!--
 @if(!Auth::guest() && $group_remarks->count() > 0)
     @if($group_remarks[$group_remarks->count()-1]->user_id == Auth::user()->id)
         <button type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments-group")'>Edit</button>
@@ -36,4 +39,5 @@
     <button style='display:none' type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments-group")'>Edit</button>
     <button type='button' class='btn btn-default show-remark-reply' onclick='show_remark_reply(".remark-post-area-group")'>Start The Conversation</button>
 @endif
+            -->
 <span class='clearfix clear_fix'></span>

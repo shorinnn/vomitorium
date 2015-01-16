@@ -22,11 +22,17 @@
             <br />
             <br />
             <a data-toggle="tooltip" title="Assign Coach" href='{{url('users/assign_coach/'.$user->id)}}'
-               class='do-tooltip btn btn-primary' ><i class="glyphicon glyphicon-user"></i></a>
-            <button data-toggle="tooltip" title="Change password" type="button" autocomplete="off" class='do-tooltip btn btn-primary' onclick='change_password("{{URL("users/$user->id/change_password")}}","{{$user->id}}")'><i class="glyphicon glyphicon-lock"></i></button>
-            <br /> <br />
-            <a data-toggle="tooltip" title="View user page" type="button" href='{{url('userpage/'.$user->id)}}' class='do-tooltip btn btn-primary' onclick='show_busy()'><i class="glyphicon glyphicon-search"></i></a>
-            <button data-toggle='tooltip' title='Delete user' type="button" autocomplete="off" class='do-tooltip btn btn-danger' onclick='del({{$user->id}},"{{url("users/$user->id")}}")'><i class='glyphicon glyphicon-trash'></i></button>
+               class='do-tooltip btn btn-primary btn-sm' ><i class="glyphicon glyphicon-user"></i></a>
+            <button data-toggle="tooltip" title="Change password" type="button" autocomplete="off" class='do-tooltip btn btn-primary btn-sm'
+                    onclick='change_password("{{URL("users/$user->id/change_password")}}","{{$user->id}}")'><i class="glyphicon glyphicon-lock"></i></button>
+           
+            <a data-toggle="tooltip" title="View user page" type="button" href='{{url('userpage/'.$user->id)}}' class='do-tooltip btn btn-primary btn-sm' 
+               onclick='show_busy()'><i class="glyphicon glyphicon-search"></i></a>
+            <br />
+            <br />
+            <a data-toggle="tooltip" title="Chat Permissions" href='{{url('users/chat_permissions/'.$user->id)}}'
+               class='do-tooltip btn btn-primary btn-sm' ><i class="glyphicon glyphicon-volume-up"></i></a>
+            <button data-toggle='tooltip' title='Delete user' type="button" autocomplete="off" class='do-tooltip btn btn-danger btn-sm' onclick='del({{$user->id}},"{{url("users/$user->id")}}")'><i class='glyphicon glyphicon-trash'></i></button>
             
             
         </td>

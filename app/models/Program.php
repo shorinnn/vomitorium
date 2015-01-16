@@ -48,10 +48,11 @@ class Program extends Ardent {
       }
       
       public function newest_users($limit = 5){
-           $now = date("Y-m-d H:i:s");
-           $expired = "(`expires` IS NULL  OR `expires` > '$now')";
-          return DB::table('programs_users')->whereRaw($expired)->whereNull('subscription_cancelled')->whereNotNull('start_date')
+          $now = date("Y-m-d H:i:s");
+          $expired = "(`expires` IS NULL  OR `expires` > '$now')";
+          $newest = DB::table('programs_users')->whereRaw($expired)->whereNull('subscription_cancelled')->whereNotNull('start_date')
                   ->where('program_id', $this->id)->orderBy('start_date','DESC')->paginate($limit);
+          return $newest;
           
       }
       

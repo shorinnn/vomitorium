@@ -369,5 +369,11 @@ class User extends ConfideUser {
         if(DB::table('stripe_transactions')->where('user_id', $this->id)->count()) return true;
         return false;
     }
+    
+    public function chat_permission($program, $permission){
+        $row = DB::table('programs_users')->where('user_id', $this->id)->where('program_id', $program)->first();
+        if($row==null ||  $row->$permission==null || $row->$permission=='') return $this->$permission;
+        else return $row->$permission;
+    }
 
 }

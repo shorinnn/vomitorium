@@ -6,6 +6,14 @@
             <option value="subscription">Subscription</option>
             <option value="one-time">One-time</option>
         </select><br />
+        <select class="form-control" id="allows_group_conversations" name="allows_group_conversations">
+            <option value="1">Allows Group Conversations</option>
+            <option value="0">Doesn't Allow Group Conversations</option>
+        </select><br />
+        <select class="form-control" id="allows_coach_conversations" name="allows_coach_conversations">
+            <option value="1">Allows Coach Conversations</option>
+            <option value="0">Doesn't Allow Coach Conversations</option>
+        </select><br />
         <div class="subscription plan-type">
             <div class="col-lg-4">
                 <div class="input-group">

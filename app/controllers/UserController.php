@@ -112,27 +112,16 @@ class UserController extends BaseController {
             }
             else $user->attachRole(2);
             Session::set('payment_plan_id',Input::get('program_id'));
+            if(Input::get('program_id')!=''){
+                $hash = Input::get('program_id');
+                $plan = PaymentPlan::whereRaw('SHA1(CONCAT("'.sys_settings().'",id)) = "'.$hash.'"')->first();
+                
+                $user->group_conversations = $plan->allows_group_conversations;
+                $user->coach_conversations = $plan->allows_coach_conversations;
+                $user->updateUniques();
+            }
             if(Input::get('program_id')!='' && isset($code)){
                 Session::set('payment_plan_id',Input::get('program_id'));
-//                if(strlen(Input::get('program_id'))==16){//unique registration code
-//                    $code = Code::where('code',Input::get('program_id'))->first();
-//                    $code->used_by = $user->id;
-//                    $code->used_at = date('Y-m-d H:i:s');
-//                    $code->updateUniques();
-//                    if(!$no_program){
-//                        $data['user_id'] = $user->id;
-//                        $data['program_id'] = $code->program_id;
-//                        DB::table('programs_users')->insert($data);
-//                    }
-//                }
-//                else{// program registration code
-//                    if(!$no_program){
-//                        $data['user_id'] = $user->id;
-//                        $program_id = Program::whereRaw('SHA1(CONCAT("'.sys_settings().'",id)) = "'.Input::get('program_id').'"')->first()->id;
-//                        $data['program_id'] = $program_id;
-//                        DB::table('programs_users')->insert($data);
-//                    }
-//                }
             }
             $this->do_login();
             if(isset($code)){// user has access pass, no payment, associate with the program and log in

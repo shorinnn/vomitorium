@@ -26,7 +26,7 @@ function enable_rte(toolbar) {
             ['misc', ['codeview']]
         ];
     }
-    if(toolbar==3){
+    else if(toolbar==3){
         toolbar = [
             ['style', ['bold', 'italic', 'underline']],
             ['lists', ['ul', 'ol']],
@@ -50,7 +50,13 @@ function enable_rte(toolbar) {
 }
 
 $(function() {
+    
     if(typeof(enable_autosave) !='undefined' && enable_autosave===1) enable_autosave_lesson();
+    
+    $('body').on('click','.note-editable', function(e){
+        $(e.target).find('.summernote_placeholder').remove();
+    });
+    
     $('body').on('keyup','input.two-column', add_two_column_row);
     
     $('body').on('keyup','.block-score', update_block_score);

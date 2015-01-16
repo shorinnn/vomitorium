@@ -1406,6 +1406,15 @@ h3.purple-bg{
     margin-bottom: 10px;
 }
 
+.group-chat{
+    margin-top: -10px;
+}
+
+.summernote_placeholder{
+    color:silver;
+    font-style: italic;
+}
+
 .conversations-title .btn{
     margin-left:5px;
 }
@@ -1800,18 +1809,22 @@ input[type='checkbox']:checked + label {
 }
 
 .download-icon{
-    float:right;
+    /*float:right;*/
     margin-left: 10px;
     text-align: center
 }
 .download-icon a{
-    color:black;
     font-weight:bold;
 }
 .download-icon a:hover{
     text-decoration:none;
     color:gray
 }
+
+.download-icon .file-hint{
+    color:gray;
+    font-style: italic;
+} 
 .file-block{
     border-bottom:2px solid silver;
 }

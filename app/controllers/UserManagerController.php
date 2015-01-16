@@ -78,6 +78,30 @@ class UserManagerController extends BaseController {
         return json_encode($response);
     }
     
+    public function chat_permissions($id){
+        $user = User::find($id);
+        $admins = array();
+        foreach(User::all() as $u){
+            if($u->hasRole("Admin")) $admins[] = $u;
+        }
+        $relations = $user->get_assignments();
+        $meta['header_img_text'] = $meta['pageTitle'] = "Set Group Chat Permissions For $user->first_name $user->last_name ($user->username)";
+        return View::make('user_manager.group_chat')->withUser($user)->withMeta($meta);
+    }
+    
+    public function set_chat_permissions($id){
+        $user = User::find($id);
+        foreach(Input::get('chat_permissions') as $program => $permission){
+           DB::table('programs_users')->where('program_id',$program)->where('user_id',$id)->update( ['group_conversations' => $permission] );
+           $permission = Input::get('coach_chat_permissions')[$program];
+           DB::table('programs_users')->where('program_id',$program)->where('user_id',$id)->update( ['coach_conversations' => $permission] );
+        }
+        $meta['header_img_text'] = $meta['pageTitle'] = "Set Group Chat Permissions For $user->first_name $user->last_name ($user->username)";
+        $response['status'] = 'success';
+        $response['text'] = 'Update successful';
+        return json_encode($response);
+    }
+    
     public function register(){
         if(Input::get('type')=='link'){
             $data = Input::all();

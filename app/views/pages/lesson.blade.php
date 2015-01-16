@@ -73,88 +73,96 @@ $next_lesson_btn = '';
                     <p class='alert alert-danger'>{{Session::get('error')}}</p>
                 @endif
                 
-                @if($lesson_remarks->count() > 0)
-                    <p class="green-bg conversations-title">Lesson Remarks</p>
-                @else
-                    <p class="green-bg conversations-title hidden">Lesson Remarks</p>
-                @endif
-                
-                @if($total_lesson_remarks>1)
-                    <button type='button' data-id="{{$current_user->id or 0}}" onclick="load_lesson_comments({{$lesson->id}},1)" class="btn btn-default load-lesson-comments">
-                        <img src="http://chicken.imacoa.ch/assets/img/arrow-point.png" alt=""> Load Earlier Messages
-                    </button><br />
-                    @endif
-                <div class="lesson-comments">
-                    {{ View::make('pages.lesson.remarks')->withRemarks($lesson_remarks) }}
-                </div>
-                @if(!Auth::guest() && $lesson_remarks->count() > 0)
-                    @if(!admin())
-                        @if($lesson_remarks->count()>0)
-                            @if($remarks[$remarks->count()-1]->posted_by == 'user')
-                                <button type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
-                            @else
-                            <button style='display:none' type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
-                            <div class='remark-post-area' style='display:none'>
-                                <span id='remark-reply-area'></span>
-                                <textarea id="remark_reply_top" class="white-textarea summernote_editor"></textarea>
+                <!-- lesson remarks -->
+                @if(Auth::check() && Auth::user()->chat_permission(Session::get('program_id'), 'coach_conversations')==1 )
+                can have remarks
+                        @if($lesson_remarks->count() > 0)
+                            <p class="green-bg conversations-title">Lesson Remarks</p>
+                        @else
+                            <p class="green-bg conversations-title hidden">Lesson Remarks</p>
+                        @endif
 
-                                <button type="button" class="btn btn-default2 message-send" 
-                                        data-rte='#remark_reply_top' data-container='.lesson-comments' 
-                                            onclick="do_remark_reply(event, {{$lesson->id}})">Send</button>
-                                <ul class="list-unstyled option-box-2">
-                                    <li><a href="#" data-toggle="tooltip" title="" data-input='attachment' 
-                                           data-rte='#remark_reply_top' data-input='attachment'
-                                           data-original-title="Attach" class="do-tooltip icon-2" onclick="attach(event)"></a></li>
-                                    <li><a href="#" data-toggle="tooltip" title="" data-original-title="Discard" data-target='#remark_reply_top' onclick="discard(event)" class="do-tooltip icon-3"></a></li>
-                                </ul>
-                            </div>
-                            <br class='clearfix clear_fix' />
-                            <button type='button' class='btn btn-default show-remark-reply' onclick='show_remark_reply()'>Reply</button>
+                        @if($total_lesson_remarks>1)
+                            <button type='button' data-id="{{$current_user->id or 0}}" onclick="load_lesson_comments({{$lesson->id}},1)" class="btn btn-default load-lesson-comments">
+                                <img src="http://chicken.imacoa.ch/assets/img/arrow-point.png" alt=""> Load Earlier Messages
+                            </button><br />
                             @endif
-                            <span class='clearfix clear_fix'></span>
-                        @endif
-                    @else
-                        @if(Session::has('user_id'))
-                            @if($remarks[$remarks->count()-1]->posted_by == 'admin')
-                                <button type='button' class='btn btn-default' onclick='force_edit(".lesson-comments")'>Edit</button>
-                            @else
-                                <button style='display:none' type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
-                                    @if($lesson_remarks->count()>0)
-                                        <div class='remark-post-area' style='display:none'>
-                                    @else 
-                                        <div class="message-col remark-post-area">
-                                        <h2>
-                                        Leave Remarks
-                                        </h2>
+                        <div class="lesson-comments">
+                            {{ View::make('pages.lesson.remarks')->withRemarks($lesson_remarks) }}
+                        </div>
+
+                        @if(!Auth::guest() && $lesson_remarks->count() > 0)
+                        asdadsa
+                            @if(!admin())
+                                @if($lesson_remarks->count()>0)
+                                    @if($remarks[$remarks->count()-1]->posted_by == 'user')
+                                        <button type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
+                                    @else
+                                    <button style='display:none' type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
+                                    <div class='remark-post-area' style='display:none'>
+                                        <span id='remark-reply-area'></span>
+                                        <textarea id="remark_reply_top" class="white-textarea summernote_editor"></textarea>
+
+                                        <button type="button" class="btn btn-default2 message-send" 
+                                                data-rte='#remark_reply_top' data-container='.lesson-comments' 
+                                                    onclick="do_remark_reply(event, {{$lesson->id}})">Send</button>
+                                        <ul class="list-unstyled option-box-2">
+                                            <li><a href="#" data-toggle="tooltip" title="" data-input='attachment' 
+                                                   data-rte='#remark_reply_top' data-input='attachment'
+                                                   data-original-title="Attach" class="do-tooltip icon-2" onclick="attach(event)"></a></li>
+                                            <li><a href="#" data-toggle="tooltip" title="" data-original-title="Discard" data-target='#remark_reply_top' onclick="discard(event)" class="do-tooltip icon-3"></a></li>
+                                        </ul>
+                                    </div>
+                                    <br class='clearfix clear_fix' />
+                                    <button type='button' class='btn btn-default show-remark-reply' onclick='show_remark_reply()'>Reply</button>
                                     @endif
-                                    
-                                    <textarea id="top-remark" class="form-control white-textarea summernote_editor"></textarea>
+                                    <span class='clearfix clear_fix'></span>
+                                @endif
+                            @else
+                                @if(Session::has('user_id'))
+                                    @if($remarks[$remarks->count()-1]->posted_by == 'admin')
+                                        <button type='button' class='btn btn-default' onclick='force_edit(".lesson-comments")'>Edit</button>
+                                    @else
+                                        <button style='display:none' type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
+                                            @if($lesson_remarks->count()>0)
+                                                <div class='remark-post-area' style='display:none'>
+                                            @else 
+                                                <div class="message-col remark-post-area">
+                                                <h2>
+                                                Leave Remarks
+                                                </h2>
+                                            @endif
+
+                                            <textarea id="top-remark" class="form-control white-textarea summernote_editor"></textarea>
 
 
-                                    <button id="post_remark_btn" type="button" class="btn btn-default2 message-send" 
-                                            data-rte='#top-remark' data-container='.lesson-comments'
-                                            onclick="post_coach_remarks(event,'{{url('post_remark')}}')">Send</button>
-                                    <ul class="list-unstyled option-box-2">
-                                        <li><a href="#" data-toggle="tooltip" title="" data-original-title="Attach" data-input='attachment'
-                                               data-rte='#top-remark'
-                                               class="do-tooltip icon-2" onclick="attach(event)"></a></li>
-                                        <li><a href="#" data-toggle="tooltip" title="" data-original-title="Discard" class="do-tooltip icon-3" 
-                                               data-target='#top-remark' onclick="discard(event)"></a></li>
-                                    </ul>
-                                    <br />
-                                    <br />
-                                </div>
-                                        @if($lesson_remarks->count()>0)
-                        <br class='clearfix clear_fix' />
-                        <br class='clearfix clear_fix' />
-                            <button type='button' class='btn btn-default show-remark-reply' onclick='show_remark_reply()'>Reply</button>
+                                            <button id="post_remark_btn" type="button" class="btn btn-default2 message-send" 
+                                                    data-rte='#top-remark' data-container='.lesson-comments'
+                                                    onclick="post_coach_remarks(event,'{{url('post_remark')}}')">Send</button>
+                                            <ul class="list-unstyled option-box-2">
+                                                <li><a href="#" data-toggle="tooltip" title="" data-original-title="Attach" data-input='attachment'
+                                                       data-rte='#top-remark'
+                                                       class="do-tooltip icon-2" onclick="attach(event)"></a></li>
+                                                <li><a href="#" data-toggle="tooltip" title="" data-original-title="Discard" class="do-tooltip icon-3" 
+                                                       data-target='#top-remark' onclick="discard(event)"></a></li>
+                                            </ul>
+                                            <br />
+                                            <br />
+                                        </div>
+                                                @if($lesson_remarks->count()>0)
+                                <br class='clearfix clear_fix' />
+                                <br class='clearfix clear_fix' />
+                                    <button type='button' class='btn btn-default show-remark-reply' onclick='show_remark_reply()'>Reply</button>
+                                @endif
+                                @endif
+
+                            @endif
+
+                            <span class='clearfix clear_fix'></span>
+                            @endif
                         @endif
-                        @endif
-                        
-                    @endif
-                    <span class='clearfix clear_fix'></span>
-                    @endif
                 @endif
+                <!-- / lesson remarks -->
             <?php
             $page_has_submit = false;
             $prev_block = '';
@@ -612,7 +620,7 @@ $next_lesson_btn = '';
                 
                 
             </div>
-            @if(Auth::check())
+            @if(Auth::check() && Auth::user()->chat_permission(Session::get('program_id'), 'group_conversations')==1 )
                 {{ View::make('pages.lesson.group_lesson_comments')->withTotal_group_remarks($total_group_remarks)->withGroup_remarks($group_remarks)->withRemarks($remarks)->withLesson($lesson) }}
             @endif
                          
