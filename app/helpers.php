@@ -76,16 +76,19 @@ function get_block_class($answer){
 function next_lesson($lesson){
     $url = '';
     // see if any other lessons in current chapter
-    if(Lesson::where('program_id',Session::get('program_id'))->where('published',1)->where('chapter_id', $lesson->chapter_id)->where('ord','>',$lesson->ord)->count() > 0){
-        $url = Lesson::where('program_id',Session::get('program_id'))->where('published',1)->where('chapter_id', $lesson->chapter_id)->where('ord','>',$lesson->ord)->orderBy('ord','ASC')->first();
+    if(Lesson::where('program_id',Session::get('program_id'))->where('published',1)->where('chapter_ord', $lesson->chapter_ord)->where('ord','>',$lesson->ord)->count() > 0){
+        $url = Lesson::where('program_id',Session::get('program_id'))->where('published',1)->where('chapter_ord', $lesson->chapter_ord)->where('ord','>',$lesson->ord)->orderBy('ord','ASC')->first();
+        
     }
     else{
         // see if there are any lessons in the next chapter
-        if(Lesson::where('program_id',Session::get('program_id'))->where('published',1)->where('chapter_id', '>', $lesson->chapter_id)->count() > 0){
-            $url = Lesson::where('program_id',Session::get('program_id'))->where('published',1)->where('chapter_id', '>', $lesson->chapter_id)
+        if(Lesson::where('program_id',Session::get('program_id'))->where('published',1)->where('chapter_ord', '>', $lesson->chapter_ord)->count() > 0){
+            $url = Lesson::where('program_id',Session::get('program_id'))->where('published',1)->where('chapter_ord', '>', $lesson->chapter_ord)
                     ->orderBy('chapter_ord','ASC')->orderBy('ord','ASC')->first();
         }
+        
     }
+    
     if($url==null) return null;
     // see if lesson has been released
     if($url->release_type!='at_start' && !admin()){

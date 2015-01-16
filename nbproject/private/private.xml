@@ -3,8 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PagesController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/admin/dash/base.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/admin/dash/template_1.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/admin/newest_clients.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Program.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/custom.js</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/User.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/payment_plans/payment.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PaymentPlansController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/payment_plans/create_plan.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/UserController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/UserManagerController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/user_manager/group_chat.blade.php</file>
         </group>
     </open-files>
 </project-private>
