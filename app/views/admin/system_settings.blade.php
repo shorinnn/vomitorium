@@ -12,6 +12,7 @@
                            data-type='select' data-source='[{"template_1":"Full"},{"template_2":"Not Yet Reviewed & Messages"},{"template_3":"Except Messages"}]' 
                            data-value="{{sys_settings('dash_layout')}}"
                            id='dash_layout'>{{human_dash()}}</a></td></tr>
+                <tr><td>Domain Name</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='domain'>{{sys_settings('domain')}}</a></td></tr>
                 <tr><td>Contact Us Destination Email</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='contact_email'>{{sys_settings('contact_email')}}</a></td></tr>
                 <tr><td>Contact Us Destination Name</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='contact_name'>{{sys_settings('contact_name')}}</a></td></tr>
                 <tr><td>Outgoing Email Address</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='email_from'>{{sys_settings('email_from')}}</a></td></tr>

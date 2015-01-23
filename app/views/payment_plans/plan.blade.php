@@ -1,6 +1,6 @@
 <tr>
     <td>{{$plan->name}}</td>
-    <td>${{$plan->cost}}
+    <td>{{currency_symbol($plan->currency)}} {{$plan->cost}}
         @if($plan->type=='subscription')
         for {{$plan->subscription_duration}} 
         {{singplural($plan->subscription_duration, $plan->subscription_duration_unit )}}
@@ -8,7 +8,7 @@
         
         @if($plan->trial_duration > 0)
         <br />{{$plan->trial_duration}} {{ singplural(1, $plan->trial_duration_unit) }} 
-         trial for ${{$plan->trial_cost}}
+         trial for {{currency_symbol($plan->currency)}} {{$plan->trial_cost}}
         @endif
     </td>
     <td>{{$plan->clients()}}</td>

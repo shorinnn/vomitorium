@@ -20,7 +20,7 @@
     <input type="hidden" name="lc" value="US">
     <input type="hidden" name="item_name" value="{{$name}}">
     <input type="hidden" name="amount" value="{{$cost}}">
-    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="currency_code" value="{{$plan->currency}}">
     <input type="hidden" name="button_subtype" value="services">
     <input type="hidden" name="no_note" value="1">
     <input type="hidden" name="return" value="{{url('/thank_you')}}">
@@ -41,7 +41,7 @@
         <input type="hidden" name="business" value="{{$processor->field}}">
         <input type="hidden" name="cmd" value="_xclick-subscriptions">
         <input type="hidden" name="item_name" value="{{$plan->name}}">
-        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="currency_code" value="{{$plan->currency}}">
         @if($plan->trial_duration>0 && !$subscribed_before)
             <input type="hidden" name="a1" value="{{$plan->trial_cost}}">
             <input type="hidden" name="p1" value="{{$plan->trial_duration}}">

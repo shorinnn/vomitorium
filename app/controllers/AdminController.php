@@ -147,6 +147,7 @@ class AdminController extends BaseController {
     }
     public function appearance(){
         $meta['header_img_text'] = 'Appearance';
+        $meta['javascripts'] = array('../assets/js/admin/lessons.js');
         return View::make('admin.appearance')->with('pageTitle', "Appearance")->withMeta($meta);
     }
     

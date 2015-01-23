@@ -424,3 +424,14 @@ function human_dash(){
         default: return 'Full'; break;
     }
 }
+
+function currency_symbol($str){
+    switch($str){
+        case 'USD': return '$'; break;
+        case 'GBP': return '&pound;'; break;
+        case 'EUR': return '&euro;'; break;
+        case 'AUD': return 'AUD $'; break;
+        case 'CAD': return 'CAD $'; break;
+        case 'SGD': return 'SGD $'; break;
+    }
+}

@@ -63,6 +63,7 @@ class PaymentPlansController extends BaseController {
         $p->cost = $p->type=='one-time' ? $p->cost : Input::get('subscription_cost');
         $p->allows_group_conversations = Input::get('allows_group_conversations');
         $p->allows_coach_conversations = Input::get('allows_coach_conversations');
+        $p->currency = Input::get('currency');
         if($p->save()){
             $return['status'] = 'success';
             $return['text'] = 'Payment plan saved';

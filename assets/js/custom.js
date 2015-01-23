@@ -30,7 +30,7 @@ function enable_rte(toolbar) {
         toolbar = [
             ['style', ['bold', 'italic', 'underline']],
             ['lists', ['ul', 'ol']],
-            ['insert', ['link', 'picture']],
+            ['insert', ['link', 'picture']]
         ];
     }
     else{
@@ -44,12 +44,26 @@ function enable_rte(toolbar) {
     }
     $('.summernote_editor').summernote({
         minHeight: 140,
-        toolbar: toolbar
+        toolbar: toolbar,
+        onImageUpload: function(files, editor, welEditable) {
+            sendFile(files[0],editor,welEditable);
+        }
     });
     $('[data-original-title=Style]').html('Styles <span class="caret"></span>');
 }
 
 $(function() {
+    
+    $('body').on('keyup', '.linked-cell', function(){
+        dataLink = $(this).attr('data-link-class');
+        if( typeof(dataLink) !='undefined' ){
+            val = $(this).val();
+            order = $(this).attr('data-link-order')
+            $('[data-link-class="'+dataLink+'"]').each(function(){
+                if( $(this).attr('data-link-order') > order ) $(this).val( val );
+            });
+        }
+    });
     
     if(typeof(enable_autosave) !='undefined' && enable_autosave===1) enable_autosave_lesson();
     

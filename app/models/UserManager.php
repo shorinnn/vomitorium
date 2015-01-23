@@ -127,11 +127,13 @@ class UserManager extends Ardent {
         if($program==null) $program_ids = array();
         else $program_ids = $program->users()->lists('user_id');
         if(count($program_ids)==0) $program_ids = array('-1');
+        
         $users =  User::whereRaw($sql)->whereIn('id',$program_ids)->get();//->paginate($limit);
         $collection = new Illuminate\Database\Eloquent\Collection;
         $arr = [];
         //$collection = new Illuminate\Pagination\Paginator;
         foreach($users as $u){
+            if( !$u->chat_permission(Session::get('program_id'), 'coach_conversations') ) continue;
             $update = json_decode($u->last_update, true);
             $update = strtotime($update[Session::get('program_id')]);
             $u->last_program_update = $update;

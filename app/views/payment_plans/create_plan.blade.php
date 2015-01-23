@@ -14,10 +14,18 @@
             <option value="1">Allows Coach Conversations</option>
             <option value="0">Doesn't Allow Coach Conversations</option>
         </select><br />
+        <select class="form-control" id='currency' name='currency'>
+                            <option value='USD'>$ USD</option>
+                            <option value='GBP'>&pound; GBP</option>
+                            <option value='EUR'>&euro; EUR</option>
+                            <option value='AUD'>AUD</option>
+                            <option value='CAD'>CAD</option>
+                            <option value='SGD'>SGD</option>
+                        </select>
         <div class="subscription plan-type">
             <div class="col-lg-4">
                 <div class="input-group">
-                    <span class="input-group-addon">$</span>
+                    <span class="input-group-addon">Cost</span>
                     <input type="text" class="form-control" placeholder="99.99" id="subscription-cost" name="subscription_cost">
                 </div>
             </div>
@@ -39,7 +47,9 @@
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <span class="input-group-addon">$</span>
+                    <span class="input-group-addon">
+                        Cost
+                    </span>
                     <input type="text" class="form-control" id='plan-cost' name='cost' placeholder="99.99">
                 </div>
             </div>
@@ -51,7 +61,7 @@
             <div class="nodisplay">
                 <div class="col-lg-4">
                     <div class="input-group">
-                        <span class="input-group-addon">$</span>
+                        <span class="input-group-addon">Cost</span>
                         <input type="text" class="form-control" placeholder="1.00" id="trial-cost" name="trial_cost">
                     </div>
                 </div>

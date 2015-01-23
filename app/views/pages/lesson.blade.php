@@ -12,13 +12,49 @@ $next_lesson_btn = '';
 @endif
 <div class="section lesson-content">
 
-<!-- progress bar --><br />
-<p class="progress-bar-info">Your Progress</p>
-<div class="progress" data-progress="{{$lesson_progress}}">
+<!-- progress bar -->
+<div class="progress" data-progress="{{$lesson_progress}}" style="margin-left: -50px;margin-right: -50px;">
   <div class="bar" style="width:{{$lesson_progress}}%">{{$lesson_progress}}%</div>
 </div>
 <!-- /progress bar -->
-
+<div class='nav_btns'>
+                <div class="pull-left" style='margin-left: -50px'>
+                    <?php
+                     $prev = previous_lesson($lesson);
+                     if($prev!=''){
+                         echo " <a class='btn btn-default' href='".URL('lesson/'.$prev)."'><i class='glyphicon glyphicon-backward'></i> Previous lesson</a>";
+                     }  
+                    ?>
+                </div>
+                @if(Session::has('success'))
+                    <p class='alert alert-success text-center'>{{Session::get('success')}}</p>
+                    <?php
+                       
+                        
+                        
+                        $next_lesson = next_lesson($lesson);
+                        
+                        if($next_lesson!='') $next_lesson_btn =  "<div class='text-center next-lesson-btn pull-right' style='margin-right: -50px'>
+                                    <a class='btn btn-default' href='".URL('lesson/'.$next_lesson)."'>Next lesson <i class='glyphicon glyphicon-forward'></i></a>
+                                </div>";
+                        echo $next_lesson_btn;
+                    ?>
+                @else
+                <?php
+                    $next_lesson = next_lesson($lesson);
+                ?>
+                     @if($lesson->progress() > 0)
+                     <?php
+                      
+                      if($next_lesson!='') $next_lesson_btn =  "<div class=' next-lesson-btn pull-right'  style='margin-right: -50px'>
+                                    <a class='btn btn-default' href='".URL('lesson/'.$next_lesson)."'>Next lesson <i class='glyphicon glyphicon-forward'></i></a>
+                                </div>";
+                        echo "<div class='text-right'>$next_lesson_btn</div>";
+                        ?>
+                     @endif
+                @endif
+                <br style='clearfix' />
+            </div>
  
  
         <div class="containerdeprecated">
@@ -30,44 +66,7 @@ $next_lesson_btn = '';
             @endif 
             
             <form id="lesson_form" action="{{Request::url()}}" method="post" novalidate>
-                <div class='nav_btns'>
-                <div class="pull-left">
-                    <?php
-                     $prev = previous_lesson($lesson);
-                     if($prev!=''){
-                         echo " <a class='btn btn-success' href='".URL('lesson/'.$prev)."'><i class='glyphicon glyphicon-backward'></i> Previous lesson</a>";
-                     }
-                    ?>
-                </div>
-                @if(Session::has('success'))
-                    <p class='alert alert-success text-center'>{{Session::get('success')}}</p>
-                    <?php
-                       
-                        
-                        
-                        $next_lesson = next_lesson($lesson);
-                        
-                        if($next_lesson!='') $next_lesson_btn =  "<div class='text-center next-lesson-btn'>
-                                    <a class='btn btn-success' href='".URL('lesson/'.$next_lesson)."'>Next lesson <i class='glyphicon glyphicon-forward'></i></a>
-                                </div>";
-                        echo $next_lesson_btn;
-                    ?>
-                @else
-                <?php
-                    $next_lesson = next_lesson($lesson);
-                ?>
-                     @if($lesson->progress() > 0)
-                     <?php
-                      
-                      if($next_lesson!='') $next_lesson_btn =  "<div class=' next-lesson-btn'>
-                                    <a class='btn btn-success' href='".URL('lesson/'.$next_lesson)."'>Next lesson <i class='glyphicon glyphicon-forward'></i></a>
-                                </div>";
-                        echo "<div class='text-right'>$next_lesson_btn</div>";
-                        ?>
-                     @endif
-                @endif
-                <br style='clearfix' />
-            </div>
+                
                 
                 @if(Session::has('error'))
                     <p class='alert alert-danger'>{{Session::get('error')}}</p>

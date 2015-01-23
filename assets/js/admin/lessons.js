@@ -381,8 +381,9 @@ function save_two_column_block(block_id, url){
     min_score = $("#scale-min-"+block_id).val();
     min_score_text = $("#scale-min-text"+block_id).val();
     max_score_text = $("#scale-max-text"+block_id).val();
+    choices = $("#choices-"+block_id).val();
     $.post(url,{title:title, subtitle:subtitle, in_section:in_section, 
-        category_id:category_id, scale_min:min_score, scale_min_text:min_score_text, scale_max_text:max_score_text}, function(result){
+        category_id:category_id, scale_min:min_score, scale_min_text:min_score_text, scale_max_text:max_score_text, choices:choices}, function(result){
            hide_busy();
            result = parse_json(result);
            if(!result) return false;

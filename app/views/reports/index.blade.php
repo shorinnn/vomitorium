@@ -10,6 +10,10 @@
            <table class="table table-bordered table-striped">
                @foreach($reports as $r)
                <tr class='list-row list-row-{{$r->id}}'><td>{{$r->title}}</td><td><a href='{{url('reports/'.$r->slug)}}' target='_blank'>View Report</a></td>
+                   <td>
+                       <b>View Markup</b><br />
+                       {{{"<a class='btn btn-link' href='".url('reports/'.$r->slug)."' target='_blank'>View My Current Strategy Plan</a>"}}}</td>
+                   
                    <td><button onclick='del({{$r->id}},"{{action("ReportsController@destroy", array($r->id))}}")' class="btn btn-danger">Delete</button></td></tr>
                @endforeach
            </table>

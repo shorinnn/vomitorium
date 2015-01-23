@@ -137,7 +137,8 @@
     </div>
     <!-- /.section -->
     <script>
-        var do_enable_rte = true;
-        var rte_config = 1;
+//        var do_enable_rte = true;
+//        var rte_config = 1;
     </script>
+    
 @stop

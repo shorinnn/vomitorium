@@ -11,11 +11,17 @@
 |
 */
 // Determine subdomain and set in session
+$own_domains = ['imacoa.ch', 'vomitorium.com'];
+$is_own_domain = false;
+foreach($own_domains as $domain){
+    if( strpos($_SERVER['SERVER_NAME'], $domain)!==false ) $is_own_domain = true;
+}
+  
 $_SERVER['SERVER_NAME'] = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost';
 if(App::environment()=='production') $domain = 'imacoa';
 else $domain = 'vomitorium';
 
-if (preg_match('/^(www|\/).*/',$_SERVER['SERVER_NAME']) || preg_match("/^($domain|\/).*/",$_SERVER['SERVER_NAME'])) {
+if ( $is_own_domain && (preg_match('/^(www|\/).*/',$_SERVER['SERVER_NAME']) || preg_match("/^($domain|\/).*/",$_SERVER['SERVER_NAME']) ) ) {
    // Public site, no subdomain
     Session::forget('subdomain');
 } else {
@@ -23,13 +29,16 @@ if (preg_match('/^(www|\/).*/',$_SERVER['SERVER_NAME']) || preg_match("/^($domai
   $subdomain = preg_replace('/^([^\.]+).*/i', '$1', $_SERVER['SERVER_NAME']);
   // Set subdomain in session.
   Session::set('subdomain',$subdomain);
-  //die('has subdomain'.$subdomain);
 }
 
  Route::resource('jsconfig', 'PagesController@jsconfig');
  
 if (!Session::has('subdomain')) {
   // The user is not logged in.  We are on the public facing site.
+    Route::get('accounts/external_domains/{id}','AccountsController@external_domains');
+    Route::post('accounts/external_domains/{id}','AccountsController@set_external_domains');
+    Route::delete('accounts/external_domains/{id}','AccountsController@destroy_external_domain');
+    Route::post('accounts/create_external_domains/{account}','AccountsController@create_external_domain');
     Route::get('accounts/admin/{id}','AccountsController@admin');
     Route::post('accounts/admin/{id}','AccountsController@update_admin');
     Route::get('accounts/status/{id}/{status}','AccountsController@status');
@@ -44,12 +53,23 @@ if (!Session::has('subdomain')) {
   // The user is attempting to access a domain.
   Route::group(array("before"=>"switchToTenantDB"), function() {
         $dbdata = DB::table('accounts')->where('subdomain', Session::get('subdomain'))->first();
-        if($dbdata==null) die('This account doesn\'t exist yet');
+        if($dbdata==null) {
+//            $dbdata = DB::table('accounts')->where('subdomain', 'chicken')->first();
+            $domain_check = (strpos($_SERVER['SERVER_NAME'], 'http')==false) ? 'http://'.$_SERVER['SERVER_NAME'] : $_SERVER['SERVER_NAME'];
+            $domain_check = rtrim($domain_check,'/');
+            $account = DB::table('external_domains')->where('domain', "$domain_check")->first();
+            if( $account==null ) die('This account doesn\'t exist yet');
+            $dbdata = DB::table('accounts')->find( $account->account_id );
+        }
         
         Config::set('database.connections.mysql_tennant.database', $dbdata->db_name);
         Config::set('database.connections.mysql_tennant.username', $dbdata->db_username);
         Config::set('database.connections.mysql_tennant.password', $dbdata->db_pass);
         Config::set('app.url', 'http://'.Session::get('subdomain').'.'.Config::get('app.base_url'));
+
+//        if($_SERVER['REMOTE_ADDR'] == '94.52.185.22'){
+//            Config::set('app.url', 'http://ryeandair.com');
+//        }
         DB::setDefaultConnection('mysql_tennant');
 
    

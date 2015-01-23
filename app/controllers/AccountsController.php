@@ -217,6 +217,30 @@ class AccountsController extends BaseController {
             return format_validation_errors($admin->errors()->all());
         }
     }
+    
+    public function external_domains($id){
+        $domains = DB::table('external_domains')->where('account_id', $id)->get();
+        return View::make('saas.external_domains')->with( compact('domains') )->withAccount( $id );
+    }
+    
+    public function set_external_domains($id){
+        DB::table('external_domains')->where('id', Input::get('pk'))->update( ['domain' => trim( Input::get('value'), '/' ) ] );
+    }
+    
+    public function destroy_external_domain($id){
+         DB::table('external_domains')->where('id', $id)->delete();
+    }
+    
+    public function create_external_domain($account){
+        $domain = DB::table('external_domains')->insert([
+            'account_id' => $account,
+            'domain' => Input::get('domain')
+        ]);
+        $domain = DB::table('external_domains')->where( 'account_id' , $account)->where( 'domain', Input::get('domain') )->first();
+        $response['status'] = 'success';
+        $response['text'] = View::make('saas.external_domain')->with( compact('domain') )->render();
+        return json_encode($response);
+    }
 
 
 

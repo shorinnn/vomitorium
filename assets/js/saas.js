@@ -85,4 +85,34 @@ $(function(){
         });
         return false;
     });
+    
+    $('body').delegate('#domain_form', 'submit', function(){
+        show_busy();
+        $.post($('#domain_form').attr('action'), $('#domain_form').serialize(), function(result){
+            console.log(result);
+            hide_busy();
+            result = parse_json(result);
+            if (!result) return false;
+            if(result.status=='danger'){
+                do_growl(result.text,'danger');
+            }
+            else{
+               $('#domain_form')[0].reset();
+               $('.domains-table').append(result.text);
+               do_growl('External Domain Added','success'); 
+               console.log(result.text);
+            }
+            
+        });
+        return false;
+    });
 });
+
+function external_domains(id){
+    bootbox.dialog({
+      message: loader_gif,
+      title: "External Domains"
+    });
+    $('.bootbox-body').load(APP_URL+'/accounts/external_domains/'+id, function(){
+    });  
+}
