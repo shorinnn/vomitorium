@@ -192,6 +192,9 @@ class AdminController extends BaseController {
                 $css = str_replace('#78e9f1', $color5, $css); 
                 $custom = str_replace('#78e9f1', $color5, $custom); 
                 $lesson = str_replace('#78e9f1', $color5, $lesson); 
+                $css = str_replace('#90edf4', $color5, $css); 
+                $custom = str_replace('#90edf4', $color5, $custom); 
+                $lesson = str_replace('#90edf4', $color5, $lesson); 
             }
             if($color6!=''){
                 $css = str_replace('#f8f8f8', $color6, $css); 
