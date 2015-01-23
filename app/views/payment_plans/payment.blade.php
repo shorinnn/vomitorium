@@ -8,10 +8,15 @@
     $name = sys_settings('title')=='' ? sys_settings('domain') : sys_settings('title');
     ?>
         @foreach($plans as $p)
+        @if($plans->count()>1)
             <div class='well col-lg-5'>
+        @else
+            <div class="col-lg-3"></div>
+            <div class='well col-lg-6'>
+        @endif
                 @if(!Session::has('trial'))
                     <h2 class='text-center'>{{$p->name}}</h2>
-                    <p class='text-center' style='color:green'>{{currency_symbol($p->currency)}} {{$p->cost}}</p>
+                    <p class='text-center' style='color:green'>{{currency_symbol($p->currency)}} {{$p->cost}}
                     @if($p->type=='subscription')
                         for {{$p->subscription_duration}} 
                         {{singplural($p->subscription_duration, $p->subscription_duration_unit )}}
@@ -19,6 +24,7 @@
                             <br />Including {{$p->trial_duration}} {{singplural(1,$p->trial_duration_unit)}} trial ({{currency_symbol($p->currency)}} {{$p->trial_cost}})
                         @endif
                     @endif
+                    </p>
                 @else
                     <h2 class='text-center'>{{$p->name}} -  {{$p->trial_duration}} {{singplural(1,$p->trial_duration_unit)}} Trial</h2>
                     <p class='text-center' style='color:green'>{{currency_symbol($p->currency)}} {{$p->trial_cost}}</p>
@@ -48,7 +54,13 @@
         <div class='col-lg-1'></div>
         @endforeach
 
-    </div>
+     @if($plans->count()>1)
+                    </div>
+        @else
+            
+            </div>
+            <div class="col-lg-3"></div>
+        @endif
     <!-- /.section -->
     
 @stop
