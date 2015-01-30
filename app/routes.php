@@ -60,6 +60,7 @@ if (!Session::has('subdomain')) {
             $account = DB::table('external_domains')->where('domain', "$domain_check")->first();
             if( $account==null ) die('This account doesn\'t exist yet');
             $dbdata = DB::table('accounts')->find( $account->account_id );
+            Config::set( 'app.js_url', $domain_check );
         }
         
         Config::set('database.connections.mysql_tennant.database', $dbdata->db_name);

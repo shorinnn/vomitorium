@@ -27,6 +27,7 @@ return array(
 	*/
 
 	'url' => 'http://www.imacoa.ch',
+	'js_url' => 'http://www.imacoa.ch',
 	'base_url' => 'imacoa.ch',
 
 	/*
