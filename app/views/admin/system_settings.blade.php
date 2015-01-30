@@ -20,6 +20,9 @@
                 <tr><td>Client Term</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='client_term'>{{sys_settings('client_term')}}</a></td></tr>
                 <tr><td>Autosave Yes button label</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='autosave_yes_button_label'>{{sys_settings('autosave_yes_button_label')}}</a></td></tr>
                 <tr><td>Autosave No button label</td><td><a href='#' data-url='{{url('system_settings')}}' data-mode='inline' class='editable' data-pk='1' id='autosave_no_button'>{{sys_settings('autosave_no_button')}}</a></td></tr>
+                <tr><td>Above Lesson Progressbar Content</td>
+                    <td><input type="text" class="form-control inline" value="{{ sys_settings('above_progressbar_content') }}" onchange="ajax_update(this)" data-field="above_progressbar_content" id="above_progressbar_content" data-pk="1" data-url="http://chicken.imacoa.ch/system_settings" />
+                    </td></tr>
                 <tr><td>New Comment Email<br />
                         <p class='alert alert-info'>
                             Available tags: [FirstName], [LastName], [CoachFirstName], [CoachLastName], [Link]

@@ -16,4 +16,7 @@ SQL Changes:<br />
     <textarea  name='sql' class='form-control' rows="6"></textarea><br />
     <button class='btn btn-default'>Run SQL</button>
 </form>
+<blockquote>
+    ALTER TABLE THEDATABASE.`settings` ADD `above_progressbar_content` TEXT NOT NULL ;
+</blockquote>
 @stop

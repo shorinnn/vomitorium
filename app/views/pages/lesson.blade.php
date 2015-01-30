@@ -11,7 +11,7 @@ $next_lesson_btn = '';
 <script> var needs_edit = false;</script>
 @endif
 <div class="section lesson-content">
-
+{{ sys_settings('above_progressbar_content')}}
 <!-- progress bar -->
 <div class="progress" data-progress="{{$lesson_progress}}" style="margin-left: -50px;margin-right: -50px;">
   <div class="bar" style="width:{{$lesson_progress}}%">{{$lesson_progress}}%</div>

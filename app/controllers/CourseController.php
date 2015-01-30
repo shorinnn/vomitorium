@@ -12,6 +12,7 @@ class CourseController extends BaseController {
         else $lesson = Lesson::where('program_id',Session::get('program_id'))->where('slug', $slug)->where('published', 1)->with('blocks')->first();
         if($lesson==null) return Redirect::to('/');
         if(!admin()){
+            
             // see if lesson has been released
             if($lesson->release_type=='on_date'){
                 $meta['pageTitle'] = $meta['header_img_text'] = 'This lesson is not available yet';
@@ -81,6 +82,7 @@ class CourseController extends BaseController {
         }
         
         $this->meta['pageTitle'] = $lesson->title;
+        $this->meta['pageTitle'] = $lesson->program->name.' - '.$lesson->chapter->title.' - '.$lesson->title;
         $this->meta['pageKeywords'] = $lesson->meta_keywords;
         $this->meta['pageDescription'] = $lesson->meta_description;
         $this->meta['header_img_text'] = $lesson->chapter_id >0 ? $lesson->chapter->title : $lesson->title;
