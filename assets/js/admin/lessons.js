@@ -892,6 +892,8 @@ function tag_options() {
     str += "<br /><b>width</b> = Width in px or percentage for uploaded images (e.g. width=40 OR width=23%)";
     str += "<br /><b>row</b> = What row in a TwoColumn answer to be used (e.g. row=1)";
     str += "<br /><b>col</b> = Which column from the row specified to be used (e.g. col=1 OR col=2)";
+    str += "<br /><br /><b>[IF var=200 is=yes]This text is displayed if var 200 is equal to yes[ENDIF]";
+    str += "<br /><br /><b>[IF var=200 is=__empty]This text is displayed if var 200 is blank[ENDIF]";
     str += "<br /><br /><b>[CLIENT_NAME]</b> displays the client name";
     bootbox.alert(str);
 }
