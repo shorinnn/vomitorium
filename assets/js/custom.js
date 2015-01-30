@@ -56,9 +56,9 @@ $(function() {
     
     $('body').on('keyup', '.linked-cell', function(){
         dataLink = $(this).attr('data-link-class');
+        order = $(this).attr('data-link-order');
         if( typeof(dataLink) !='undefined' ){
             val = $(this).val();
-            order = $(this).attr('data-link-order')
             $('[data-link-class="'+dataLink+'"]').each(function(){
                 if( $(this).attr('data-link-order') > order ) $(this).val( val );
             });
@@ -1820,7 +1820,7 @@ function enable_autosave_lesson(){
         
         $("#lesson_form").rememberState({
             objName:lesson_name,
-            noticeDialog: $("<div class='rememberStateDiv' />").html("<p>You didn't complete this lesson last time. Restore your autosaved progress?</p> <button class='rememberStateYes btn btn-success' href='#'>Oh, thank ***, yes, please restore it!</button>  <button class='rememberStateNo btn btn-danger' href='#'>Nope, I'm good</button>"),
+            noticeDialog: $("<div class='rememberStateDiv' />").html("<p>You didn't complete this lesson last time. Restore your autosaved progress?</p> <button class='rememberStateYes btn btn-success' href='#'>"+autosave_yes_button_label+"</button>  <button class='rememberStateNo btn btn-danger' href='#'>"+autosave_no_button_label+"</button>"),
             noticeConfirmSelector: "button.rememberStateYes",
             noticeCancelSelector: "button.rememberStateNo"
         });

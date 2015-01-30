@@ -35,17 +35,14 @@ $extra_class = '';
         @for($i=1; $i<$min_rows; ++$i)
         <tr>
             <?php
-            $linked_attr_left = $linked_attr_right = '';
-            if($block->choices > 0){
-                $linked_attr_left = "data-link-order='$i' data-link-class='linked-left-$link_counter'";
-                $linked_attr_right = "data-link-order='$i' data-link-class='linked-right-$link_counter'";
-                ++$link_counter;
-                if( $link_counter > $block->choices ) $link_counter = 1;
-            }
+                $linked_attr_left = "data-link-order='$block->ord' data-link-class='linked-left-$i'";
+                $linked_attr_right = "data-link-order='$block->ord' data-link-class='linked-right-$i'";
             ?>
-            <td><input data-block="{{$block->id}}" data-row="{{$i}}" type="text" {{$linked_attr_left}} class="linked-cell required form-control two-column two-column-{{$block->id}}" 
+            <td><input data-block="{{$block->id}}" data-row="{{$i}}" type="text" {{$linked_attr_left}} 
+                       class="linked-cell required form-control two-column two-column-{{$block->id}}" 
                   {{disable_answered($answer_str)}} name="two-column[{{$block->id}}][{{$i}}][1]" value="{{ $array[$i][1] or '' }}" /></td>
-            <td><input data-block="{{$block->id}}" data-row="{{$i}}" type="text" {{$linked_attr_right}} class="linked-cell required form-control two-column two-column-{{$block->id}}" 
+            <td><input data-block="{{$block->id}}" data-row="{{$i}}" type="text" {{$linked_attr_right}} 
+                       class="linked-cell required form-control two-column two-column-{{$block->id}}" 
                   {{disable_answered($answer_str)}} name="two-column[{{$block->id}}][{{$i}}][2]" value="{{ $array[$i][2] or '' }}"/></td>
         </tr>
         @endfor

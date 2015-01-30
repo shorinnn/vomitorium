@@ -698,7 +698,7 @@ $next_lesson_btn = '';
     <script>
         var do_enable_rte = true;
         var rte_config = 3;
-        @if(admin())
+        @if(admin() || $lesson->already_submitted())
             var enable_autosave = 0;
         @else
             var enable_autosave = 1;

@@ -9,10 +9,11 @@
        Left Column Title <input type="text" class="form-control" id="scale-min-text{{$block->id}}" value="{{$block->scale_min_text}}" placeholder="Left Column Title (e.g. KPI)" /><br />
        Right Column Title <input type="text" class="form-control" id="scale-max-text{{$block->id}}" value="{{$block->scale_max_text}}" placeholder="Right Column Title (e.g. Target)" /><br />
        Number of Rows <input type="text" class="form-control" id="scale-min-{{$block->id}}" value="{{$block->scale_min}}" placeholder="Number of fillable rows (e.g. 2)" /><br />
-       Every X rows are linked
-       <input type="text" class="form-control" id="choices-{{$block->id}}" value="{{$block->choices}}" 
+       <div style='display:none'>
+           Every X rows are linked
+           <input type="text" class="form-control" id="choices-{{$block->id}}" value="{{$block->choices}}" 
               placeholder="To link column 1 and 3 for example, enter 2" /><br />
-
+       </div>
       <button class='btn btn-danger save-btn' onclick='save_two_column_block({{$block->id}},"{{action('LessonsController@update_block',array($block->id))}}")'>Save</button>
        
       {{View::make('lessons.categories')->withBlock($block)}}

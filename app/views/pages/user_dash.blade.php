@@ -7,7 +7,7 @@
         <div class="container">           
             <h3>Notifications</h3>
             @if(count($notifications)==0)
-                You have no new notifications<br /><br />
+                <span style='color:#777'>You have no new notifications</span><br /><br />
             @else
             <a href="{{url('inbox/filter:unread')}}" style="color:red"><i class='glyphicon glyphicon-info-sign'></i> You have {{count($notifications)}} new {{singplural(count($notifications),'notifications')}}</a>
                 <br /><br />
@@ -36,8 +36,17 @@
             </p>
             @endif
                 
-            @if(Auth::user()->coach(Session::get('program_id'))!=false)
-                Your Coach: {{Auth::user()->coach(Session::get('program_id'))->username}}
+            @if(    Auth::user()->chat_permission(Session::get('program_id'), 'coach_conversations')==1 && 
+                    Auth::user()->coach(Session::get('program_id'))!=false)
+            <center>
+                <p style='color:#1e6e37; font-weight: bold'>Your Coach: </p>
+                    @if(Auth::user()->coach(Session::get('program_id'))->avatar!='')
+                        <img class="img-responsive img-col" src="{{url('assets/img/avatars/'.Auth::user()->coach(Session::get('program_id'))->avatar)}}" />
+                    @endif
+                    {{Auth::user()->coach(Session::get('program_id'))->first_name}} {{Auth::user()->coach(Session::get('program_id'))->last_name}}
+                    <br />
+                    <br />
+            </center>
             @endif
             
             <!-- courses-->

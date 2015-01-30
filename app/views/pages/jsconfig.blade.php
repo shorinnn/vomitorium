@@ -4,3 +4,6 @@ var APP_URL = "{{ Config::get('app.url') }}";
 var sortable_count = 15;
 var allowed = ['.jpg', '.jpeg', '.gif', '.png', '.doc', '.docx', '.pdf', '.odt', '.zip'];
 var allowed_img = ['.jpg', '.jpeg', '.gif', '.png'];
+
+var autosave_yes_button_label = '{{{sys_settings('autosave_yes_button_label')}}}';
+var autosave_no_button_label = '{{{sys_settings('autosave_no_button')}}}';

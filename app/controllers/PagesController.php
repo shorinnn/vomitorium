@@ -68,6 +68,9 @@ class PagesController extends \BaseController {
                   if($visited=='') $visited = array();
                   else $visited = json_decode($visited, true);
                   $meta['header_img_text'] = sys_settings('domain');
+                  if(Session::has('program_id')){
+                      $meta['header_img_text'] = Program::find( Session::get('program_id') )->name;
+                  }
                   $intro_content = '';
                   
                   $intro_lesson = Lesson::where('program_id', Session::get('program_id'))->where('intro_lesson', 1)->first();
