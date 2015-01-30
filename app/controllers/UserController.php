@@ -365,6 +365,24 @@ class UserController extends BaseController {
             }
         }
         
+        public function change_password(){
+            if( !Hash::check(Input::get('old'), Auth::user()->password) ){
+                return Redirect::back()->withError('Old Password is not valid' );
+            }
+            if(Input::get('new') == ''){
+                return Redirect::back()->withError("New password can't be blank");
+            }
+            if(Input::get('new') != Input::get('confirm')){
+                return Redirect::back()->withError('Password confirmation fails');
+            }
+            Auth::user()->password = Input::get('new');
+            Auth::user()->password_confirmation = Input::get('confirm');
+            if(Auth::user()->updateUniques())
+                return Redirect::back()->withSuccess('Password changed');
+            else
+                return Redirect::back()->withError(format_validation_errors( Auth::user()->errors()->all()) );
+        }
+        
         public function subscriptions(){
             $meta['header_img_text'] = 'My Subscriptions';
             $subscriptions = DB::table('programs_users')->whereNull('subscription_cancelled')->where('user_id', Auth::user()->id)->get();

@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/two-column.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/lessons/two_column_block.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/admin/lessons.js</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/custom.js</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/ReportsController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/reports/index.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/user_manager/codes.blade.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/admin/system_settings.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/LessonsController.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PagesController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/payment_plans/payment.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/CourseController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Lesson.php</file>
         </group>
     </open-files>
 </project-private>

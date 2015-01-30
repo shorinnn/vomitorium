@@ -238,6 +238,7 @@ if (!Session::has('subdomain')) {
         Route::get( 'subscriptions',                 'UserController@subscriptions');
         Route::get( 'settings',                 'UserController@settings');
         Route::post( 'settings',                 'UserController@upload_avatar');
+        Route::post( 'password',                 'UserController@change_password');
         Route::get( 'system_settings',          'AdminController@system_settings');
         Route::get( 'appearance',          'AdminController@appearance');
         Route::post( 'system_settings',          'AdminController@update_system_settings');
