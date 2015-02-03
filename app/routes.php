@@ -53,6 +53,7 @@ if (!Session::has('subdomain')) {
   // The user is attempting to access a domain.
   Route::group(array("before"=>"switchToTenantDB"), function() {
         $dbdata = DB::table('accounts')->where('subdomain', Session::get('subdomain'))->first();
+        Config::set('app.js_url', 'http://'.Session::get('subdomain').'.'.Config::get('app.base_url'));
         if($dbdata==null) {
 //            $dbdata = DB::table('accounts')->where('subdomain', 'chicken')->first();
             $domain_check = (strpos($_SERVER['SERVER_NAME'], 'http')==false) ? 'http://'.$_SERVER['SERVER_NAME'] : $_SERVER['SERVER_NAME'];
