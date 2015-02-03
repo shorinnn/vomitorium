@@ -115,3 +115,8 @@ Route::filter('csrf', function()
 	}
 });
 
+
+App::error(function($exception, $code)
+{
+    return View::make('errors.default')->withException($exception)->withCode($code);
+});
