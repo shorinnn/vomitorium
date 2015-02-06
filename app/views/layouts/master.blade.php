@@ -98,9 +98,9 @@
                         @endif
 
                         @if(Request::url() == url("register"))
-                            <li class="active"><a href="{{url('register')}}" class="register">Register</a></li>
+                            <li class="active"><a href="{{ url('register/'.sys_settings('custom_register_page_link') )}}" class="register">Register</a></li>
                         @else
-                            <li><a href="{{url('register')}}" class="register">Register</a></li>
+                            <li><a href="{{ url('register/'.sys_settings('custom_register_page_link') ) }}" class="register">Register</a></li>
                         @endif
                     @else
                     <ul class="nav nab-bar">
@@ -143,9 +143,10 @@
         			<ul class="nav navbar-nav main-nav-items">
                                     @if(Auth::guest() || !admin())
                                     <li class='program_chooser'>
-                                   @if(!Auth::guest())
+                                   @if(!Auth::guest() && count(Auth::user()->programs()) >1 )
                                        Current Program:<br />
                                        <select class="form-control" id='program_chooser' onchange='choose_program()'>
+
                                            @if(Auth::user()->programs()!=false)
                                                @foreach(Auth::user()->programs() as $p)
                                                     <?php
@@ -164,19 +165,29 @@
                                             @else
                                                 <li><a href="{{url('/')}}">Home</a></li>
                                             @endif
-
-                                            @if(current_controller()=='Course')
-                                            <li class=" active">
+                                            
+                                            @if( sys_settings('installation')=='31-1408525988')
+                                                @if(current_controller()=='Course')
+                                                    <li class=" active">
                                                 @else
-                                            <li>
+                                                    <li>
                                                 @endif
-                                                <a href="{{URL('courses')}}">Courses</a>
-                                            </li>
-
-                                            @if(Request::url() == url("contact-us"))
-                                                <li class="active"><a href="{{url('contact-us')}}">Support</a></li>
+                                                    <a href="{{URL('about-us')}}">About Us</a>
+                                                </li>
                                             @else
-                                                <li><a href="{{url('contact-us')}}">Support</a></li>
+                                                @if(current_controller()=='Course')
+                                                    <li class=" active">
+                                                @else
+                                                    <li>
+                                                @endif
+                                                    <a href="{{URL('courses')}}">Courses</a>
+                                                </li>
+                                            @endif
+                                            
+                                            @if(Request::url() == url("contact-us"))
+                                                <li class="active"><a href="{{url('contact-us')}}">Contact Us</a></li>
+                                            @else
+                                                <li><a href="{{url('contact-us')}}">Contact Us</a></li>
                                             @endif
                                     @else
                                         {{View::make('layouts.admin_menu')}}

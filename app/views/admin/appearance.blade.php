@@ -32,6 +32,24 @@
                             onclick='ajax_update(this)' >Save</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>About Us Page content</td>
+                    <td> 
+                        <div class='summernote_editor about_us_html'>{{ sys_settings('about_us_html') }}</div>
+                        <button class="btn btn-primary" data-field = 'about_us_html' data-pk = '1'
+                            data-code=".about_us_html" data-url='{{url('system_settings')}}'
+                            onclick='ajax_update(this)' >Save</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>User Dashboard Permanent Top Content</td>
+                    <td> 
+                        <div class='summernote_editor user_dash_html'>{{ sys_settings('user_dash_html') }}</div>
+                        <button class="btn btn-primary" data-field = 'user_dash_html' data-pk = '1'
+                            data-code=".user_dash_html" data-url='{{url('system_settings')}}'
+                            onclick='ajax_update(this)' >Save</button>
+                    </td>
+                </tr>
                 <tr><td>Logo</td>
                     <td>
                          @if(sys_settings('logo')!='')

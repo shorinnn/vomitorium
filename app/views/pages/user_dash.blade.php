@@ -4,7 +4,8 @@
 <div class="section">
         <?php $program = Program::find(Session::get('program_id')); ?>
     @if($program!=null)
-        <div class="container">           
+        <div class="container">       
+            {{ sys_settings('user_dash_html') }}
             <h3>Notifications</h3>
             @if(count($notifications)==0)
                 <span style='color:#777'>You have no new notifications</span><br /><br />

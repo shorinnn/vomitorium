@@ -1,7 +1,7 @@
 <?php
 $programs = get_programs();
 ?>
-@if($programs!=null && $programs->count() > 0)
+@if($programs!=null && $programs->count() > 1)
 <li class='program_chooser'>
     Current Program:<br />
     <select class="form-control" id='program_chooser' onchange='choose_program()'>

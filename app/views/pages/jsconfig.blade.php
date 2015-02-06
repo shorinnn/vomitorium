@@ -7,3 +7,4 @@ var allowed_img = ['.jpg', '.jpeg', '.gif', '.png'];
 
 var autosave_yes_button_label = '{{{sys_settings('autosave_yes_button_label')}}}';
 var autosave_no_button_label = '{{{sys_settings('autosave_no_button')}}}';
+var autosave_question = '{{{sys_settings('autosave_question')}}}';

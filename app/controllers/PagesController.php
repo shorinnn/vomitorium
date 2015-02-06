@@ -2,7 +2,7 @@
 
 class PagesController extends \BaseController {
        public function __construct(){
-            $this->beforeFilter('auth', array('only' => 'contact'));
+//            $this->beforeFilter('auth', array('only' => 'contact'));
        }
        
        public $meta;
@@ -16,6 +16,7 @@ class PagesController extends \BaseController {
           $meta['header_img_text'] = 'Welcome';
           if(Auth::guest()){
                 $meta['header_img_text'] = 'Welcome';
+                if(sys_settings('installation')=='31-1408525988') unset( $meta['header_img_text'] );
 		return View::make('pages.index')->with('pageTitle','Welcome')->withMeta($meta);
           }
           else{
@@ -105,9 +106,10 @@ class PagesController extends \BaseController {
         }
         
         public function do_contact(){ 
-            $_POST['contact_name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
-            $_POST['contact_email'] = Auth::user()->email;
+//            $_POST['contact_name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
+//            $_POST['contact_email'] = Auth::user()->email;
             $_POST['contact_message'] = Input::get('contact_message');
+            $_POST['contact_subject'] = Input::get('contact_subject');
             return Mailer::contact($_POST);
         }
         
@@ -183,6 +185,13 @@ class PagesController extends \BaseController {
             Session::forget('trial');
             $meta['header_img_text'] = 'Purchase Complete';
             $plans = PaymentPlan::where('program_id',$custom['p'])->get();
+            
+            $_POST['name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
+            $_POST['email'] = Auth::user()->email;
+            $_POST['program'] = Program::find( Session::get('program_id') );
+            Mailer::program_purchased($_POST);
+            
+            
             Return View::make('payment_plans.paypal_success')->withMeta($meta);
         }
         
@@ -195,6 +204,12 @@ class PagesController extends \BaseController {
             $str = Input::all();
             $str = print_r($str, true);
             mail('shorinnn@yahoo.com','is', $str);
+        }
+        
+        public function about_us(){
+            $meta['header_img_text'] = 'About Us';
+            $content = sys_settings('about_us_html');
+            Return View::make('pages.basic_page')->withMeta($meta)->with( compact('content') );
         }
         
 }

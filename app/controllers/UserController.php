@@ -115,10 +115,11 @@ class UserController extends BaseController {
             if(Input::get('program_id')!=''){
                 $hash = Input::get('program_id');
                 $plan = PaymentPlan::whereRaw('SHA1(CONCAT("'.sys_settings().'",id)) = "'.$hash.'"')->first();
-                
-                $user->group_conversations = $plan->allows_group_conversations;
-                $user->coach_conversations = $plan->allows_coach_conversations;
-                $user->updateUniques();
+                if($plan!=null){
+                    $user->group_conversations = $plan->allows_group_conversations;
+                    $user->coach_conversations = $plan->allows_coach_conversations;
+                    $user->updateUniques();
+                }
             }
             if(Input::get('program_id')!='' && isset($code)){
                 Session::set('payment_plan_id',Input::get('program_id'));
@@ -136,6 +137,12 @@ class UserController extends BaseController {
                 Session::forget('accesspass');
                 Session::forget('payment_plan_id');
                 Session::forget('trial');
+                
+                $_POST['name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
+                $_POST['email'] = Auth::user()->email;
+                $_POST['program'] = Program::find( Session::get('program_id') );
+                Mailer::free_access_registration($_POST);
+                
                 return Redirect::to("/");
             }
             else return Redirect::to("payment");

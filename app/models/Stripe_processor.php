@@ -83,6 +83,11 @@ class Stripe_processor extends Ardent {
                 Session::set('program_id', $plan->program_id);
                 Session::forget('payment_plan_id');
                 Session::forget('trial');
+                
+                $_POST['name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
+                $_POST['email'] = Auth::user()->email;
+                $_POST['program'] = Program::find( Session::get('program_id') );
+                Mailer::program_purchased($_POST);
                 Return View::make('payment_plans.stripe_success')->withMeta($meta);
             }
             catch(Exception $e) {
@@ -165,6 +170,11 @@ class Stripe_processor extends Ardent {
                 Session::set('program_id', $plan->program_id);
                 Session::forget('payment_plan_id');
                 Session::forget('trial');
+                
+                $_POST['name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
+                $_POST['email'] = Auth::user()->email;
+                $_POST['program'] = Program::find( Session::get('program_id') );
+                Mailer::program_purchased($_POST);
                 Return View::make('payment_plans.stripe_success')->withMeta($meta);
             }
             catch(Exception $e){

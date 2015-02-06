@@ -226,6 +226,7 @@ if (!Session::has('subdomain')) {
         Route::post( 'users/search',          'UserManagerController@search');
 
         Route::get( '/about-us/video-introduction',                 'PagesController@page');
+        Route::get( '/about-us',                 'PagesController@about_us');
         Route::get( 'easteregg',                 'PagesController@easteregg');
         Route::get( '/who-we-are/{any}',                 'PagesController@page');
         Route::get( '/the-brilliant-career',                 'PagesController@page');

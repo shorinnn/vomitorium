@@ -2,8 +2,8 @@
 class Mailer extends Eloquent {
     
     public static function contact($data){
-        $return = Mail::send('emails.contact', $data, function($message){
-            $message->to(sys_settings('contact_email'), sys_settings('contact_name'))->subject('New Contact Message');
+        $return = Mail::send('emails.contact', $data, function($message) use ($data) {
+            $message->to(sys_settings('contact_email'), sys_settings('contact_name'))->subject( $data['contact_subject'] );
         });
         if($return==1) {
             $response['status'] = 'success';
@@ -31,4 +31,32 @@ class Mailer extends Eloquent {
             $message->to($user->email, "$user->first_name $user->last_name")->subject('New Comment');
         });
     }
+    
+    public static function program_purchased($data){
+        $text = "Hello $data[name] <br />Congratulations on purchasing ".$data['program']->name.".<br />Please sign in by going to ". action('UserController@login') ;
+        if( trim( sys_settings('purchase_email_content') ) != ''){
+            $text = str_replace('[CustomerName]', $data['name'], nl2br( sys_settings('purchase_email_content') ) );
+            $text = str_replace('[ProgramName]', $data['program']->name, $text );
+            $text = str_replace('[LoginLink]', action('UserController@login'), $text );
+        }
+        $data['text'] = $text;
+        $return = Mail::send('emails.program_purchased', $data, function($message) use ($data){
+            $message->to($data['email'], $data['name'])->subject( sys_settings('program_purchase_email_subject') );
+        });
+    }
+    
+    
+    public static function free_access_registration($data){
+        $text = "Hello $data[name] <br />Congratulations on registering for ".$data['program']->name.".<br />Please sign in by going to ". action('UserController@login') ;
+        if( trim( sys_settings('purchase_email_content') ) != ''){
+            $text = str_replace('[CustomerName]', $data['name'], nl2br( sys_settings('free_register_email_content') ) );
+            $text = str_replace('[ProgramName]', $data['program']->name, $text );
+            $text = str_replace('[LoginLink]', action('UserController@login'), $text );
+        }
+        $data['text'] = $text;
+        $return = Mail::send('emails.program_purchased', $data, function($message) use ($data){
+            $message->to($data['email'], $data['name'])->subject( sys_settings('free_register_email_subject') );
+        });
+    }
+    
 }
