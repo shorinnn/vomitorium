@@ -2661,8 +2661,18 @@ div.disabled{
     padding: 12px;
     padding-left: 27px !important;
     padding-right: 27px !important;
-    border: 1px solid #c5dce0;
+    border: 1px solid silver;
     color: #2585aa;
+    max-width: 1070px;
+    color:gray;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px !important;
+}
+
+.announcement-msg p{
+    color:rgb(90, 89, 89) !important;
+    
 }
 
 .add .row{

@@ -89,8 +89,7 @@ $next_lesson_btn = '';
                             {{ View::make('pages.lesson.remarks')->withRemarks($lesson_remarks) }}
                         </div>
 
-                        @if(!Auth::guest() && $lesson_remarks->count() > 0)
-                        asdadsa
+                        @if(!Auth::guest() && $lesson_remarks->count() >= 0)
                             @if(!admin())
                                 @if($lesson_remarks->count()>0)
                                     @if($remarks[$remarks->count()-1]->posted_by == 'user')
@@ -115,6 +114,27 @@ $next_lesson_btn = '';
                                     <button type='button' class='btn btn-default show-remark-reply' onclick='show_remark_reply()'>Reply</button>
                                     @endif
                                     <span class='clearfix clear_fix'></span>
+                                @else
+                                    <button style='display:none' type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
+                                    <div class='remark-post-area' style='display:none'>
+                                        <span id='remark-reply-area'></span>
+                                        <textarea id="remark_reply_top" class="white-textarea summernote_editor"></textarea>
+
+                                        <button type="button" class="btn btn-default2 message-send" 
+                                                data-rte='#remark_reply_top' data-container='.lesson-comments' 
+                                                    onclick="do_remark_reply(event, {{$lesson->id}})">Send</button>
+                                        <ul class="list-unstyled option-box-2">
+                                            <li><a href="#" data-toggle="tooltip" title="" data-input='attachment' 
+                                                   data-rte='#remark_reply_top' data-input='attachment'
+                                                   data-original-title="Attach" class="do-tooltip icon-2" onclick="attach(event)"></a></li>
+                                            <li><a href="#" data-toggle="tooltip" title="" data-original-title="Discard" data-target='#remark_reply_top' onclick="discard(event)" class="do-tooltip icon-3"></a></li>
+                                        </ul>
+                                    </div>
+                                    <br class='clearfix clear_fix' />
+                                    <button type='button' class='btn btn-default show-remark-reply' onclick='show_remark_reply()'>Send Query To Your Coach</button>
+                                    <span class='clearfix clear_fix'></span>
+                                
+                                    
                                 @endif
                             @else
                                 @if(Session::has('user_id'))

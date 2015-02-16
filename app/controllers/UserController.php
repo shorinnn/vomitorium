@@ -142,6 +142,14 @@ class UserController extends BaseController {
                 $_POST['email'] = Auth::user()->email;
                 $_POST['program'] = Program::find( Session::get('program_id') );
                 Mailer::free_access_registration($_POST);
+                DB::table('programs_users')->insert(
+                        array(
+                            'program_id' => $code->program_id,
+                            'subscription_id' => $code->payment_plan_id,
+                            'user_id' => Auth::user()->id,
+                            'start_date' => date('Y-m-d H:i:s')
+                            )
+                );
                 
                 return Redirect::to("/");
             }

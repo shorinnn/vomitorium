@@ -97,10 +97,12 @@
                             <li><a href="{{url('login')}}" class="login">Login</a></li>
                         @endif
 
-                        @if(Request::url() == url("register"))
-                            <li class="active"><a href="{{ url('register/'.sys_settings('custom_register_page_link') )}}" class="register">Register</a></li>
-                        @else
-                            <li><a href="{{ url('register/'.sys_settings('custom_register_page_link') ) }}" class="register">Register</a></li>
+                        @if( sys_settings('installation')!='31-1408525988')
+                            @if(Request::url() == url("register"))
+                                <li class="active"><a href="{{ url('register/'.sys_settings('custom_register_page_link') )}}" class="register">Register</a></li>
+                            @else
+                                <li><a href="{{ url('register/'.sys_settings('custom_register_page_link') ) }}" class="register">Register</a></li>
+                            @endif
                         @endif
                     @else
                     <ul class="nav nab-bar">

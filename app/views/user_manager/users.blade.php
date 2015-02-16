@@ -10,6 +10,7 @@
     <thead>
         <tr><th>User</th><th>First Name</th><th>Last Name</th><th>Email</th>
             <!--<th>Created at</th>-->
+            <th>Coaching | Group Conv.</th>
             <th>Payment Plans</th></tr>
     </thead>
     <tbody>
@@ -53,6 +54,21 @@
             </a>
         </td>
         <td>
+            @if($user->chat_permission(Session::get('program_id'), 'coach_conversations')==1)
+                <i class="glyphicon glyphicon-ok do-tooltip" title="Has Coach Conversations Permission"></i>
+            @else
+                <i class="glyphicon glyphicon-remove do-tooltip" title="Doesn't Have Coach Conversations Permission"></i>
+            @endif
+            
+            | 
+            
+            @if($user->chat_permission(Session::get('program_id'), 'group_conversations')==1)
+                <i class="glyphicon glyphicon-ok do-tooltip" title="Has Group Conversations Permission"></i>
+            @else
+                <i class="glyphicon glyphicon-remove do-tooltip" title="Doesn't have Group Conversations Permission"></i>
+            @endif
+        </td>
+        <td>
             <?php
                 $plans = DB::table('programs_users')->where('user_id', $user->id)->get();
                 foreach($plans as $p){
@@ -71,6 +87,7 @@
         <!--
         <td>{{$user->created_at}}</td>
         -->
+
  </tr>
         @endforeach
     </tbody>

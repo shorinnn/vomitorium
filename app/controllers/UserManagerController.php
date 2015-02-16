@@ -172,9 +172,12 @@ class UserManagerController extends BaseController {
         }
         else if(Input::get('type')=='send_code'){
             $code = new Code();
-            $program = Program::find(Input::get('program'));
+//            $program = Program::find(Input::get('program'));
+            $plan = PaymentPlan::find(Input::get('program'));
+            $program = $plan->program;
             $data['program_name'] = $program->name;
             $code->program_id = $program->id;
+            $code->payment_plan_id = $plan->id;
             do{
                 $code->code = Str::random();
             }
@@ -195,11 +198,14 @@ class UserManagerController extends BaseController {
             $response['callback'] = 'link_sent';
         }
         else{
+            $plan = PaymentPlan::find(Input::get('program'));
+            $program = $plan->program;
             $codes = array();
             $code_string = array();
             for($i=0; $i<Input::get('code_count');++$i){
                 $code = new Code();
-                $code->program_id = Input::get('program');
+                $code->program_id = $program->id;
+                $code->payment_plan_id = $plan->id;
                 do{
                     $code->code = Str::random();
                 }

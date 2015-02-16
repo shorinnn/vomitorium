@@ -431,7 +431,9 @@ class CourseController extends BaseController {
         if($admin!=null) $admin = $admin->admin_id;
         else{
             $lessons = Lesson::where('program_id', Session::get('program_id'))->lists('id');
-            $admin = Conversation::where('user_id', Auth::user()->id)->whereIn('lesson_id', $lessons)->first()->admin_id;
+            $admin = Conversation::where('user_id', Auth::user()->id)->whereIn('lesson_id', $lessons)->first();
+            if($admin==null) $admin = Auth::user()->coach(Session::get('program_id'))->id;
+            else $admin = $admin->admin_id;
         }
        
         $remark = new Conversation();

@@ -3,6 +3,7 @@
                     <input type="radio" name="type" value="link" id='register_manual' onclick='show_div(this)' /> <label for='register_manual'>Manual Add</label><br />
                     <input type="radio" name="type" value="link" id='register_codes' onclick='show_div(this)' /> <label for='register_codes'>Generate Access Passes</label><br />
                     <input type="radio" name="type" value="link" id='send_codes' onclick='show_div(this)' /> <label for='send_codes'>Send Access Pass (Email)</label><br />
+                    <!-- send registration link -->
                     <form id='register_link_div' 
                           data-bv-message =""
                           data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
@@ -63,6 +64,7 @@ Hey [FIRST_NAME] [LAST_NAME]
                         <button class='btn btn-default' data-submit='1'>Send</button>
                         <input type='hidden' name='type' value='link' />
                     </form>
+                    <!-- manual add -->
                     <form id='register_manual_div' 
                           data-bv-message =""
                           data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
@@ -153,6 +155,7 @@ Your password is [PASSWORD]
                         <button class='btn btn-default' data-submit='1'>Add</button>
                         <input type='hidden' name='type' value='manual' />
                     </form>
+                    <!-- generate access pass -->
                     <form id='register_codes_div' 
                           data-bv-message =""
                           data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
@@ -164,13 +167,22 @@ Your password is [PASSWORD]
                             <div class="col-lg-12">
                                 <label>Program</label>
                             <select name='program' class="form-control">
-                                     @foreach($programs as $p)
+                                     <!--@foreach($programs as $p)
                                         <option title="{{$p->name}}" value='{{$p->id}}'
                                         @if(Session::has('program_id') && Session::get('program_id')==$p->id)
                                         selected="selected"
                                         @endif
                                         >{{$p->name}}</option>
-                                    @endforeach
+                                    @endforeach -->
+                                     @if($plans->count()==0)
+                                        You have no payment plans created. <a href="{{url('payment_plans')}}">Create one</a>
+                                    @else
+                                        <!--<select name='payment_plan' class="form-control">-->
+                                            @foreach($plans as $p)
+                                                 <option title="{{$p->name}}" value='{{$p->id}}'>{{$p->program->name}} - {{$p->name}}</option>
+                                            @endforeach
+                                        <!--</select>-->
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -198,6 +210,7 @@ Your password is [PASSWORD]
                     </form>
                     <br class="clear_fix" />
             </div>
+        <!-- Email Codes -->
             <form id='send_codes_div' 
                           data-bv-message =""
                           data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
@@ -209,13 +222,16 @@ Your password is [PASSWORD]
                             <div class="col-lg-12 form-group">
                                 <label>Program</label>
                                 <select name='program' class="form-control">
-                                     @foreach($programs as $p)
+<!--                                     @foreach($programs as $p)
                                         <option title="{{$p->name}}" value='{{$p->id}}'
                                         @if(Session::has('program_id') && Session::get('program_id')==$p->id)
                                         selected="selected"
                                         @endif
                                         >{{$p->name}}</option>
-                                    @endforeach
+                                    @endforeach-->
+                                        @foreach($plans as $p)
+                                             <option title="{{$p->name}}" value='{{$p->id}}'>{{$p->program->name}} - {{$p->name}}</option>
+                                        @endforeach
                                 </select>
                             </div>
                         </div>
