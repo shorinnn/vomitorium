@@ -9,6 +9,7 @@
             <word>endif</word>
             <word>endiftarget</word>
             <word>stopfor</word>
+            <word>YesGroup</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

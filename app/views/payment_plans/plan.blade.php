@@ -11,6 +11,18 @@
          trial for {{currency_symbol($plan->currency)}} {{$plan->trial_cost}}
         @endif
     </td>
+    <td> @if($plan->allows_group_conversations)
+            Yes
+        @else
+            No
+        @endif
+    </td>
+    <td>
+        @if($plan->allows_coach_conversations)
+            Yes
+        @else
+            No
+        @endif</td>
     <td>{{$plan->clients()}}</td>
     <td>{{$plan->cancelled()}}</td>
     <td>

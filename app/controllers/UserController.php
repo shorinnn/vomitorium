@@ -132,7 +132,7 @@ class UserController extends BaseController {
                 $data['program_id'] = $code->program_id;
                 $data['user_id'] = $user->id;
                 $data['start_date'] = date('Y-m-d H:i:s');
-                DB::table('programs_users')->insert($data);
+//                DB::table('programs_users')->insert($data);
                 Session::set('program_id', $code->program_id);
                 Session::forget('accesspass');
                 Session::forget('payment_plan_id');
@@ -142,12 +142,15 @@ class UserController extends BaseController {
                 $_POST['email'] = Auth::user()->email;
                 $_POST['program'] = Program::find( Session::get('program_id') );
                 Mailer::free_access_registration($_POST);
+                $plan = PaymentPlan::find($code->payment_plan_id);
                 DB::table('programs_users')->insert(
                         array(
-                            'program_id' => $code->program_id,
-                            'subscription_id' => $code->payment_plan_id,
-                            'user_id' => Auth::user()->id,
-                            'start_date' => date('Y-m-d H:i:s')
+                                'program_id' => $code->program_id,
+                                'subscription_id' => $code->payment_plan_id,
+                                'user_id' => Auth::user()->id,
+                                'start_date' => date('Y-m-d H:i:s'),
+                                'group_conversations' => $plan->allows_group_conversations,
+                                'coach_conversations' => $plan->allows_coach_conversations
                             )
                 );
                 

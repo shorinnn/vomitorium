@@ -6,6 +6,14 @@
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/UserController.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/UserManagerController.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/user_manager/add_clients.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/config/app.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/filters.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/admin/dash/header.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/admin/dash/template_1.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PagesController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/admin/newest_clients.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Program.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/User.php</file>
         </group>
     </open-files>
 </project-private>

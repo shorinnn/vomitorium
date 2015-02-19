@@ -27,8 +27,8 @@
                </div>
            <table class='table table-striped table-bordered nodisplay'>
                 <thead>
-                    <tr><th colspan="5">Payment Plans <button class='btn btn-primary pull-right' onclick='show_plan_modal()'>Create New Payment Plan</button></th></tr>
-                    <tr><th>Name</th><th>Pricing</th><th>No. Clients</th><th>Cancelled</th><th></th></tr>
+                    <tr><th colspan="7">Payment Plans <button class='btn btn-primary pull-right' onclick='show_plan_modal()'>Create New Payment Plan</button></th></tr>
+                    <tr><th>Name</th><th>Pricing</th><th>Group Conversations</th><th>Coach Conversations</th><th>No. Clients</th><th>Cancelled</th><th></th></tr>
                 </thead>
                 <tbody>
                     
@@ -51,8 +51,8 @@
             <table class='table table-striped table-bordered'>
             @endif
                 <thead>
-                    <tr><th colspan="5">Payment Plans <button class='btn btn-primary pull-right' onclick='show_plan_modal()'>Create New Payment Plan</button></th></tr>
-                    <tr><th>Name</th><th>Pricing</th><th>No. Clients</th><th>Cancelled</th><th></th></tr>
+                    <tr><th colspan="7">Payment Plans <button class='btn btn-primary pull-right' onclick='show_plan_modal()'>Create New Payment Plan</button></th></tr>
+                    <tr><th>Name</th><th>Pricing</th><th>Group Conversations</th><th>Coach Conversations</th><th>No. Clients</th><th>Cancelled</th><th></th></tr>
                 </thead>
                 <tbody>
                     @foreach($plans as $p)
