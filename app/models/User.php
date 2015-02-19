@@ -362,6 +362,8 @@ class User extends ConfideUser {
              }
          }
         DB::table('remarks')->where('user_id', $this->id)->delete();
+        // delete program-users
+        DB::table('programs_users')->where('user_id', $this->id)->delete();
     }
     
     public function paying(){
