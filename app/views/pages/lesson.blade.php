@@ -138,7 +138,7 @@ $next_lesson_btn = '';
                                 @endif
                             @else
                                 @if(Session::has('user_id'))
-                                    @if($remarks[$remarks->count()-1]->posted_by == 'admin')
+                                    @if( $remarks->count() > 0 && $remarks[$remarks->count()-1]->posted_by == 'admin')
                                         <button type='button' class='btn btn-default' onclick='force_edit(".lesson-comments")'>Edit</button>
                                     @else
                                         <button style='display:none' type='button' class='btn btn-default force-edit-remark' onclick='force_edit(".lesson-comments")'>Edit</button>
