@@ -112,6 +112,7 @@ function next_lesson($lesson){
 }
 
 function previous_lesson($lesson){
+    if(Auth::guest()) return;
     $url = '';
     // see if any other lessons in current chapter
     if(Lesson::where('program_id',Session::get('program_id'))->where('published',1)->where('chapter_id', $lesson->chapter_id)->where('ord','<',$lesson->ord)->count() > 0){

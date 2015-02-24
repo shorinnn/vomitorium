@@ -58,12 +58,7 @@ $next_lesson_btn = '';
  
  
         <div class="containerdeprecated">
-            
-            
 
-            
-            @if($unread_remark && !admin())
-            @endif 
             
             <form id="lesson_form" action="{{Request::url()}}" method="post" novalidate>
                 
@@ -181,12 +176,14 @@ $next_lesson_btn = '';
                         @endif
                 @endif
                 <!-- / lesson remarks -->
+
             <?php
             $page_has_submit = false;
             $prev_block = '';
             $first_in_section = $lesson->blocks()->where('in_section', 1)->orderBy('ord','asc')->get();
             if($first_in_section->count()==0) $first_in_section = 99999;
             else $first_in_section = $first_in_section->first()->ord;
+
                 $page_has_scale = '';
                 // display blocks that are not included in sections first
                 foreach($lesson->blocks()->where('ord','<=', $first_in_section)->where('in_section',0)->orderBy('ord','ASC')->get() as $block){
@@ -275,6 +272,7 @@ $next_lesson_btn = '';
                         }
                     }
                 }?>
+
                 <div class='text-center top-pagination'></div>
                 <?php
                 // display blocks that are included in sections
@@ -697,7 +695,7 @@ $next_lesson_btn = '';
                 </div>
              @endif
         </div>
-    
+
    
         <!-- /.container -->
     </div>
