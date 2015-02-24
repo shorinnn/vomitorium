@@ -3291,3 +3291,17 @@ a.comment-reply:hover{
     font-weight: bold;
     text-decoration: underline;
 }
+
+.query-btn{
+    text-transform: capitalize;
+    font-size: 12px !important;
+    opacity: 0.7;
+     -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.query-btn:hover{
+    opacity:1;
+}
