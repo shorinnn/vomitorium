@@ -121,10 +121,10 @@
     $paypal = PaymentProcessor::where('name','Paypal')->first();
     $name = sys_settings('title')=='' ? sys_settings('domain') : sys_settings('title');
     ?>
-        It appears that your subscriptions have expired. Please select your plan: <br />
+        It appears that your subscription has expired. Please select your plan: <br />
         
         @foreach($plans as $p)
-            <div class='well col-lg-5'>
+            <div class='well col-lg-12'>
                 <h2 class='text-center'>{{$p->name}}</h2>
                 <p class='text-center' style='color:green'>{{currency_symbol($p->currency)}} {{$p->cost}}
                 
@@ -136,16 +136,35 @@
             <br />
             <br />
                 <center>
-                    @if($processor != null)
+                    @if($processor!=null)
+                        @if($paypal!=null)
+                            <div class="col-lg-6">
+                        @else
+                            <div>
+                        @endif
+                            {{View::make('payment_plans.stripe_code')->withPlan($p)->withName($name)->withProcessor($processor)->render()}}
+                        </div>
+                    @endif
+
+                    @if($paypal!=null)
+                        @if($processor!=null)
+                            <div class="col-lg-6">
+                        @else
+                            <div>
+                        @endif
+                            {{View::make('payment_plans.paypal_code')->withPlan($p)->withName($name)->withProcessor($paypal)->render()}}
+                        </div>
+                    @endif
+                    
+<!--                    @if($processor != null)
                         {{View::make('payment_plans.stripe_code')->withPlan($p)->withName($name)->withProcessor($processor)->render()}}
                         <br />
                     @endif
                     @if($paypal != null)
                         {{View::make('payment_plans.paypal_code')->withPlan($p)->withName($name)->withProcessor($paypal)->render()}}
-                    @endif
+                    @endif-->
                 </center>
             </div>
-        <div class='col-lg-1'></div>
         @endforeach
     @endif
 
