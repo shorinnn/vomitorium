@@ -68,7 +68,8 @@ class PagesController extends \BaseController {
                   $plan_id = DB::table('programs_users')->where('user_id', Auth::user()->id)
                           ->where('expires', '<', date('Y-m-d H:i:s') )
                           ->orderBy('expires','DESC')->limit(1)->first();
-                  $plans = PaymentPlan::where('id', $plan_id->subscription_id)->get();
+                  if($plan_id==null) $plans = PaymentPlan::get();
+                  else $plans = PaymentPlan::where('id', $plan_id->subscription_id)->get();
                   $expired = DB::table('programs_users')->where('user_id',Auth::user()->id)->count();
                   if($visited=='') $visited = array();
                   else $visited = json_decode($visited, true);
