@@ -16,12 +16,13 @@
         @endif
                 @if(!Session::has('trial'))
                     <h2 class='text-center'>{{$p->name}}</h2>
-                    <p class='text-center' style='color:green'>{{currency_symbol($p->currency)}} {{$p->cost}}
+                    <p class='text-center' style='color:green'>{{currency_symbol($p->currency)}}{{$p->cost}}
                     @if($p->type=='subscription')
                         for {{$p->subscription_duration}} 
                         {{singplural($p->subscription_duration, $p->subscription_duration_unit )}}
                         @if($p->trial_duration>0)
-                            <br />Including {{$p->trial_duration}} {{singplural(1,$p->trial_duration_unit)}} trial ({{currency_symbol($p->currency)}} {{$p->trial_cost}})
+                            <br />Including {{$p->trial_duration}} {{singplural(1,$p->trial_duration_unit)}} trial 
+                            ({{currency_symbol($p->currency)}}{{$p->trial_cost}})
                         @endif
                     @endif
                     </p>
