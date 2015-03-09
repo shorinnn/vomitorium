@@ -1,4 +1,4 @@
-<tr>
+<tr class='list-row list-row-{{$plan->id}}'>
     <td>{{$plan->name}}</td>
     <td>{{currency_symbol($plan->currency)}} {{$plan->cost}}
         @if($plan->type=='subscription')
@@ -46,5 +46,9 @@
         <button class='btn  btn-primary btn-sm' 
                 data-code='{{{$trial_code}}}' onclick='get_buy_button(event)'>Get Trial Link</button>
         @endif
+    </td>
+    <td>
+        <button data-toggle="tooltip" type="button" class="do-tooltip btn btn-danger" 
+                onclick="del({{$plan->id}},'{{url("payment_plans/delete_plan/$plan->id")}}')" data-original-title="Delete Payment Plan">Delete</button>
     </td>
 </tr>

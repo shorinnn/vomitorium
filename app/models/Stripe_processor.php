@@ -85,6 +85,8 @@ class Stripe_processor extends Ardent {
                 Session::forget('trial');
                 
                 $_POST['name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
+                $_POST['first_name'] = Auth::user()->first_name;
+                $_POST['last_name'] = Auth::user()->last_name;
                 $_POST['email'] = Auth::user()->email;
                 $_POST['program'] = Program::find( Session::get('program_id') );
                 Mailer::program_purchased($_POST);

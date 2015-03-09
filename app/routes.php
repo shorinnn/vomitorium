@@ -141,6 +141,7 @@ if (!Session::has('subdomain')) {
         Route::post('programs/update', 'ProgramsController@update');
         Route::resource('programs', 'ProgramsController');
         Route::resource('lesson_alerts', 'LessonAlertsController');
+        Route::delete('payment_plans/delete_plan/{id}', 'PaymentPlansController@delete_plan');
         Route::post('payment_plans/update_processor', 'PaymentPlansController@update_processor');
         Route::delete('payment_plans/delete_processor/{id}', 'PaymentPlansController@delete_processor');
         Route::post('payment_plans/processor', 'PaymentPlansController@processor');

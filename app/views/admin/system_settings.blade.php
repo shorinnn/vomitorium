@@ -37,7 +37,7 @@
                     </td><td><a href='#' data-url='{{url('system_settings')}}' data-type='textarea' data-mode='inline' class='editable' data-pk='1' id='new_comment_email'>{{sys_settings('new_comment_email')}}</a></td></tr>
                 <tr><td>Purchased Program Email<br />
                         <p class='alert alert-info'>
-                            Available tags: [CustomerName], [ProgramName], [LoginLink]
+                            Available tags: [CustomerFirstName], [CustomerLastName], [ProgramName], [LoginLink]
                         </p>
                     </td><td><a href='#' data-url='{{url('system_settings')}}' data-type='textarea' data-mode='inline' 
                                 class='editable' data-pk='1' id='purchase_email_content'>{{sys_settings('purchase_email_content')}}</a></td></tr>
@@ -45,7 +45,7 @@
                 
                 <tr><td>Free Program Register Email<br />
                         <p class='alert alert-info'>
-                            Available tags: [CustomerName], [ProgramName], [LoginLink]
+                            Available tags: [CustomerFirstName], [CustomerLastName], [ProgramName], [LoginLink]
                         </p>
                     </td><td><a href='#' data-url='{{url('system_settings')}}' data-type='textarea' data-mode='inline' 
                                 class='editable' data-pk='1' id='free_register_email_content'>{{sys_settings('free_register_email_content')}}</a></td></tr>

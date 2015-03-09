@@ -84,6 +84,12 @@ class PaymentPlansController extends BaseController {
         if($id==Session::get('program_id')) Session::forget('program_id');
         return json_encode(array('status' => 'success', 'text' => 'Program Deleted'));
     }
+    
+    function delete_plan($id){
+        DB::table('payment_plans')->where('id', $id)->delete();
+        DB::table('programs_users')->where('subscription_id', $id)->delete();
+        return json_encode(array('status' => 'success', 'text' => 'Payment Plan Deleted'));
+    }
    
     
     

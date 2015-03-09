@@ -36,6 +36,7 @@ class Program extends Ardent {
              }
          }
          
+         DB::table('payment_plans')->where('program_id', $this->id)->delete();
          DB::table('programs_users')->where('program_id', $this->id)->delete();
       }
       

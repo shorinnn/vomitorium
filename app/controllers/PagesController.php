@@ -191,7 +191,8 @@ class PagesController extends \BaseController {
             $meta['header_img_text'] = 'Purchase Complete';
             $plans = PaymentPlan::where('program_id',$custom['p'])->get();
             
-            $_POST['name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
+            $_POST['first_name'] = Auth::user()->first_name;
+            $_POST['last_name'] = Auth::user()->last_name;
             $_POST['email'] = Auth::user()->email;
             $_POST['program'] = Program::find( Session::get('program_id') );
             Mailer::program_purchased($_POST);

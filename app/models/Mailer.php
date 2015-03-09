@@ -33,9 +33,12 @@ class Mailer extends Eloquent {
     }
     
     public static function program_purchased($data){
+        $data['name'] = $data['first_name'].' '.$data['last_name'] ;
         $text = "Hello $data[name] <br />Congratulations on purchasing ".$data['program']->name.".<br />Please sign in by going to ". action('UserController@login') ;
         if( trim( sys_settings('purchase_email_content') ) != ''){
-            $text = str_replace('[CustomerName]', $data['name'], nl2br( sys_settings('purchase_email_content') ) );
+            $text = str_replace('[CustomerName]', $data['first_name'].' '.$data['last_name'] , nl2br( sys_settings('free_register_email_content') ) );
+            $text = str_replace('[CustomerFirstName]', $data['first_name'], $text );
+            $text = str_replace('[CustomerLastName]', $data['last_name'], $text );
             $text = str_replace('[ProgramName]', $data['program']->name, $text );
             $text = str_replace('[LoginLink]', action('UserController@login'), $text );
         }
@@ -47,9 +50,12 @@ class Mailer extends Eloquent {
     
     
     public static function free_access_registration($data){
+        $data['name'] = $data['first_name'].' '.$data['last_name'];
         $text = "Hello $data[name] <br />Congratulations on registering for ".$data['program']->name.".<br />Please sign in by going to ". action('UserController@login') ;
         if( trim( sys_settings('purchase_email_content') ) != ''){
-            $text = str_replace('[CustomerName]', $data['name'], nl2br( sys_settings('free_register_email_content') ) );
+            $text = str_replace('[CustomerName]', $data['first_name'].' '.$data['last_name'] , nl2br( sys_settings('free_register_email_content') ) );
+            $text = str_replace('[CustomerFirstName]', $data['first_name'], $text );
+            $text = str_replace('[CustomerLastName]', $data['last_name'], $text );
             $text = str_replace('[ProgramName]', $data['program']->name, $text );
             $text = str_replace('[LoginLink]', action('UserController@login'), $text );
         }
