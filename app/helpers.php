@@ -187,7 +187,11 @@ function parse_tags($text, $logo='', $report_title=''){
     if(Auth::guest()) $user_id = 0;
     else{
         $user_id = (admin() && Session::has('user_id')) ? Session::get('user_id') : Auth::user()->id;
-        $user_id = Auth::user()->id;
+        if(admin()){
+            if(Input::has('user')) $user_id = Input::get('user');
+            else $user_id = Auth::user()->id;
+        }
+        else $user_id = Auth::user()->id;
     }
     
     preg_match_all("/\[(.*?)\]/", $text, $matches, PREG_PATTERN_ORDER);
@@ -276,7 +280,7 @@ function parse_tags($text, $logo='', $report_title=''){
                         $str = isset($arr[$row][$col]) ? $arr[$row][$col] : '';
                         break;
                     case 'Open Ended': 
-                        $str = $answer->answer;
+                        $str = nl2br( $answer->answer );
                         break;
                     
                     case 'Skill Select': 

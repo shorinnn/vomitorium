@@ -63,6 +63,18 @@
 <center>
     <button id='print_btn' onclick="print_report({{$report->id}})">Print</button>
     <button id='download_btn' onclick="download_report({{$report->id}})">Download</button>
+    @if(admin())
+        <select onchange='view_report_for(this)'>
+            <option value='0'>View Report For User...</option>
+            @foreach(User::all() as $user)
+                <option value='{{$user->id}}'
+                        @if($user->id == Input::get('user'))
+                            selected="selected"
+                        @endif
+                        >{{$user->first_name}} ( {{$user->last_name}} {{$user->email}} )</option>
+            @endforeach
+        </select>
+    @endif
 </center>
 <div id="the-print-content" style="background-color:white; display:inline-block">
 {{$content}}
@@ -107,5 +119,12 @@ function print_report(id){
             });
         }
     });
+}
+
+function view_report_for(dropdown){
+   val = $(dropdown).val();
+   if(val>0){
+       window.location = 'strategy-plan?user='+val;
+   }
 }
 </script>
