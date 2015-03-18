@@ -305,7 +305,8 @@ class Lesson extends Ardent {
           }
           $ids = $blocks->lists('id');
           if(count($ids)==0) return 100;
-          $answered = Block_answer::whereIn('block_id', $ids)->where('user_id', $user_id)->whereNotNull('answer')->whereRaw('LENGTH(answer) > 0')->count();
+          $answered = Block_answer::whereIn('block_id', $ids)->where('user_id', $user_id)->whereNotNull('answer')->count();
+                  //->whereRaw('LENGTH(answer) > 0')->count();
           return ceil($answered * 100 / $total);
           //return $answered->count();
       }

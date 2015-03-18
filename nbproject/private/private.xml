@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/ReportsController.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PagesController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/user_dash.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/payment_plans/payment.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Stripe_processor.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/payment_plans/stripe_code.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/reports/show.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/helpers.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/custom.js</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/admin/reports.js</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/config/app.php</file>
             <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/filters.php</file>
         </group>
