@@ -821,3 +821,10 @@ label.form-label {
 .scale-holder{
     clear:both;
 }
+
+p.play, p.pause, p.loading, p.error{
+    margin:0 !important;
+}
+.audiojs .play-pause{
+    width: 36px;
+}

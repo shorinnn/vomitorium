@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    audiojs.events.ready(function() {
+        var as = audiojs.createAll();
+      });
     //go top
     $(document).ready(function() {
         var offset = 220;

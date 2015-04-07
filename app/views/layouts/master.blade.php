@@ -253,6 +253,7 @@
     {{HTML::script('../assets/js/custom.js')}}
     {{HTML::script('../assets/js/conversations.js')}}
     {{HTML::script('../assets/js/payment_plans.js')}}
+    {{HTML::script('../assets/js/audiojs/audio.min.js')}}
     <script src="//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.js"></script>
      @if(isset($meta)) 
         {{extra_javascripts($meta)}}
