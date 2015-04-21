@@ -15,7 +15,7 @@ class LessonsController extends BaseController {
 //           }
            $this->beforeFilter('admin');
            $this->beforeFilter('program', array('except'=>array('get_answers')));
-           $this->program = Program::find(Session::get('program_id'));           
+           $this->program = Program::find(Session::get('program_id'));      
        }
 
 	/**
@@ -27,7 +27,7 @@ class LessonsController extends BaseController {
 	{
             $meta['header_img_text'] = $meta['pageTitle'] = 'Course Editor';
             $lessons = Lesson::where('program_id',$this->program->id)->where('chapter_id',0)->orderBy('chapter_ord','asc')->orderBy('ord','asc')->paginate(15);
-            if($lessons->count()==0) return  Redirect::to('modules');
+//            if($lessons->count()==0) return  Redirect::to('modules');
             $data['chapters'] = editable_json( Chapter::where('program_id', Session::get('program_id'))->orderBy('ord','asc')->get(array('id','title')), 'title' , array('0' => 'None'));
             $data['lessons'] = $lessons;
             $meta['javascripts'] = array('../assets/js/admin/lessons.js');
