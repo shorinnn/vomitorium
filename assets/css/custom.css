@@ -1245,9 +1245,39 @@ h3{
     text-align: left;
     margin-bottom: 15px !important;
     font-family: "OSans" !important;
-    width:850px;
+    /*width:850px;*/
+    width:95%;
     float:right
 }
+ /* Custom, iPhone Retina */ 
+    @media only screen and (min-width : 320px) {
+        .block_div h2 {
+            width:85%;
+        }
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (min-width : 480px) {
+         .block_div h2 {
+            width:85%;
+        }
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+         .block_div h2 {
+                width:85%;
+            }
+    }
+    
+     /* Medium Devices, Desktops */
+    @media only screen and (min-width : 992px) {
+         .block_div h2 {
+                        width:90%;
+                    }
+    }
+
+
 
 .purple{
     color: #6e469b;
