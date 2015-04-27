@@ -59,9 +59,6 @@
         margin: 0px auto;
         cursor: pointer;
     }
-        *{
-        font-size:101% !important;
-    }
 </style>
 <center>
     <button id='print_btn' onclick="print_report({{$report->id}})">Print</button>
