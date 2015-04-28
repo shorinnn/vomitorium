@@ -59,6 +59,26 @@
         margin: 0px auto;
         cursor: pointer;
     }
+    
+    #myModal{
+        height:100%;
+        width:100%;
+        position: fixed;
+        font-size: 50px;
+        background-color:rgba(0, 0, 0, 0.8);
+        color:white;
+        z-index: 10000000;
+        top:0;
+        left:0;
+        
+    }
+    
+    #myModal h1{
+        background-color:black;
+        text-indent: 200px;
+        margin-top: 200px;
+        padding:50px;
+    }
 </style>
 <center>
     <button id='print_btn' onclick="print_report({{$report->id}})">Print</button>
@@ -87,9 +107,21 @@
 {{HTML::script('assets/js/jquery.min.js')}}
 {{HTML::script('assets/js/html2canvas.js')}}
 <script>
+    
+    function showModal(){
+        $('body').append("<div id='myModal'><h1>Please Wait <img src='../assets/img/ajax-loader_2.gif'/></h1></div>");
+    }
 function download_report(id){
+    showModal();
     $('#download_btn').html( 'Please wait...');
     $('#download_btn').attr('disabled','disabled');
+    
+    $('#the-print-content').css({'height':'3508px', 'width':'4961px'});
+    $('.main-box').css('height','100% !important');
+    $('.container-fluid').css('height', '95%');
+    $('.container-fluid > .row:nth-child(even)').css('height', '90%');
+    $('.main-box').attr('style', 'height:100% !important');
+    $('div').css( 'font-size','108%' );
     html2canvas($('#the-print-content'), {
         onrendered: function(canvas)
         {
@@ -99,10 +131,56 @@ function download_report(id){
                 $('#download_btn').html('Download');
                  $('#download_btn').removeAttr('disabled');
                 window.location = APP_URL+'/reports/print/'+file;
+                
+                $('#the-print-content').css({'height':'initial', 'width':'initial'});
+                $('.main-box').css('height','initial !important');
+                $('.container-fluid').css('height', 'initial');
+                $('.container-fluid > .row:nth-child(even)').css('height', 'initial');
+                $('.main-box').removeAttr('style');
+                $('div').css( 'font-size','100%' );
+                $('#myModal').remove();
             });
-        }
+        },
+        height:3508 ,
+        width:4961 
     });
 }
+//function print_report(id){
+//    showModal();
+//    $('#download_btn').html( 'Please wait...');
+//    $('#download_btn').attr('disabled','disabled');
+//    
+//    $('#the-print-content').css({'height':'3508px', 'width':'4961px'});
+//    $('.main-box').css('height','100% !important');
+//    $('.container-fluid').css('height', '95%');
+//    $('.container-fluid > .row:nth-child(even)').css('height', '90%');
+//    $('.main-box').attr('style', 'height:100% !important');
+//    $('div').css( 'font-size','108%' );
+//    w = window.open(APP_URL+'/reports/print_loading')
+//    html2canvas($('#the-print-content'), {
+//        onrendered: function(canvas)
+//        {
+//            var img = canvas.toDataURL();
+//            $.post(APP_URL+'/reports/save_report_image', {data: img, id:id}, function(file) {
+//                console.log(file);
+//                $('#download_btn').html('Download');
+//                 $('#download_btn').removeAttr('disabled');
+////                window.location = APP_URL+'/reports/print/'+file;
+//                
+//                $('#the-print-content').css({'height':'initial', 'width':'initial'});
+//                $('.main-box').css('height','initial !important');
+//                $('.container-fluid').css('height', 'initial');
+//                $('.container-fluid > .row:nth-child(even)').css('height', 'initial');
+//                $('.main-box').removeAttr('style');
+//                $('div').css( 'font-size','100%' );
+//                $('#myModal').remove();
+//                w.location = APP_URL+'/reports/print/'+file+'/render';
+//            });
+//        },
+//        height:3508 ,
+//        width:4961 
+//    });
+//}
 function print_report(id){
     $('#print_btn').html( 'Please wait...');
     $('#print_btn').attr('disabled','disabled');
@@ -128,3 +206,6 @@ function view_report_for(dropdown){
    }
 }
 </script>
+<div style="opacity: 0">
+<img src="../assets/img/ajax-loader_2.gif" />
+</div>
