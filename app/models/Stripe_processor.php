@@ -10,7 +10,7 @@ class Stripe_processor extends Ardent {
             $token = $_POST['stripeToken'];
             
             // Create a Customer
-            if(Auth::user()->stripe_customer_id ==''){
+            if( trim( Auth::user()->stripe_customer_id)  ==''){
                 try{
                     $customer = Stripe_Customer::create(array(
                       "card" => $token,
@@ -28,18 +28,18 @@ class Stripe_processor extends Ardent {
             else{
                 // see if this card has been used before
                 $customer = Stripe_Customer::retrieve(Auth::user()->stripe_customer_id);
-                $card = $customer->cards->create(array("card" => $token));
+                $card = $customer->sources->create(array("card" => $token));
                 $db_card = Stripe_transaction::where('user_id', Auth::user()->id)->where('card_fingerprint', $card->fingerprint)->get();
                 // it's new, add it to the customer
                 if($db_card->count()==0){
-                    $customer->default_card = $card ;
+                    $customer->default_source = $card ;
                     $customer->save();
                 }
                 // used before, delete this duplicate and use the existing one
                 else{
-                    $customer->cards->retrieve($card->id)->delete();
-                    $card = $customer->cards->retrieve($db_card->first()->card_id);
-                    $customer->default_card = $card ;
+                    $customer->sources->retrieve($card->id)->delete();
+                    $card = $customer->sources->retrieve($db_card->first()->card_id);
+                    $customer->default_source = $card ;
                     $customer->save();
                 }
                  
@@ -64,8 +64,8 @@ class Stripe_processor extends Ardent {
                 $t = new Stripe_transaction();
                 $t->user_id = Auth::user()->id;
                 $t->transaction_id = $charge->id;
-                $t->card_id = $charge->card->id;
-                $t->card_fingerprint = $charge->card->fingerprint;
+                $t->card_id = $charge->source->id;
+                $t->card_fingerprint = $charge->source->fingerprint;
                 $t->payment_plan_id = $plan->id;
                 $t->save();
                 Auth::user()->updateUniques();
@@ -143,8 +143,8 @@ class Stripe_processor extends Ardent {
                         $t = new Stripe_transaction();
                         $t->user_id = Auth::user()->id;
                         $t->transaction_id = $charge->id;
-                        $t->card_id = $charge->card->id;
-                        $t->card_fingerprint = $charge->card->fingerprint;
+                        $t->card_id = $charge->source->id;
+                        $t->card_fingerprint = $charge->source->fingerprint;
                         $t->payment_plan_id = $plan->id;
                         $t->save();
                     }
@@ -228,8 +228,8 @@ class Stripe_processor extends Ardent {
                     $t = new Stripe_transaction();
                     $t->user_id = $user->id;
                     $t->transaction_id = $charge->id;
-                    $t->card_id = $charge->card->id;
-                    $t->card_fingerprint = $charge->card->fingerprint;
+                    $t->card_id = $charge->source->id;
+                    $t->card_fingerprint = $charge->source->fingerprint;
                     $t->payment_plan_id = $plan_id;
                     $t->save();
                 }
