@@ -81,7 +81,9 @@
     }
 </style>
 <center>
-    <button id='print_btn' onclick="print_report({{$report->id}})">Print</button>
+    @if(sys_settings('installation') != '31-1408525988')
+        <button id='print_btn' onclick="print_report({{$report->id}})">Print</button>
+    @endif
     <button id='download_btn' onclick="download_report({{$report->id}})">Download</button>
     @if(admin())
         <select onchange='view_report_for(this)'>
