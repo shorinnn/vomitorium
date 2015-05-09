@@ -82,7 +82,7 @@ class CourseController extends BaseController {
         }
         
         $this->meta['pageTitle'] = $lesson->title;
-        $this->meta['pageTitle'] = $lesson->program->name.' - '.$lesson->chapter->title.' - '.$lesson->title;
+        $this->meta['pageTitle'] = $lesson->chapter_id >0 ? $lesson->program->name.' - '.$lesson->chapter->title.' - '.$lesson->title : $lesson->program->name.' - '.$lesson->title;
         $this->meta['pageKeywords'] = $lesson->meta_keywords;
         $this->meta['pageDescription'] = $lesson->meta_description;
         $this->meta['header_img_text'] = $lesson->chapter_id >0 ? $lesson->chapter->title : $lesson->title;
