@@ -151,7 +151,7 @@ class PagesController extends \BaseController {
         
         public function print_report($file, $render=false){
            if($render=='render') return  View::make("reports.print")->withFile($file);
-           return Response::download(base_path()."/assets/uploads/reports/$file");
+           return Response::download( base_path()."/assets/uploads/reports/$file" );
         }
         public function print_loading(){
             return  "<br /><br /><br /><br /><center>".HTML::image('assets/img/ajax-loader.gif')."<h1>Generating Report - please wait...</h3></center>";

@@ -124,6 +124,7 @@ function download_report(id){
     $('.container-fluid > .row:nth-child(even)').css('height', '90%');
     $('.main-box').attr('style', 'height:100% !important');
     $('div').css( 'font-size','108%' );
+    equalizeBoxes();
     html2canvas($('#the-print-content'), {
         onrendered: function(canvas)
         {
@@ -133,7 +134,7 @@ function download_report(id){
                 $('#download_btn').html('Download');
                  $('#download_btn').removeAttr('disabled');
                 window.location = APP_URL+'/reports/print/'+file;
-                
+
                 $('#the-print-content').css({'height':'initial', 'width':'initial'});
                 $('.main-box').css('height','initial !important');
                 $('.container-fluid').css('height', 'initial');
@@ -141,6 +142,9 @@ function download_report(id){
                 $('.main-box').removeAttr('style');
                 $('div').css( 'font-size','100%' );
                 $('#myModal').remove();
+                setTimeout(function(){
+                    window.location = window.location.href;
+                },1000)
             });
         },
         height:3508 ,
@@ -206,6 +210,42 @@ function view_report_for(dropdown){
    if(val>0){
        window.location = 'strategy-plan?user='+val;
    }
+}
+
+function equalizeBoxes(){
+    max = 0;
+    $('.main-box').each(function(){
+        if( $(this).height() > max) max = $(this).height();
+    });
+    padding = 20;// $('.box-heading').height() + 10;
+    defaultMaxHeight =  max;//$('.main-box').height();
+    lastVal = 0;
+    $('.main-box').each(function(){
+        maxHeight = max;
+        currentHeight = 0;
+        $(this).find('.box-content .box').each(function(){
+           currentHeight += $(this).height(); 
+        });
+        while( currentHeight < maxHeight){
+            $(this).find('.box-content .box').each(function(){
+               $(this).height( $(this).height() + 5); 
+               $(this).attr('data-remove-style', 1);
+            });
+            currentHeight = 0;
+            
+            $(this).find('.box-content .box').each(function(){
+               currentHeight += $(this).height(); 
+            });
+            currentHeight += padding * $(this).find('.box-content .box').length;
+        }
+        if(lastVal == 0 ){
+            lastVal = $(this).find('.box-content .box').last().offset().top + $(this).find('.box-content .box').last().height();
+        }
+        else{
+            dif = lastVal - ( $(this).find('.box-content .box').last().offset().top + $(this).find('.box-content .box').last().height() );
+            $(this).find('.box-content .box').last().height( $(this).find('.box-content .box').last().height() + dif);
+        }
+    });
 }
 </script>
 <div style="opacity: 0">
