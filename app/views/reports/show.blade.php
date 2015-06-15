@@ -120,11 +120,13 @@ function download_report(id){
     $('#download_btn').attr('disabled','disabled');
     
     $('#the-print-content').css({'height':'3508px', 'width':'4961px'});
+    
     $('.main-box').css('height','100% !important');
     $('.container-fluid').css('height', '95%');
     $('.container-fluid > .row:nth-child(even)').css('height', '90%');
     $('.main-box').attr('style', 'height:100% !important');
     $('div').css( 'font-size','108%' );
+    $('.top-3-row').find('.col-xs-4 .box').css('min-height','300px');
     equalizeBoxes();
 
     w = window.open();
@@ -229,11 +231,13 @@ function print_report(id){
         }
     });
 }
+var report_segment = "{{$report->slug}}";
 
 function view_report_for(dropdown){
    val = $(dropdown).val();
    if(val>0){
-       window.location = 'strategy-plan?user='+val;
+//       window.location = 'strategy-plan?user='+val;
+       window.location = report_segment+'?user='+val;
    }
 }
 
