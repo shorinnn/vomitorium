@@ -95,10 +95,13 @@ if (!Session::has('subdomain')) {
         Route::post( 'inbox',          'PMController@store');
         Route::get( 'change_style',          'PagesController@change_style');
         Route::post( 'reports/save_report_image',          'PagesController@save_report_image');
-        Route::get( 'reports/print/{file}',          'PagesController@print_report');
+        Route::get( 'reports/pre-print',          'PagesController@pre_print_report');
+        Route::get( 'reports/print/{file}/{render}/{token}',          'PagesController@print_report');
         Route::get( 'reports/print/{file}/{render}',          'PagesController@print_report');
+        Route::get( 'reports/print/{file}',          'PagesController@print_report');
         Route::get( 'reports/print_loading',          'PagesController@print_loading');
         Route::get( 'reports/{slug}',          'PagesController@reports');
+        Route::get( 'download-cookie',          'PagesController@downloadCookie');
         Route::get( 'conversation/{lesson_id}',          'CourseController@conversation');
         Route::get( 'conversation/{lesson_id}/{user_id}',          'CourseController@conversation');
 

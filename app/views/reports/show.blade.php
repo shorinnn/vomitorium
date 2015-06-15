@@ -108,6 +108,7 @@
 {{HTML::script('jsconfig')}}
 {{HTML::script('assets/js/jquery.min.js')}}
 {{HTML::script('assets/js/html2canvas.js')}}
+{{HTML::script('assets/js/jquery.cookie.js')}}
 <script>
     
     function showModal(){
@@ -125,15 +126,23 @@ function download_report(id){
     $('.main-box').attr('style', 'height:100% !important');
     $('div').css( 'font-size','108%' );
     equalizeBoxes();
+
+    w = window.open();
+    w.location = APP_URL+'/reports/pre-print/';
     html2canvas($('#the-print-content'), {
         onrendered: function(canvas)
         {
             var img = canvas.toDataURL();
+            var token = new Date().getTime(); //use the current timestamp as the token value
             $.post(APP_URL+'/reports/save_report_image', {data: img, id:id}, function(file) {
                 console.log(file);
                 $('#download_btn').html('Download');
-                 $('#download_btn').removeAttr('disabled');
-                window.location = APP_URL+'/reports/print/'+file;
+                $('#download_btn').removeAttr('disabled');
+                loc = APP_URL+'/reports/print/'+file;
+                
+                w.location = loc;
+                console.log('LOCATION '+loc);
+//                window.location = APP_URL+'/reports/print/'+file;
 
                 $('#the-print-content').css({'height':'initial', 'width':'initial'});
                 $('.main-box').css('height','initial !important');
@@ -142,9 +151,25 @@ function download_report(id){
                 $('.main-box').removeAttr('style');
                 $('div').css( 'font-size','100%' );
                 $('#myModal').remove();
-                setTimeout(function(){
-                    window.location = window.location.href;
-                },1000)
+//                setTimeout(function(){
+//                    window.location = window.location.href;
+//                },1000)
+                fileDownloadCheckTimer = window.setInterval(function () {
+//                      var cookieValue = $.cookie('fileDownloadToken');
+//                      if (cookieValue == token){
+//                          alert('COOKIE VAL IS '+cookieValue);
+//                           window.clearInterval(fileDownloadCheckTimer);
+//                           window.location = window.location.href;
+//                       }
+                    $.get(APP_URL+'/download-cookie', function(result){
+                          if(result==1){
+                            window.clearInterval(fileDownloadCheckTimer);
+                            window.location = window.location.href;
+                            w.close();
+                          }
+                          
+                      });
+                    }, 1000);
             });
         },
         height:3508 ,

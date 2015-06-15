@@ -119,6 +119,7 @@ class PagesController extends \BaseController {
         }
         
         public function jsconfig(){
+//            return View::make('pages.jsconfig');
             return Response::make(View::make('pages.jsconfig'), 200, array('Content-Type' => 'application/javascript'));
         }
         
@@ -132,10 +133,17 @@ class PagesController extends \BaseController {
         }
         
         public function reports($slug){
+            
             $report = Report::where('slug', $slug)->first();
             if($report==null) return "Report unavailable";
             $content = parse_tags($report->content, null, $report->title);
             return  View::make("reports.show")->withContent($content)->withReport($report);
+        }
+        
+        public function downloadCookie(){
+            $cookie = Cookie::get('fileDownloadToken'); 
+            Cookie::queue('fileDownloadToken', 0, 0);
+            return $cookie;
         }
         
         public function save_report_image(){
@@ -149,7 +157,12 @@ class PagesController extends \BaseController {
             return $file;
         }
         
-        public function print_report($file, $render=false){
+        public function pre_print_report($file = '', $render = '', $token =''){
+            return 'Generating report - please wait... (this window will auto-close on completion)';
+        }
+        
+        public function print_report($file, $render=false, $token = ''){
+           $cookie = Cookie::queue('fileDownloadToken', 1, 1);
            if($render=='render') return  View::make("reports.print")->withFile($file);
            return Response::download( base_path()."/assets/uploads/reports/$file" );
         }

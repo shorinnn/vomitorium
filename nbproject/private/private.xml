@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/config/app.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/filters.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/CourseController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/routes.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PagesController.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/reports/show.blade.php</file>
         </group>
     </open-files>
 </project-private>
