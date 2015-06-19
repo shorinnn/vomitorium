@@ -178,6 +178,8 @@ function download_report(id){
         width:4961 
     });
 }
+
+
 //function print_report(id){
 //    showModal();
 //    $('#download_btn').html( 'Please wait...');
@@ -257,8 +259,11 @@ function equalizeBoxes(){
         });
         while( currentHeight < maxHeight){
             $(this).find('.box-content .box').each(function(){
-               $(this).height( $(this).height() + 5); 
-               $(this).attr('data-remove-style', 1);
+               if( !$(this).hasClass('row-table') ){
+                   $(this).height( $(this).height() + 5); 
+                   $(this).attr('data-remove-style', 1);
+               }
+              
             });
             currentHeight = 0;
             
@@ -275,6 +280,7 @@ function equalizeBoxes(){
             $(this).find('.box-content .box').last().height( $(this).find('.box-content .box').last().height() + dif);
         }
     });
+//    $('.row-table').css('height','auto');
 }
 </script>
 <div style="opacity: 0">
