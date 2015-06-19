@@ -45,6 +45,7 @@ class Stripe_processor extends Ardent {
                  
             }
             $plan = PaymentPlan::find($_POST['plan_id']);
+
             if($plan->type=='subscription' && !Session::has('trial')) return self::subscribe($customer, $plan, $meta);
             else return self::charge($customer, $plan, $meta);
             
@@ -52,11 +53,11 @@ class Stripe_processor extends Ardent {
         }
         
         public static function charge($customer, $plan, $meta){
-            // Charge the Customer instead of the card
             try{
                 $charge = Stripe_Charge::create(array(
                   "amount" => $plan->cost*100, # amount in cents, again
-                  "currency" => "usd",
+//                  "currency" => "usd",
+                  "currency" => $plan->currency,
                   "customer" => $customer->id
                     )
                 );
@@ -111,7 +112,8 @@ class Stripe_processor extends Ardent {
                     "interval" => singplural(1, $plan->subscription_duration_unit),
                     "interval_count" => $plan->subscription_duration,
                     "name" => $plan->name,
-                    "currency" => "usd",
+//                    "currency" => "usd",
+                    "currency" => $plan->currency,
                     "id" => $plan->id);
                 
                 if($plan->type=='subscription' && $plan->trial_duration>0){
@@ -135,7 +137,8 @@ class Stripe_processor extends Ardent {
                     try{
                          $charge = Stripe_Charge::create(array(
                           "amount" => $plan->trial_cost*100, # amount in cents, again
-                          "currency" => "usd",
+//                          "currency" => "usd",
+                          "currency" => $plan->currency,
                           "customer" => $customer->id
                             )
                         );
@@ -174,6 +177,8 @@ class Stripe_processor extends Ardent {
                 Session::forget('trial');
                 
                 $_POST['name'] = Auth::user()->first_name.' '.Auth::user()->last_name;
+                $_POST['first_name'] = Auth::user()->first_name;
+                $_POST['last_name'] = Auth::user()->last_name;
                 $_POST['email'] = Auth::user()->email;
                 $_POST['program'] = Program::find( Session::get('program_id') );
                 Mailer::program_purchased($_POST);

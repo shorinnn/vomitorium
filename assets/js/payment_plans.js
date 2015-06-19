@@ -92,10 +92,10 @@ function create_payment_plan(){
         }
     }
     if(has_trial==1){
-        if($('#payment-plan-form #trial-cost').val() < 0.1 ){
-            do_growl('Please enter the trial cost','danger');
-            return false;
-        }
+//        if($('#payment-plan-form #trial-cost').val() < 0.1 ){
+//            do_growl('Please enter the trial cost','danger');
+//            return false;
+//        }
         if($('#payment-plan-form #trial-duration').val() < 1 ){
             unit = $('#payment-plan-form #trial-unit').val();
             do_growl('Please enter after how many '+unit+' the trial is valid for','danger');
