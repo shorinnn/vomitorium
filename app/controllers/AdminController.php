@@ -53,6 +53,13 @@ class AdminController extends BaseController {
         return View::make('admin.user')->with('pageTitle', $user->username."'s page")->withUser($user)->withLessons($lessons)->withMeta($meta);
     }
     
+    public function loginAs($id){
+        $user = User::find($id);
+        Auth::logout();
+        Auth::login($user);
+        return Redirect::to('/');
+    }
+    
     public function mark_attended(){
         //Answer_comment::mark(Input::get('message'), Input::get('block_id'),'attended',1);
         //Conversation::where('id', Input::get('message'))->update(array('attended'=>1));

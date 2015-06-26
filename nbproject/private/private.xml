@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/routes.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/PagesController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/reports/show.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/jsconfig.blade.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/filters.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/AdminController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/controllers/AccountsController.php</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/admin/reports.js</file>
-            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/pages/lesson/report.blade.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/PaymentPlan.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/assets/js/payment_plans.js</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/models/Stripe_processor.php</file>
+            <file>file:/D:/Dropbox/Documente/NetBeansProjects/SAAS/app/views/payment_plans/stripe_card_declined.blade.php</file>
         </group>
     </open-files>
 </project-private>

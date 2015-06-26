@@ -136,6 +136,7 @@ if (!Session::has('subdomain')) {
         Route::get( 'new_messages',          'AdminController@new_messages');
         Route::get( 'unattended_messages',          'AdminController@unattended_messages');
         Route::get( 'userpage/{id}',          'AdminController@user_page');
+        Route::get( 'userpage/{id}/login-as',          'AdminController@loginAs');
 
         Route::get('skills', 'SkillsController@index');
         Route::post( '/skills/update',          'SkillsController@update');

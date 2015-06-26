@@ -14,6 +14,9 @@
            <br /> Registered: {{format_date($user->created_at)}}, {{$user->created_at->diffForHumans()}}
            <br />
            <br />
+           @if( admin() )
+           <a class='btn btn-primary' href='{{ action('AdminController@loginAs', $user->id) }}'>Login To {{$user->username}}'s account</a>
+           @endif
            <h2>Courses</h2>
            <?php $chapter = -1 ;?>
            @foreach($lessons as $l)
