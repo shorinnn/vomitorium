@@ -82,7 +82,8 @@ return array(
 	*/
 
 //	'username' => 'shorinnn@yahoo.com',
-	'username' => 'bofhan@gmail.com',
+//	'username' => 'bofhan@gmail.com',
+        'username' => 'cocorium2014@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -96,7 +97,8 @@ return array(
 	*/
 
 	//'password' => 'JLl8O8bG5NRZgoIRVVFrPw',
-	'password' => 'DuVCxOOTlE6KnobyJ1C3oQ',
+//	'password' => 'DuVCxOOTlE6KnobyJ1C3oQ',
+	'password' => 'LyfUmy4YtKLZlPp-bup6Jw',
 
 	/*
 	|--------------------------------------------------------------------------
