@@ -135,6 +135,8 @@ function download_report(id){
         onrendered: function(canvas)
         {
             var img = canvas.toDataURL();
+            console.log('IMGDATA IS ');
+            console.log(img);
             var token = new Date().getTime(); //use the current timestamp as the token value
             $.post(APP_URL+'/reports/save_report_image', {data: img, id:id}, function(file) {
                 console.log(file);

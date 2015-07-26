@@ -1769,15 +1769,21 @@ function set_user_timezone(){
 
 function add_two_column_row(e){
     block = $(e.target).attr('data-block');
-    row = $(e.target).attr('data-row');
+    prevRow = row = $(e.target).attr('data-row');
     row++;
-    if($('.two-column-'+block+'[data-row='+row+']').length==0){
-        new_row = '<tr><td><input data-block="'+block+'" data-row="'+row+'" type="text" class="form-control two-column two-column-'+block+'" ' +
-                  'name="two-column['+block+']['+row+'][1]" /></td> ' +
+    if($('.two-column-'+block+'[data-row='+prevRow+']').length>0 && $('.two-column-'+block+'[data-row='+row+']').length==0){
+        linkOrder = $('.two-column-'+block+'[data-row='+prevRow+']').first().attr('data-link-order');
+        console.log(linkOrder);
+        new_row = '<tr><td><input data-block="'+block+'" data-row="'+row+'" type="text" class="linked-cell form-control two-column two-column-'+block+'" ' +
+                  'name="two-column['+block+']['+row+'][1]" data-link-order="'+linkOrder+'" data-link-class="'+row+'" /></td> ' +
                   '<td><input data-block="'+block+'" data-row="'+row+'" type="text" class="form-control two-column two-column-'+block+'" '+
                   'name="two-column['+block+']['+row+'][2]" /></td></tr>';
         
         $('.two-column-table-'+block+' tbody').append(new_row);
+        oldRow = row-1;
+        elem = $('[data-row='+oldRow+']:not([data-block='+block+'])');
+        console.log(elem);
+        if( elem.attr('data-link-order') > linkOrder )        elem.keyup();
     }
 }
 
