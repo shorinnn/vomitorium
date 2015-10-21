@@ -79,7 +79,7 @@
         margin-top: 200px;
         padding:50px;
     }
-    .box-content{
+    .box-content, .box-content1{
         color:black !important;
     }
     
