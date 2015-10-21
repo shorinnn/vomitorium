@@ -79,6 +79,10 @@
         margin-top: 200px;
         padding:50px;
     }
+    .box-content{
+        color:black !important;
+    }
+    
 </style>
 <center>
     @if(sys_settings('installation') != '31-1408525988')

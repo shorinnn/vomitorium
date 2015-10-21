@@ -149,6 +149,7 @@ class PagesController extends \BaseController {
         public function save_report_image(){
             $data = $_POST['data'];
             $file = sys_settings() .'-report-'.$_POST['id']. '.png';
+            $file = sys_settings() .'-report-'.$_POST['id']. '.jpg';
             // remove "data:image/png;base64,"
             $uri =  substr($data,strpos($data,",")+1);
             // save to file
