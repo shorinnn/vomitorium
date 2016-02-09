@@ -7,6 +7,7 @@ if ($first_in_section->count() == 0)
 else
     $first_in_section = $first_in_section->first()->ord;
 $page_has_scale = '';
+$total_answers = 0;
 // display blocks that are not included in sections first
 foreach ($lesson->blocks()->where('ord', '<=', $first_in_section)->where('in_section', 0)->orderBy('ord', 'ASC')->get() as $block) {
     if ($block->type == 'text') {

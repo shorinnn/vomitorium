@@ -342,7 +342,7 @@ function parse_tags($text, $logo='', $report_title=''){
 }
 
 function sys_settings($setting='installation', $default=''){
-    if( !isset(DB::table('settings')->first()->$setting) ) return $default;
+    if( DB::table('settings')->first()==null ) return $default;
     $setting = DB::table('settings')->first()->$setting;
     if($setting=='' && $default!='') $setting = $default;
     return $setting;

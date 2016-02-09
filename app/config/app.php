@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => (!isset($_GET['debug_errors_mode'])) ? false : $_GET['debug_errors_mode'],
 
 	/*
 	|--------------------------------------------------------------------------
