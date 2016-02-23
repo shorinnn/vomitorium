@@ -1794,9 +1794,13 @@ function link_remote_change_element(target){
         result = parse_json(result);
         if(result.status=='success'){
             remove = $target.attr('data-remove-element');
-            $(remove).remove();
             add = $target.attr('data-add-element');
-            $target.prepend(add);
+            if( $(remove).length==1 ){
+                $(remove).remove();
+            }
+            else{
+                $target.prepend(add);
+            }
             do_growl('Saved','success');
         }
         else{
