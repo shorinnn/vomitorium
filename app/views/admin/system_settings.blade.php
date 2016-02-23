@@ -30,6 +30,15 @@
                         <input type="text" class="form-control inline" value='' onchange="ajax_update(this)" data-field="above_progressbar_content" id="above_progressbar_content" data-pk="1" 
                                data-url="{{ url('system_settings') }}" placeholder="Enter New Value" />
                     </td></tr>
+                <tr><td>User Dashboard HTML</td>
+                    <td>
+                        Current: 
+                        <blockquote>
+                            {{{ sys_settings('user_dash_html') }}}
+                        </blockquote>
+                        <input type="text" class="form-control inline" value='' onchange="ajax_update(this)" data-field="user_dash_html" id="user_dash_html" data-pk="1" 
+                               data-url="{{ url('system_settings') }}" placeholder="Enter New Value" />
+                    </td></tr>
                 <tr><td>New Comment Email<br />
                         <p class='alert alert-info'>
                             Available tags: [FirstName], [LastName], [CoachFirstName], [CoachLastName], [Link]
